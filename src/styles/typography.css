@@ -1,0 +1,16 @@
+.text-balance {
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+
+.editorial-num {
+  font-family: "Fraunces", serif;
+  font-variant-numeric: oldstyle-nums;
+  font-style: italic;
+}
