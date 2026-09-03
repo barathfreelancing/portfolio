@@ -18,7 +18,7 @@ const projects = [
       "A real-time computer vision application that maps hand gestures to mouse control. Handles varying lighting conditions, camera angles, and hand positions to keep tracking reliable outside a lab setting.",
     technologies: ["Python", "OpenCV", "PyAutoGUI"],
     image: "/images/projects/virtual-mouse.png",
-    githubUrl: "https://github.com/barath220904",
+    githubUrl: "https://github.com/barath220904/Virtual-Mouse",
     liveUrl: null,
   },
   {
@@ -29,7 +29,7 @@ const projects = [
       "An NLP pipeline that classifies product reviews by sentiment. Covers text preprocessing, feature extraction, and a trained SVM model for prediction.",
     technologies: ["Python", "Scikit-learn", "NLTK", "SVM"],
     image: "/images/projects/sentiment-classifier.png",
-    githubUrl: "https://github.com/barath220904",
+    githubUrl: "http://github.com/barath220904/Sentiment-analysis",
     liveUrl: null,
   },
   {
@@ -40,7 +40,7 @@ const projects = [
       "A responsive weather application that pulls live data from a REST API and presents current conditions and forecasts in a clean, readable layout.",
     technologies: ["HTML", "CSS", "JavaScript", "REST API"],
     image: "/images/projects/weather-dashboard.png",
-    githubUrl: "https://github.com/barath220904",
+    githubUrl: "https://github.com/barath220904/weather-analyzer",
     liveUrl: null,
   },
 ];
