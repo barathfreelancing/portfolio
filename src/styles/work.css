@@ -1,0 +1,114 @@
+.work {
+  background: var(--canvas-soft);
+}
+
+.featured-project {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--sp-3xl);
+  align-items: center;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: var(--sp-2xl);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--sp-3xl);
+}
+
+.featured-project__visual {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--ink);
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.featured-project__frame {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.featured-project__frame::before {
+  content: '';
+  position: absolute;
+  inset: var(--sp-lg);
+  border: 1px dashed rgba(255, 255, 255, 0.14);
+  border-radius: var(--r-sm);
+}
+
+.featured-project__title {
+  margin: var(--sp-xs) 0 4px;
+}
+
+.featured-project__subtitle {
+  color: var(--body);
+  margin-bottom: var(--sp-md);
+}
+
+.featured-project__body p.body-md {
+  margin-bottom: var(--sp-md);
+}
+
+.featured-project__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-xs);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--sp-lg);
+}
+
+.featured-project__tech li {
+  padding: 4px 10px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-full);
+  color: var(--body);
+}
+
+.featured-project__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  flex-wrap: wrap;
+}
+
+.featured-project__note {
+  color: var(--mute);
+}
+
+.upcoming-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-lg);
+}
+
+.upcoming-card {
+  border: 1px dashed var(--hairline-strong);
+  border-radius: var(--r-md);
+  padding: var(--sp-lg);
+  background: var(--canvas);
+}
+
+.upcoming-card__status {
+  color: var(--accent);
+  margin-bottom: var(--sp-sm);
+}
+
+.upcoming-card__title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: var(--sp-xs);
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 900px) {
+  .featured-project {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-grid {
+    grid-template-columns: 1fr;
+  }
+}

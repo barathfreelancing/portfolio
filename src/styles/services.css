@@ -1,0 +1,120 @@
+.services {
+  background: var(--canvas);
+}
+
+.section-head {
+  margin-bottom: var(--sp-3xl);
+  max-width: 620px;
+}
+
+.section-head .eyebrow {
+  margin-bottom: var(--sp-sm);
+}
+
+.services__list {
+  border-top: 1px solid var(--hairline);
+}
+
+.service-row {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.service-row__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-lg);
+  background: none;
+  border: none;
+  padding: var(--sp-lg) 0;
+  text-align: left;
+}
+
+.service-row__code {
+  color: var(--mute);
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.service-row__title {
+  flex: 1;
+  color: var(--ink);
+  transition: color 0.18s ease;
+}
+
+.service-row__trigger:hover .service-row__title,
+.service-row__trigger:focus-visible .service-row__title {
+  color: var(--accent);
+}
+
+.service-row__icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.service-row__icon::before,
+.service-row__icon::after {
+  content: '';
+  position: absolute;
+  background: var(--ink);
+  top: 50%;
+  left: 50%;
+  transition: transform 0.25s ease;
+}
+
+.service-row__icon::before {
+  width: 14px;
+  height: 1.5px;
+  transform: translate(-50%, -50%);
+}
+
+.service-row__icon::after {
+  width: 1.5px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+}
+
+.service-row__icon--open::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+  opacity: 0;
+}
+
+.service-row__panel {
+  padding: 0 0 var(--sp-xl) 44px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  max-width: 640px;
+}
+
+.service-row__value {
+  margin: 0;
+}
+
+.service-row__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-xs);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-row__tech li {
+  padding: 4px 10px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-full);
+  color: var(--body);
+}
+
+@media (max-width: 640px) {
+  .service-row__trigger {
+    gap: var(--sp-sm);
+  }
+
+  .service-row__panel {
+    padding-left: 0;
+  }
+}

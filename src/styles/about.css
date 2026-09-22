@@ -1,0 +1,26 @@
+.about {
+  background: var(--canvas);
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--sp-3xl);
+}
+
+.about__head {
+  margin-bottom: 0;
+}
+
+.about__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-md);
+  max-width: 560px;
+}
+
+@media (max-width: 780px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+}
