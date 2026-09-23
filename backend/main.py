@@ -19,7 +19,13 @@ app = FastAPI(title="Barathkumar Portfolio - API")
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",          # Vite local dev server
+        "http://127.0.0.1:5173",
+        # TODO: Replace the line below with your actual Vercel production URL
+        # Example: "https://barathkumar-portfolio.vercel.app"
+        "https://YOUR-VERCEL-DOMAIN.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

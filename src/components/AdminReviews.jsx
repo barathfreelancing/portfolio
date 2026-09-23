@@ -14,7 +14,7 @@ export default function AdminReviews() {
     e.preventDefault();
     setLoginError('');
     try {
-      const res = await fetch('/api/admin/login', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: passwordInput }),
@@ -40,7 +40,7 @@ export default function AdminReviews() {
     if (!token) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/admin/reviews', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/reviews`, {
         headers: {
           'X-Admin-Key': token,
         },
@@ -71,7 +71,7 @@ export default function AdminReviews() {
 
   const handleApprove = async (id) => {
     try {
-      const res = await fetch(`/api/admin/reviews/${id}/approve`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/reviews/${id}/approve`, {
         method: 'PATCH',
         headers: {
           'X-Admin-Key': token,
@@ -90,7 +90,7 @@ export default function AdminReviews() {
     if (!window.confirm('Are you sure you want to delete this review?')) return;
 
     try {
-      const res = await fetch(`/api/reviews/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/reviews/${id}`, {
         method: 'DELETE',
         headers: {
           'X-Admin-Key': token,
