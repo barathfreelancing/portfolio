@@ -14,9 +14,6 @@ if not ADMIN_SECRET:
         "Add ADMIN_SECRET=<your-secret> to backend/.env and restart the server."
     )
 
-print("ADMIN_SECRET configured: True")
-print("ADMIN_SECRET length:", len(ADMIN_SECRET))
-
 def verify_admin(x_admin_key: str = Header(None), authorization: str = Header(None)):
     token = None
     if x_admin_key:
