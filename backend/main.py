@@ -96,13 +96,13 @@ def get_published_reviews(db: Session = Depends(get_db)):
 
 @app.post("/api/reviews", response_model=schemas.ReviewResponse, status_code=status.HTTP_201_CREATED)
 def submit_review(review_data: schemas.ReviewCreate, db: Session = Depends(get_db)):
-    """Submit a client review. Stored as pending (unapproved)."""
+    """Submit a client review. Immediately published — no approval required."""
     db_review = models.Review(
         name=review_data.name.strip(),
         company=review_data.company.strip() if review_data.company else None,
         role=review_data.role.strip() if review_data.role else None,
         review=review_data.review.strip(),
-        is_approved=False,
+        is_approved=True,
     )
     db.add(db_review)
     db.commit()
@@ -126,25 +126,10 @@ def get_all_reviews_admin(
     db: Session = Depends(get_db),
     authorized: bool = Depends(verify_admin),
 ):
-    """Fetch all pending and approved reviews for admin management."""
+    """Fetch all reviews for admin management (delete-only workflow)."""
     reviews = db.query(models.Review).order_by(models.Review.created_at.desc()).all()
     return reviews
 
-
-@app.patch("/api/admin/reviews/{review_id}/approve", response_model=schemas.AdminReviewResponse)
-def approve_review(
-    review_id: int,
-    db: Session = Depends(get_db),
-    authorized: bool = Depends(verify_admin),
-):
-    """Approve a pending review."""
-    review = db.query(models.Review).filter(models.Review.id == review_id).first()
-    if not review:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Review not found.")
-    review.is_approved = True
-    db.commit()
-    db.refresh(review)
-    return review
 
 
 @app.delete("/api/reviews/{review_id}", status_code=status.HTTP_200_OK)

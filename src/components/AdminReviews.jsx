@@ -69,23 +69,6 @@ export default function AdminReviews() {
     }
   }, [token]);
 
-  const handleApprove = async (id) => {
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/reviews/${id}/approve`, {
-        method: 'PATCH',
-        headers: {
-          'X-Admin-Key': token,
-        },
-      });
-
-      if (!res.ok) throw new Error('Failed to approve review.');
-
-      await loadAdminReviews();
-    } catch (err) {
-      alert(err.message);
-    }
-  };
-
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this review?')) return;
 
@@ -140,8 +123,6 @@ export default function AdminReviews() {
     );
   }
 
-  const pendingReviews = reviews.filter((r) => !r.is_approved);
-  const publishedReviews = reviews.filter((r) => r.is_approved);
 
   return (
     <section className="admin-page section-pad">
@@ -149,7 +130,7 @@ export default function AdminReviews() {
         <div className="admin-header">
           <div>
             <p className="eyebrow">Dashboard</p>
-            <h2 className="display-lg">Review Moderation</h2>
+            <h2 className="display-lg">Review Management</h2>
           </div>
           <div>
             <button type="button" className="btn btn-secondary btn-sm" onClick={handleLogout}>
@@ -165,94 +146,45 @@ export default function AdminReviews() {
         )}
 
         {loading ? (
-          <p className="caption-mono">Loading reviews for moderation...</p>
+          <p className="caption-mono">Loading reviews...</p>
         ) : (
-          <>
-            {/* PENDING SECTION */}
-            <div className="admin-section">
-              <h3 className="admin-section__title">
-                Pending Reviews ({pendingReviews.length})
-              </h3>
-              {pendingReviews.length === 0 ? (
-                <p className="body-sm" style={{ color: 'var(--mute)' }}>
-                  No pending reviews awaiting approval.
-                </p>
-              ) : (
-                pendingReviews.map((item) => (
-                  <div key={item.id} className="admin-card">
-                    <div className="admin-card__body">
-                      <p className="body-md" style={{ fontWeight: 500, marginBottom: '6px' }}>
-                        &ldquo;{item.review}&rdquo;
-                      </p>
-                      <p className="caption-mono">
-                        By: <strong>{item.name}</strong>{' '}
-                        {[item.role, item.company].filter(Boolean).length > 0 &&
-                          `(${[item.role, item.company].filter(Boolean).join(', ')})`}
-                      </p>
-                      <p className="review-card__date" style={{ marginTop: '4px' }}>
-                        Submitted: {new Date(item.created_at).toLocaleString()}
-                      </p>
-                    </div>
-                    <div className="admin-card__actions">
-                      <button
-                        type="button"
-                        className="btn-approve"
-                        onClick={() => handleApprove(item.id)}
-                      >
-                        Approve
-                      </button>
-                      <button
-                        type="button"
-                        className="btn-delete"
-                        onClick={() => handleDelete(item.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
+          <div className="admin-section">
+            <h3 className="admin-section__title">
+              All Reviews ({reviews.length})
+            </h3>
+            {reviews.length === 0 ? (
+              <p className="body-sm" style={{ color: 'var(--mute)' }}>
+                No reviews yet.
+              </p>
+            ) : (
+              reviews.map((item) => (
+                <div key={item.id} className="admin-card">
+                  <div className="admin-card__body">
+                    <p className="body-md" style={{ fontWeight: 500, marginBottom: '6px' }}>
+                      &ldquo;{item.review}&rdquo;
+                    </p>
+                    <p className="caption-mono">
+                      By: <strong>{item.name}</strong>{' '}
+                      {[item.role, item.company].filter(Boolean).length > 0 &&
+                        `(${[item.role, item.company].filter(Boolean).join(', ')})`}
+                    </p>
+                    <p className="review-card__date" style={{ marginTop: '4px' }}>
+                      Submitted: {new Date(item.created_at).toLocaleString()}
+                    </p>
                   </div>
-                ))
-              )}
-            </div>
-
-            {/* PUBLISHED SECTION */}
-            <div className="admin-section">
-              <h3 className="admin-section__title">
-                Published Reviews ({publishedReviews.length})
-              </h3>
-              {publishedReviews.length === 0 ? (
-                <p className="body-sm" style={{ color: 'var(--mute)' }}>
-                  No published reviews.
-                </p>
-              ) : (
-                publishedReviews.map((item) => (
-                  <div key={item.id} className="admin-card">
-                    <div className="admin-card__body">
-                      <p className="body-md" style={{ fontWeight: 500, marginBottom: '6px' }}>
-                        &ldquo;{item.review}&rdquo;
-                      </p>
-                      <p className="caption-mono">
-                        By: <strong>{item.name}</strong>{' '}
-                        {[item.role, item.company].filter(Boolean).length > 0 &&
-                          `(${[item.role, item.company].filter(Boolean).join(', ')})`}
-                      </p>
-                      <p className="review-card__date" style={{ marginTop: '4px' }}>
-                        Published: {new Date(item.created_at).toLocaleString()}
-                      </p>
-                    </div>
-                    <div className="admin-card__actions">
-                      <button
-                        type="button"
-                        className="btn-delete"
-                        onClick={() => handleDelete(item.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
+                  <div className="admin-card__actions">
+                    <button
+                      type="button"
+                      className="btn-delete"
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      Delete
+                    </button>
                   </div>
-                ))
-              )}
-            </div>
-          </>
+                </div>
+              ))
+            )}
+          </div>
         )}
       </div>
     </section>

@@ -100,6 +100,8 @@ export default function Reviews() {
       setSubmitStatus('success');
       setFormData({ name: '', company: '', role: '', review: '' });
       setFormErrors({});
+      // Refresh the public list so the new review appears immediately
+      fetchReviews();
     } catch (err) {
       setSubmitStatus('error');
     }
@@ -251,7 +253,7 @@ export default function Reviews() {
                   Thank you!
                 </h4>
                 <p className="body-md">
-                  Your review has been submitted successfully and will be published after review.
+                  Thanks — your review is now live.
                 </p>
                 <button
                   type="button"
