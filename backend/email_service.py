@@ -1,6 +1,5 @@
 from dotenv import load_dotenv
 import os
-import os
 import re
 import smtplib
 import logging

@@ -1,8 +1,21 @@
 import os
-from fastapi import Header, HTTPException, status, Depends
+from pathlib import Path
+from dotenv import load_dotenv
+from fastapi import Header, HTTPException, status
 
-ADMIN_SECRET = os.getenv("ADMIN_SECRET", "admin123")
+# Load .env from the backend directory (works regardless of where uvicorn is launched from)
+load_dotenv(dotenv_path=Path(__file__).parent / ".env")
 
+ADMIN_SECRET = os.getenv("ADMIN_SECRET")
+
+if not ADMIN_SECRET:
+    raise RuntimeError(
+        "ADMIN_SECRET is not configured. "
+        "Add ADMIN_SECRET=<your-secret> to backend/.env and restart the server."
+    )
+
+print("ADMIN_SECRET configured: True")
+print("ADMIN_SECRET length:", len(ADMIN_SECRET))
 
 def verify_admin(x_admin_key: str = Header(None), authorization: str = Header(None)):
     token = None
