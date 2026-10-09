@@ -5,7 +5,7 @@ const PROJECT_TYPES = ['Website', 'Full-stack application', 'API / integration',
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', type: PROJECT_TYPES[0], message: '' });
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState('idle'); // 'idle' | 'success'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   const update = (field) => (e) => {
@@ -27,20 +27,38 @@ export default function Contact() {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
-    const subject = `Project enquiry: ${form.type}`;
-    const body = `Name: ${form.name.trim()}
-Email: ${form.email.trim()}
-Project type: ${form.type}
+    setStatus('submitting');
+    setFeedbackMessage('');
 
-${form.message.trim()}`;
-    window.location.href = `mailto:barathfreelancing@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          subject: `Project enquiry: ${form.type}`,
+          from_name: form.name.trim(),
+          name: form.name.trim(),
+          email: form.email.trim(),
+          project_type: form.type,
+          message: form.message.trim(),
+        }),
+      });
+      const data = await response.json();
+      if (!data.success) throw new Error(data.message || 'Request failed');
 
-    setStatus('success');
-    setFeedbackMessage('Opening your email app to send the enquiry.');
+      setStatus('success');
+      setFeedbackMessage('Enquiry sent. I will get back to you soon.');
+      setForm({ name: '', email: '', type: PROJECT_TYPES[0], message: '' });
+      setErrors({});
+    } catch {
+      setStatus('error');
+      setFeedbackMessage('Could not send your enquiry. Please email barathfreelancing@gmail.com directly.');
+    }
   };
 
   return (
@@ -147,8 +165,9 @@ ${form.message.trim()}`;
           <button
             type="submit"
             className="btn btn-primary contact-form__submit"
+            disabled={status === 'submitting'}
           >
-            Send enquiry
+            {status === 'submitting' ? 'Sending...' : 'Send enquiry'}
           </button>
         </form>
       </div>
