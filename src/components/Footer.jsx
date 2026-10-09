@@ -13,7 +13,6 @@ export default function Footer() {
           <a href="#work">Work</a>
           <a href="#services">Services</a>
           <a href="#about">About</a>
-          <a href="#reviews">Reviews</a>
           <a href="#contact">Contact</a>
           <a href="https://github.com/barath220904" target="_blank" rel="noreferrer">
             GitHub
@@ -27,9 +26,6 @@ export default function Footer() {
           </a>
           <a href="https://wa.me/918148290307" target="_blank" rel="noreferrer">
             WhatsApp
-          </a>
-          <a href="/admin/reviews" style={{ opacity: 0.6 }}>
-            Admin
           </a>
         </nav>
 
