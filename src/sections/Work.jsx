@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { featuredProject, upcomingProjects } from '../data/projects';
+import { featuredProjects } from '../data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,21 +13,18 @@ export default function Work() {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduce) return;
 
-      gsap.from('.featured-project', {
-        opacity: 0,
-        y: 32,
-        duration: 0.7,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: '.featured-project', start: 'top 80%' },
-      });
-
-      gsap.from('.upcoming-card', {
-        opacity: 0,
-        y: 24,
-        duration: 0.55,
-        stagger: 0.1,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: '.upcoming-grid', start: 'top 85%' },
+      // Cards slide in from the left as you scroll, scrubbed for a smooth feel.
+      gsap.utils.toArray('.featured-project').forEach((el) => {
+        gsap.fromTo(
+          el,
+          { x: -180, opacity: 0.1 },
+          {
+            x: 0,
+            opacity: 1,
+            ease: 'none',
+            scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 50%', scrub: 0.8 },
+          }
+        );
       });
     }, rootRef);
 
@@ -42,57 +39,52 @@ export default function Work() {
           <h2 className="display-lg">Selected work</h2>
         </div>
 
-        <article className="featured-project">
-          <div className="featured-project__visual">
-            <img
-              src="/studds-website.png"
-              alt="STUDDS motorcycle helmet website"
-              className="featured-project__image"
-            />
-          </div>
-          <div className="featured-project__body">
-            <p className="eyebrow">Case study</p>
-            <h3 className="display-md featured-project__title">{featuredProject.title}</h3>
-            <p className="body-lg featured-project__subtitle">{featuredProject.subtitle}</p>
-            <p className="body-md">{featuredProject.description}</p>
-            <ul className="featured-project__tech">
-              {featuredProject.tech.map((t) => (
-                <li key={t} className="caption-mono">
-                  {t}
-                </li>
-              ))}
-            </ul>
-            <div className="featured-project__actions">
-              <a
-                href={featuredProject.sourceUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-primary btn-sm"
-              >
-                View source
-              </a>
-
-              <a
-                href="https://studds-website.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary btn-sm"
-              >
-                Live preview →
-              </a>
+        {featuredProjects.map((project, i) => (
+          <article
+            className={`featured-project${i % 2 === 1 ? ' featured-project--reverse' : ''}`}
+            key={project.title}
+          >
+            <div className="featured-project__visual">
+              <img
+                src={project.image}
+                alt={project.imageAlt}
+                className="featured-project__image"
+              />
             </div>
-          </div>
-        </article>
-
-        <div className="upcoming-grid">
-          {upcomingProjects.map((project) => (
-            <div className="upcoming-card" key={project.title}>
-              <p className="caption-mono upcoming-card__status">{project.status}</p>
-              <h4 className="display-sm upcoming-card__title">{project.title}</h4>
-              <p className="body-sm">{project.description}</p>
+            <div className="featured-project__body">
+              <p className="eyebrow">Case study</p>
+              <h3 className="display-md featured-project__title">{project.title}</h3>
+              <p className="body-lg featured-project__subtitle">{project.subtitle}</p>
+              <p className="body-md">{project.description}</p>
+              <ul className="featured-project__tech">
+                {project.tech.map((t) => (
+                  <li key={t} className="caption-mono">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+              <div className="featured-project__actions">
+                <a
+                  href={project.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-primary btn-sm"
+                >
+                  View source
+                </a>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary btn-sm"
+                >
+                  Live preview →
+                </a>
+              </div>
             </div>
-          ))}
-        </div>
+          </article>
+        ))}
+
       </div>
     </section>
   );

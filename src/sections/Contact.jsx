@@ -1,35 +1,57 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const PROJECT_TYPES = ['Website', 'Full-stack application', 'API / integration', 'AI / automation', 'Other'];
+const BUDGETS = ['Under ₹25k', '₹25k – ₹50k', '₹50k – ₹1L', '₹1L – ₹2L', '₹2L – ₹5L', '₹5L+'];
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_MESSAGE = 800;
+
+const EMPTY_FORM = { name: '', email: '', type: PROJECT_TYPES[0], budget: 2, message: '' };
+
+const validators = {
+  name: (v) => (v.trim() ? '' : 'Enter your name.'),
+  email: (v) => (EMAIL_RE.test(v.trim()) ? '' : 'Enter a valid email.'),
+  message: (v) => (v.trim() ? '' : 'Tell me a bit about the project.'),
+};
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', type: PROJECT_TYPES[0], message: '' });
+  const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
   const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
   const [feedbackMessage, setFeedbackMessage] = useState('');
+  const formRef = useRef(null);
 
   const update = (field) => (e) => {
-    setForm((f) => ({ ...f, [field]: e.target.value }));
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    const value = field === 'budget' ? Number(e.target.value) : e.target.value;
+    setForm((f) => ({ ...f, [field]: value }));
+    if (touched[field] && validators[field]) {
+      setErrors((prev) => ({ ...prev, [field]: validators[field](value) }));
     }
+  };
+
+  const handleBlur = (field) => () => {
+    setTouched((t) => ({ ...t, [field]: true }));
+    setErrors((prev) => ({ ...prev, [field]: validators[field](form[field]) }));
   };
 
   const validate = () => {
     const next = {};
-    if (!form.name.trim()) next.name = 'Enter your name.';
-    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      next.email = 'Enter a valid email.';
-    }
-    if (!form.type) next.type = 'Select a project type.';
-    if (!form.message.trim()) next.message = 'Tell me a bit about the project.';
+    Object.keys(validators).forEach((field) => {
+      next[field] = validators[field](form[field]);
+    });
     setErrors(next);
-    return Object.keys(next).length === 0;
+    setTouched({ name: true, email: true, message: true });
+    const firstInvalid = Object.keys(next).find((k) => next[k]);
+    if (firstInvalid) {
+      formRef.current?.querySelector(`#${firstInvalid}`)?.focus();
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (status === 'submitting' || !validate()) return;
 
     setStatus('submitting');
     setFeedbackMessage('');
@@ -45,6 +67,7 @@ export default function Contact() {
           name: form.name.trim(),
           email: form.email.trim(),
           project_type: form.type,
+          budget: BUDGETS[form.budget],
           message: form.message.trim(),
         }),
       });
@@ -52,14 +75,50 @@ export default function Contact() {
       if (!data.success) throw new Error(data.message || 'Request failed');
 
       setStatus('success');
-      setFeedbackMessage('Enquiry sent. I will get back to you soon.');
-      setForm({ name: '', email: '', type: PROJECT_TYPES[0], message: '' });
-      setErrors({});
     } catch {
       setStatus('error');
       setFeedbackMessage('Could not send your enquiry. Please email barathfreelancing@gmail.com directly.');
     }
   };
+
+  const reset = () => {
+    setForm(EMPTY_FORM);
+    setErrors({});
+    setTouched({});
+    setFeedbackMessage('');
+    setStatus('idle');
+  };
+
+  const isValid = (field) => touched[field] && !errors[field] && form[field].trim() !== '';
+
+  const renderField = (field, label, Tag, props) => (
+    <div
+      className={`form-field form-field--float${errors[field] ? ' is-invalid' : ''}${
+        isValid(field) ? ' is-valid' : ''
+      }`}
+    >
+      <Tag
+        id={field}
+        value={form[field]}
+        placeholder=" "
+        onChange={update(field)}
+        onBlur={handleBlur(field)}
+        disabled={status === 'submitting'}
+        aria-invalid={Boolean(errors[field])}
+        aria-describedby={errors[field] ? `${field}-error` : undefined}
+        {...props}
+      />
+      <label htmlFor={field}>{label}</label>
+      <svg className="form-field__tick" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M4 10.5l4 4 8-9" />
+      </svg>
+      {errors[field] && (
+        <span id={`${field}-error`} className="form-field__error">
+          {errors[field]}
+        </span>
+      )}
+    </div>
+  );
 
   return (
     <section id="contact" className="contact section-pad">
@@ -89,87 +148,99 @@ export default function Contact() {
           </div>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit} noValidate>
-          <div className="form-field">
-            <label htmlFor="name">Name</label>
-            <input
-              id="name"
-              type="text"
-              value={form.name}
-              onChange={update('name')}
-              aria-invalid={Boolean(errors.name)}
-              aria-describedby={errors.name ? 'name-error' : undefined}
-            />
-            {errors.name && (
-              <span id="name-error" className="form-field__error">
-                {errors.name}
-              </span>
-            )}
+        {status === 'success' ? (
+          <div className="contact-success" role="status">
+            <svg className="contact-success__check" viewBox="0 0 52 52" aria-hidden="true">
+              <circle cx="26" cy="26" r="24" />
+              <path d="M15 27l8 8 14-16" />
+            </svg>
+            <h3 className="display-sm">Enquiry sent</h3>
+            <p className="body-md">
+              Thanks, {form.name.trim().split(' ')[0] || 'there'}. I&rsquo;ll get back to you at{' '}
+              {form.email.trim()} soon.
+            </p>
+            <button type="button" className="btn btn-secondary btn-sm" onClick={reset}>
+              Send another
+            </button>
           </div>
+        ) : (
+          <form className="contact-form" onSubmit={handleSubmit} noValidate ref={formRef}>
+            {renderField('name', 'Name', 'input', { type: 'text', autoComplete: 'name' })}
+            {renderField('email', 'Email', 'input', { type: 'email', autoComplete: 'email' })}
 
-          <div className="form-field">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              value={form.email}
-              onChange={update('email')}
-              aria-invalid={Boolean(errors.email)}
-              aria-describedby={errors.email ? 'email-error' : undefined}
-            />
-            {errors.email && (
-              <span id="email-error" className="form-field__error">
-                {errors.email}
-              </span>
-            )}
-          </div>
-
-          <div className="form-field">
-            <label htmlFor="type">Project type</label>
-            <select
-              id="type"
-              value={form.type}
-              onChange={update('type')}
-            >
-              {PROJECT_TYPES.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="form-field">
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              rows={4}
-              value={form.message}
-              onChange={update('message')}
-              aria-invalid={Boolean(errors.message)}
-              aria-describedby={errors.message ? 'message-error' : undefined}
-            />
-            {errors.message && (
-              <span id="message-error" className="form-field__error">
-                {errors.message}
-              </span>
-            )}
-          </div>
-
-          {feedbackMessage && (
-            <div className={`contact-form__feedback contact-form__feedback--${status}`} role="alert">
-              {feedbackMessage}
+            <div className="form-field">
+              <label htmlFor="type" className="form-field__label-static">
+                Project type
+              </label>
+              <select
+                id="type"
+                value={form.type}
+                onChange={update('type')}
+                disabled={status === 'submitting'}
+              >
+                {PROJECT_TYPES.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
             </div>
-          )}
 
-          <button
-            type="submit"
-            className="btn btn-primary contact-form__submit"
-            disabled={status === 'submitting'}
-          >
-            {status === 'submitting' ? 'Sending...' : 'Send enquiry'}
-          </button>
-        </form>
+            <div className="form-field budget">
+              <div className="budget__head">
+                <label htmlFor="budget" className="form-field__label-static">
+                  Budget
+                </label>
+                <output htmlFor="budget" className="budget__value">
+                  {BUDGETS[form.budget]}
+                </output>
+              </div>
+              <input
+                id="budget"
+                type="range"
+                min="0"
+                max={BUDGETS.length - 1}
+                step="1"
+                value={form.budget}
+                onChange={update('budget')}
+                disabled={status === 'submitting'}
+                style={{ '--fill': `${(form.budget / (BUDGETS.length - 1)) * 100}%` }}
+                aria-valuetext={BUDGETS[form.budget]}
+              />
+              <div className="budget__ticks" aria-hidden="true">
+                <span>{BUDGETS[0]}</span>
+                <span>{BUDGETS[BUDGETS.length - 1]}</span>
+              </div>
+            </div>
+
+            {renderField('message', 'Message', 'textarea', { rows: 4, maxLength: MAX_MESSAGE })}
+            <span
+              className={`form-field__count${form.message.length > MAX_MESSAGE - 100 ? ' is-near' : ''}`}
+            >
+              {form.message.length}/{MAX_MESSAGE}
+            </span>
+
+            {feedbackMessage && (
+              <div className={`contact-form__feedback contact-form__feedback--${status}`} role="alert">
+                {feedbackMessage}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="btn btn-primary contact-form__submit"
+              disabled={status === 'submitting'}
+            >
+              {status === 'submitting' ? (
+                <>
+                  <span className="spinner" aria-hidden="true" /> Sending...
+                </>
+              ) : (
+                'Send enquiry'
+              )}
+            </button>
+          </form>
+        )}
       </div>
     </section>
   );
