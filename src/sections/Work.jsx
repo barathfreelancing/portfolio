@@ -64,14 +64,16 @@ export default function Work() {
                 ))}
               </ul>
               <div className="featured-project__actions">
-                <a
-                  href={project.sourceUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-primary btn-sm"
-                >
-                  View source
-                </a>
+                {project.sourceUrl && (
+                  <a
+                    href={project.sourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn btn-primary btn-sm"
+                  >
+                    View source ↗
+                  </a>
+                )}
                 <a
                   href={project.liveUrl}
                   target="_blank"
