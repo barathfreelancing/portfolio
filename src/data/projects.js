@@ -32,4 +32,15 @@ export const featuredProjects = [
     sourceUrl: 'https://github.com/barathfreelancing/3D-BMW-E30',
     liveUrl: 'https://bmwm30.vercel.app/',
   },
+  {
+    title: 'Hong Zao',
+    subtitle: 'Modern Chinese Restaurant Website',
+    description:
+      'A restaurant website for a modern Chinese kitchen in Soho, London, pairing warm editorial design and food photography with a signature-dishes menu, dining spaces, guest reviews and a table reservation form with built-in validation.',
+    tech: ['React', 'Vite', 'JavaScript', 'CSS'],
+    image: '/hong-zao.png',
+    imageAlt: 'Hong Zao restaurant website showing a Grandmother’s stove story section with steamed dumplings',
+    sourceUrl: 'https://github.com/barathfreelancing/chinese-restaurant-website',
+    liveUrl: 'https://hong-zao.vercel.app/',
+  },
 ];

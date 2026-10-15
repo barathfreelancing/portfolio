@@ -13,11 +13,11 @@ export default function Work() {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduce) return;
 
-      // Cards slide in from the left as you scroll, scrubbed for a smooth feel.
-      gsap.utils.toArray('.featured-project').forEach((el) => {
+      // Cards slide in alternately from the left and right as you scroll, scrubbed for a smooth feel.
+      gsap.utils.toArray('.featured-project').forEach((el, i) => {
         gsap.fromTo(
           el,
-          { x: -180, opacity: 0.1 },
+          { x: i % 2 === 0 ? -180 : 180, opacity: 0.1 },
           {
             x: 0,
             opacity: 1,
