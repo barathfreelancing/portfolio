@@ -43,4 +43,15 @@ export const featuredProjects = [
     sourceUrl: 'https://github.com/barathfreelancing/chinese-restaurant-website',
     liveUrl: 'https://hong-zao.vercel.app/',
   },
+  {
+    title: 'Drishti Opticians',
+    subtitle: 'Eyewear Store Website',
+    description:
+      'An eyewear storefront for a Kannur optician serving customers since 1977, combining editorial heritage storytelling with a filterable frame collection, quick view, a saved-frames bag and an in-store appointment form.',
+    tech: ['React', 'Vite', 'TypeScript', 'Motion'],
+    image: '/drishti-optics.png',
+    imageAlt: 'Drishti Opticians website showing the Our story section beside an engraving of a spectacle seller’s stall',
+    sourceUrl: 'https://github.com/barathfreelancing/drishti-optics',
+    liveUrl: 'https://drishti-optics.vercel.app/',
+  },
 ];
