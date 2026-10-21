@@ -19,7 +19,7 @@ OWN-WORLD: A live WebGL sky (fbm cumulus, star field, rising motes, layered floa
 
 STORY: Understand that one developer builds both cinematic frontends and Python/AI systems, believe it through five live projects shown as full-frame cinema stills, then send the enquiry form.
 
-FIRST VIEWPORT: The sky fills the screen; the floating city sits right of centre with the entity (a light core inside two tilted rings) hovering above it. Bottom-left: the condensed two-line headline "Building / digital worlds." at up to 6rem, a one-line lead, and the "Explore work" (magenta) and "Hire me" buttons, all visible without scrolling.
+FIRST VIEWPORT: The sky fills the screen; the floating city sits right of centre with the entity (a light core inside two tilted rings) hovering above it. Bottom-left: the condensed two-line headline "Building / digital worlds." at up to 6rem, a lead naming Barathkumar and the offer (websites, web apps, APIs and automation for businesses), and the "Hire me" (magenta, primary) and "See the work" buttons, all visible without scrolling.
 
 FORM: Brief-pinned world (anime fantasy sky), so no roll was dealt; scroll-driven world state is the signature interaction, with the entity travelling between chapters. The roll was skipped because the owner's brief pins the world ("Build an anime-inspired fantasy universe with cinematic landscapes, floating architecture, atmospheric depth, an abstract digital entity, luminous particles, editorial typography, and violet, blue, magenta, and midnight-black tones"); concept-seed --check-seed none confirms none means skipped. seed: none
 

@@ -20,7 +20,7 @@ export const CHAPTERS = [
   },
   {
     id: 'about', // twilight
-    cam: 0.62,
+    cam: 0.85,
     top: hex('#080721'),
     mid: hex('#21196a'),
     low: hex('#6a37b0'),
@@ -34,7 +34,7 @@ export const CHAPTERS = [
   },
   {
     id: 'technology', // night among distant islands
-    cam: 0.82,
+    cam: 0.92,
     top: hex('#05061a'),
     mid: hex('#0f1448'),
     low: hex('#2a2a78'),

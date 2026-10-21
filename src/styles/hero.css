@@ -39,8 +39,13 @@
 }
 
 .hero__lead {
+  max-width: 40ch;
   margin-bottom: var(--sp-6);
   color: var(--ink);
+}
+
+.hero__lead strong {
+  font-weight: 700;
 }
 
 .hero__ctas {

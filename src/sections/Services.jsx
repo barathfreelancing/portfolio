@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { Plus } from '@phosphor-icons/react';
+import { useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger, prefersReducedMotion } from '../motion/gsap';
 import { services } from '../data/services';
 
@@ -13,7 +12,6 @@ const STEPS = [
 
 export default function Services() {
   const rootRef = useRef(null);
-  const [openIndex, setOpenIndex] = useState(0);
 
   useEffect(() => {
     const reduce = prefersReducedMotion();
@@ -57,46 +55,30 @@ export default function Services() {
       <div className="container">
         <h2 className="title title--lg services__title">What I build</h2>
 
-        <div className="services__list">
-          {services.map((service, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <div className={`service${isOpen ? ' is-open' : ''}`} key={service.key}>
-                <h3 className="service__heading">
-                  <button
-                    type="button"
-                    className="service__trigger"
-                    id={`service-trigger-${service.key}`}
-                    aria-expanded={isOpen}
-                    aria-controls={`service-panel-${service.key}`}
-                    onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                  >
-                    <span className="title service__title">{service.title}</span>
-                    <span className="service__icon" aria-hidden="true">
-                      <Plus size={28} weight="light" />
-                    </span>
-                  </button>
-                </h3>
+        <p className="lead services__lead">
+          Four kinds of work, often combined in one project. You work with me directly, from the first call to launch.
+        </p>
 
-                <div
-                  id={`service-panel-${service.key}`}
-                  className="service__panel"
-                  role="region"
-                  aria-labelledby={`service-trigger-${service.key}`}
-                  inert={!isOpen}
-                >
-                  <div className="service__panel-inner">
-                    <p className="lead service__value">{service.value}</p>
-                    <ul className="service__tech" aria-label="Typical tools">
-                      {service.tech.map((t) => (
-                        <li key={t}>{t}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        <div className="services__grid">
+          {services.map((service) => (
+            <article className="service" key={service.key} aria-labelledby={`service-${service.key}`}>
+              <h3 className="title service__title" id={`service-${service.key}`}>
+                {service.title}
+              </h3>
+              <p className="service__value">{service.value}</p>
+              <h4 className="service__label chrome">Typical work</h4>
+              <ul className="service__examples">
+                {service.examples.map((e) => (
+                  <li key={e}>{e}</li>
+                ))}
+              </ul>
+              <ul className="service__tech" aria-label={`${service.title} tools`}>
+                {service.tech.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
 
         <div className="process">

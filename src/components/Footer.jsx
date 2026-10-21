@@ -14,7 +14,7 @@ export default function Footer() {
           <a href="#services">Services</a>
           <a href="#about">About</a>
           <a href="#contact">Contact</a>
-          <a href="https://github.com/barath220904" target="_blank" rel="noreferrer">
+          <a href="https://github.com/barathfreelancing" target="_blank" rel="noreferrer">
             GitHub
           </a>
           <a

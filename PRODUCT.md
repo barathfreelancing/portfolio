@@ -41,8 +41,10 @@ Visitors reach the site from a shared link (WhatsApp, GitHub, a proposal) on pho
 
 ## Evidence on Hand
 
-- Five shipped projects with live URLs and source repositories: STUDDS, MANO Residences, BMW E30 M3, Hong Zao, Drishti Opticians (`src/data/projects.js`, screenshots in `public/`).
-- Contact: barathfreelancing@gmail.com, WhatsApp +91 81482 90307, github.com/barath220904.
+- Five shipped projects with live URLs and source repositories: STUDDS, MANO Residences, BMW E30 M3, Hong Zao, Drishti Opticians (`src/data/projects.js`, screenshots in `public/`). All five were designed and developed solo by Barathkumar (confirmed). Drishti Opticians is client work; the other four are self-initiated concept builds (confirmed).
+- Earlier Python/ML repositories on github.com/barath220904 (sentiment analysis, house-price prediction, virtual mouse, chatbot, image converter), listed as secondary evidence without their unverified percentage claims.
+- Contact: barathfreelancing@gmail.com, WhatsApp +91 81482 90307, github.com/barathfreelancing (the freelance account holding every showcased project; confirmed as the public GitHub link).
+- Confirmed commitment: a reply within 24 hours of an enquiry.
 - Absent, and not to be fabricated: testimonials, client logos, metrics, years of experience, pricing beyond the enquiry form's budget ranges.
 
 ## Product Principles

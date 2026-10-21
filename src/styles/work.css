@@ -4,17 +4,17 @@
 }
 
 .work__lead {
+  max-width: 44ch;
   margin-bottom: var(--sp-8);
 }
 
+/* The frames sit outside the page container: page width by default, near full-bleed when stacked */
 .frames {
   display: grid;
   gap: var(--sp-8);
-}
-
-.frame {
-  position: sticky;
-  top: calc(var(--header-height) + 16px);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
 .frame__card {
@@ -31,8 +31,6 @@
   position: relative;
   /* The screenshots are close to 2.14:1, so the frame reads as a widescreen still */
   aspect-ratio: 2.14;
-  max-height: calc(100dvh - var(--header-height) - 260px);
-  min-height: 220px;
   overflow: hidden;
   background: var(--night-3);
 }
@@ -44,19 +42,21 @@
   object-position: top center;
 }
 
+/* Heading | story | stack and links */
 .frame__body {
   display: grid;
-  grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) auto;
-  grid-template-areas:
-    'heading description actions'
-    'heading tech actions';
+  grid-template-columns: minmax(0, 3.2fr) minmax(0, 5fr) minmax(0, 2.6fr);
   align-items: start;
-  gap: var(--sp-3) var(--sp-6);
-  padding: var(--sp-5) var(--sp-6) var(--sp-5);
+  gap: var(--sp-5) var(--sp-6);
+  padding: var(--sp-5) var(--sp-6) var(--sp-6);
 }
 
-.frame__heading {
-  grid-area: heading;
+.frame__kind {
+  color: var(--ink-3);
+}
+
+.frame__kind.is-client {
+  color: var(--violet);
 }
 
 .frame__title {
@@ -64,28 +64,66 @@
 }
 
 .frame__subtitle {
-  color: var(--magenta-hi);
+  color: var(--ink-2);
   font-weight: 500;
 }
 
-.frame__description {
-  grid-area: description;
+.frame__story {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.frame__brief {
+  max-width: 54ch;
+  color: var(--ink);
+  font-size: 1rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.frame__label {
+  margin-top: var(--sp-1);
+  color: var(--ink-3);
+}
+
+.frame__built {
+  display: grid;
+  gap: 6px;
+  color: var(--ink-2);
   font-size: 0.9375rem;
 }
 
+.frame__built li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.frame__built li::before {
+  position: absolute;
+  top: 0.8em;
+  left: 0;
+  width: 10px;
+  height: 1px;
+  background: var(--ink-3);
+  content: '';
+}
+
+.frame__meta {
+  display: grid;
+  gap: var(--sp-5);
+}
+
 .frame__tech {
-  grid-area: tech;
   display: flex;
   flex-wrap: wrap;
-  gap: 2px 16px;
-  color: var(--ink-3);
-  font-size: 0.8125rem;
+  gap: 2px 14px;
+  color: var(--ink-2);
+  font-size: 0.875rem;
 }
 
 .frame__actions {
-  grid-area: actions;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: var(--sp-2);
 }
 
@@ -97,42 +135,178 @@
   pointer-events: none;
 }
 
-@media (max-width: 1100px) {
-  .frame__body {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
-    grid-template-areas:
-      'heading description'
-      'actions tech';
-  }
-
-  .frame__actions {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-}
-
-/* Below the stacking breakpoint the stills are a plain sequence */
-@media (max-width: 899px) {
+/* Stacked stills on desktop and laptops. The still's height gives way first (cropping from the
+   bottom) so a whole frame, buttons included, always fits under the nav while it is stuck. */
+@media (min-width: 900px) and (min-height: 620px) {
   .frame {
-    position: static;
+    position: sticky;
+    top: calc(var(--header-height) + 16px);
+  }
+
+  /* Full-screen stills: the screenshot fills the card, the description is a band along its bottom */
+  .frames {
+    max-width: none;
+    padding: 0 16px;
+  }
+
+  .frame__card {
+    height: calc(100dvh - var(--header-height) - 32px);
   }
 
   .frame__visual {
-    max-height: none;
-    min-height: 0;
+    position: absolute;
+    inset: 0;
+    aspect-ratio: auto;
   }
 
   .frame__body {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      'heading'
-      'description'
-      'tech'
-      'actions';
-    padding: var(--sp-5) var(--sp-4);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: var(--sp-5) var(--sp-7) var(--sp-6);
+    border-top: 1px solid var(--line-strong);
+    /* Solid: a translucent band lets the screenshot's own text ghost through the description */
+    background: var(--night-2);
+  }
+}
+
+@media (max-width: 1100px) {
+  .frame__body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  }
+
+  .frame__meta {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+}
+
+@media (max-width: 899px) {
+  /* One column: the kind label follows the subtitle, never above the title */
+  .frame__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .frame__meta {
+    display: contents;
+  }
+
+  .frame__heading {
+    order: 1;
+  }
+
+  .frame__kind {
+    order: 2;
+    margin-top: calc(var(--sp-3) * -1);
+  }
+
+  .frame__story {
+    order: 3;
+  }
+
+  .frame__tech {
+    order: 4;
+  }
+
+  .frame__actions {
+    order: 5;
   }
 
   .frames {
     gap: var(--sp-6);
+  }
+
+  .frame__body {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  .frame__meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Python and machine learning: a quiet index of linked repositories */
+.pyworks {
+  margin-top: var(--section);
+}
+
+.pyworks__title {
+  margin-bottom: var(--sp-3);
+}
+
+.pyworks__lead {
+  margin-bottom: var(--sp-6);
+}
+
+.pyworks__list {
+  border-top: 1px solid var(--line);
+}
+
+.pywork {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 6fr) minmax(0, 3fr) 24px;
+  align-items: baseline;
+  gap: var(--sp-5);
+  padding: var(--sp-4) 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  transition: color var(--swift) ease;
+}
+
+.pywork__title {
+  color: var(--ink);
+  font-stretch: var(--w-compressed);
+  font-size: 1.5rem;
+  font-weight: 750;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.pywork__tech {
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+
+.pywork__arrow {
+  align-self: center;
+  color: var(--ink-3);
+  transition:
+    transform var(--swift) var(--ease-out),
+    color var(--swift) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pywork:hover .pywork__title,
+  .pywork:hover .pywork__arrow {
+    color: var(--magenta-hi);
+  }
+
+  .pywork:hover .pywork__arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+@media (max-width: 760px) {
+  .pywork {
+    grid-template-columns: minmax(0, 1fr) 24px;
+    gap: var(--sp-2) var(--sp-4);
+  }
+
+  .pywork__title {
+    grid-column: 1;
+  }
+
+  .pywork__arrow {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .pywork__summary,
+  .pywork__tech {
+    grid-column: 1 / -1;
   }
 }

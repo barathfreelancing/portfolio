@@ -1,7 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import { CaretDown, CheckCircle, EnvelopeSimple, GithubLogo, PaperPlaneTilt, WhatsappLogo } from '@phosphor-icons/react';
+import {
+  CaretDown,
+  Check,
+  CheckCircle,
+  Copy,
+  EnvelopeSimple,
+  GithubLogo,
+  PaperPlaneTilt,
+  WhatsappLogo,
+} from '@phosphor-icons/react';
 import { gsap, EASE_OUT, prefersReducedMotion } from '../motion/gsap';
 import { flareWorld } from '../world/signals';
+
+const EMAIL = 'barathfreelancing@gmail.com';
+const WHATSAPP_URL = `https://wa.me/918148290307?text=${encodeURIComponent(
+  'Hi Barathkumar, I saw your portfolio and would like to talk about a project.'
+)}`;
 
 const PROJECT_TYPES = ['Website', 'Full-stack application', 'API / integration', 'AI / automation', 'Other'];
 const BUDGETS = ['Under ₹25k', '₹25k - ₹50k', '₹50k - ₹1L', '₹1L - ₹2L', '₹2L - ₹5L', '₹5L+'];
@@ -22,8 +36,32 @@ export default function Contact() {
   const [touched, setTouched] = useState({});
   const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error' | 'email'
   const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [copied, setCopied] = useState(false);
   const formRef = useRef(null);
   const rootRef = useRef(null);
+  const copyTimer = useRef(0);
+
+  useEffect(() => () => clearTimeout(copyTimer.current), []);
+
+  // Many visitors have no desktop mail client, so the address is one click from their clipboard.
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+    } catch {
+      const field = document.createElement('textarea');
+      field.value = EMAIL;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+      document.execCommand('copy');
+      field.remove();
+    }
+    setCopied(true);
+    clearTimeout(copyTimer.current);
+    copyTimer.current = setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     if (prefersReducedMotion()) return undefined;
@@ -78,7 +116,7 @@ export default function Contact() {
       const body = encodeURIComponent(
         `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\nProject type: ${form.type}\nBudget: ${BUDGETS[form.budget]}\n\n${form.message.trim()}`
       );
-      window.location.href = `mailto:barathfreelancing@gmail.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
       setStatus('email');
       setFeedbackMessage('Your email app should open with the enquiry ready. Send it there to complete your message.');
       return;
@@ -109,7 +147,7 @@ export default function Contact() {
       flareWorld();
     } catch {
       setStatus('error');
-      setFeedbackMessage('Could not send your enquiry. Please email barathfreelancing@gmail.com directly.');
+      setFeedbackMessage(`Could not send your enquiry. Please email ${EMAIL} directly.`);
     }
   };
 
@@ -162,25 +200,43 @@ export default function Contact() {
           <p className="lead contact__lead">Have an idea worth bringing to life? Tell me what you want to build.</p>
 
           <ul className="contact__direct">
-            <li>
-              <a href="mailto:barathfreelancing@gmail.com" className="contact__link">
+            <li className="contact__email">
+              <a href={`mailto:${EMAIL}`} className="contact__link">
                 <EnvelopeSimple size={20} aria-hidden="true" />
-                barathfreelancing@gmail.com
+                {EMAIL}
               </a>
+              <button type="button" className="contact__copy" onClick={copyEmail}>
+                {copied ? <Check size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
+                <span>{copied ? 'Copied' : 'Copy'}</span>
+                <span className="visually-hidden"> email address</span>
+              </button>
+              <span className="visually-hidden" role="status">
+                {copied ? 'Email address copied' : ''}
+              </span>
             </li>
             <li>
-              <a href="https://wa.me/918148290307" target="_blank" rel="noreferrer" className="contact__link">
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="contact__link">
                 <WhatsappLogo size={20} aria-hidden="true" />
                 +91 81482 90307 (WhatsApp)
               </a>
             </li>
             <li>
-              <a href="https://github.com/barath220904" target="_blank" rel="noreferrer" className="contact__link">
+              <a href="https://github.com/barathfreelancing" target="_blank" rel="noreferrer" className="contact__link">
                 <GithubLogo size={20} aria-hidden="true" />
-                github.com/barath220904
+                github.com/barathfreelancing
               </a>
             </li>
           </ul>
+
+          <div className="next">
+            <h3 className="next__title chrome">What happens next</h3>
+            <ol className="next__steps">
+              <li>Send the form, an email or a WhatsApp message with a short brief.</li>
+              <li>I reply within 24 hours.</li>
+              <li>We talk through the goals, scope and timeline on a short call.</li>
+              <li>You get a written scope and a quote.</li>
+            </ol>
+          </div>
         </div>
 
         {status === 'success' ? (
@@ -188,8 +244,8 @@ export default function Contact() {
             <CheckCircle size={44} weight="light" className="contact-success__icon" aria-hidden="true" />
             <h3 className="title title--sm">Enquiry sent</h3>
             <p className="body">
-              Thanks, {form.name.trim().split(' ')[0] || 'there'}. I&rsquo;ll get back to you at {form.email.trim()}{' '}
-              soon.
+              Thanks, {form.name.trim().split(' ')[0] || 'there'}. I&rsquo;ll reply to {form.email.trim()} within 24
+              hours.
             </p>
             <button type="button" className="btn btn-ghost btn-sm" onClick={reset}>
               Send another

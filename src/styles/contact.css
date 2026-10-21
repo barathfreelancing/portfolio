@@ -2,6 +2,19 @@
   padding-bottom: clamp(96px, 12vw, 160px);
 }
 
+/* The dawn is brightest low on the page; a veil keeps the left column's copy readable over it */
+.contact::before {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 70% at 0% 85%, rgba(7, 6, 15, 0.72), rgba(7, 6, 15, 0.35) 55%, transparent 80%);
+  content: '';
+  pointer-events: none;
+}
+
+.contact__grid {
+  position: relative;
+}
+
 .contact__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 560px);
@@ -53,6 +66,80 @@
   .contact__link:hover {
     text-decoration-color: var(--magenta);
   }
+}
+
+.contact__email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-4);
+}
+
+.contact__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--ink-2);
+  background: rgba(7, 6, 15, 0.42);
+  font-stretch: var(--w-expanded);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition:
+    transform var(--press) var(--ease-out),
+    border-color var(--swift) ease,
+    color var(--swift) ease;
+}
+
+.contact__copy:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .contact__copy:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+}
+
+/* What happens next: numbered because the order is the information */
+.next {
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+}
+
+.next__title {
+  margin-bottom: var(--sp-4);
+  color: var(--ink-2);
+}
+
+.next__steps {
+  display: grid;
+  gap: var(--sp-3);
+  max-width: 46ch;
+  counter-reset: step;
+}
+
+.next__steps li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  color: var(--ink);
+  counter-increment: step;
+}
+
+.next__steps li::before {
+  color: var(--ink);
+  font-stretch: var(--w-compressed);
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.35;
+  content: counter(step);
 }
 
 .contact-panel {

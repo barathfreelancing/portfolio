@@ -25,7 +25,31 @@ export default function App() {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    // In-page links glide instead of jumping, then hand focus to the section so keyboard and
+    // screen-reader users continue from where they landed. The skip link stays native.
+    const onClick = (e) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const link = e.target.closest?.('a[href^="#"]');
+      const hash = link?.getAttribute('href');
+      if (!hash || hash === '#' || hash === '#main') return;
+      const target = document.querySelector(hash);
+      if (!target) return;
+      e.preventDefault();
+      // Lenis applies the html scroll-padding-top (nav height + 16px), so no manual offset is needed.
+      lenis.scrollTo(target, {
+        duration: 1.1,
+        // Keyboard activation (detail 0) jumps instantly; only pointer clicks glide.
+        immediate: e.detail === 0,
+        onComplete: () => {
+          if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+        },
+      });
+    };
+    document.addEventListener('click', onClick);
+
     return () => {
+      document.removeEventListener('click', onClick);
       gsap.ticker.remove(raf);
       lenis.destroy();
     };

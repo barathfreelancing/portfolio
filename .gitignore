@@ -7,3 +7,6 @@ dist/
 # Local review artifacts
 .playwright-mcp/
 .impeccable/review/
+
+# Per-project skill installs (local tooling, includes local settings)
+skills/

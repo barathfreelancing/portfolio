@@ -25,6 +25,11 @@
   margin-top: var(--sp-7);
 }
 
+/* Full ink: this column sits over the brightest band of the twilight sky */
+.about__body .body {
+  color: var(--ink);
+}
+
 .about__principles {
   grid-column: 1 / -1;
   display: grid;

@@ -6,6 +6,18 @@
   background: var(--night);
 }
 
+/* A short fade so the sky dissolves into the footer instead of being cut */
+.footer::before {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: 64px;
+  background: linear-gradient(to bottom, transparent, var(--night));
+  content: '';
+  pointer-events: none;
+}
+
 .footer__inner {
   display: flex;
   flex-wrap: wrap;

@@ -120,7 +120,7 @@ The interface itself is quiet so the world can be loud: off-white type, hairline
 A midnight ground lit by a violet-blue sky, with magenta reserved for action.
 
 ### Primary
-- **Signal Magenta** (#ff4fb8): primary buttons, the active nav underline, the process route fill and reached stops, the range thumb and fill, focus rings, caret and selection. Hover lifts to **Signal Magenta Hi** (#ff7ccc), which also colours accent title lines and project subtitles.
+- **Signal Magenta** (#ff4fb8): primary buttons, the active nav underline, the process route fill and reached stops, the range thumb and fill, focus rings, caret and selection. Hover lifts to **Signal Magenta Hi** (#ff7ccc), which also colours the accent line of a title card.
 
 ### Secondary
 - **Aurora Violet** (#8b6cff): secondary chapter titles ("From idea to system.") and the scrollbar thumb. Never on a control.
@@ -149,7 +149,7 @@ A midnight ground lit by a violet-blue sky, with magenta reserved for action.
 
 ### Hierarchy
 - **Display** (800, clamp(3.4rem, 10.5vw, 6rem), 0.88, uppercase, 62% width): the hero title only.
-- **Headline** (800, clamp(2.9rem, 7.4vw, 6rem), 0.88, uppercase, 62% width): chapter titles; services rows use clamp(2.6rem, 7vw, 5.5rem).
+- **Headline** (800, clamp(2.9rem, 7.4vw, 6rem), 0.88, uppercase, 62% width): chapter titles; service blocks use clamp(2.6rem, 5.6vw, 4.5rem).
 - **Title** (800, clamp(2.1rem, 4.4vw, 3.5rem)): project titles and sub-chapter titles; small titles at clamp(1.6rem, 2.6vw, 2.1rem).
 - **Statement** (500, clamp(1.6rem, 3.3vw, 2.75rem), 1.18): the About manifesto line.
 - **Lead** (400, clamp(1.125rem, 1.6vw, 1.375rem), 1.5, max 34ch): one sentence under a title.
@@ -163,7 +163,7 @@ A midnight ground lit by a violet-blue sky, with magenta reserved for action.
 
 ## Layout
 
-Container max 1320px with a fluid gutter of clamp(16px, 4vw, 48px). Sections are separated by `--section` (clamp(96px, 14vw, 192px)) top and bottom; services closes at 40% of that because the contact chapter opens immediately. The page uses a different layout family per chapter: bottom-left title card (hero), offset 12-column manifesto (about), index rows of name and items (stack), sticky stack of widescreen stills (work), giant accordion plus a horizontal route (services), copy beside form (contact). Breakpoints: 1100px (frame body regrid), 900px (single column, the work stack becomes a sequence), 860px (nav collapses to the menu, the route turns vertical), 640/560/520px (fine adjustments). The hero always fits the first viewport (min-height 100dvh).
+Container max 1320px with a fluid gutter of clamp(16px, 4vw, 48px). Sections are separated by `--section` (clamp(96px, 14vw, 192px)) top and bottom; services closes at 40% of that because the contact chapter opens immediately. The page uses a different layout family per chapter: bottom-left title card (hero), offset 12-column manifesto (about), index rows of name and items (stack), sticky stack of widescreen stills (work), a 2x2 of service blocks plus a horizontal route (services), a linked index of Python repositories (after the work), copy beside form (contact). Breakpoints: 1100px (frame body regrid), 900px wide and 620px tall (full-screen stacked stills only above both), 860px (nav collapses to the menu, the route turns vertical), 640/560/520px (fine adjustments). The hero always fits the first viewport (min-height 100dvh).
 
 ## Elevation & Depth
 
@@ -180,22 +180,28 @@ All-sharp: 0px radius on buttons, inputs, frames, panels, the range thumb and th
 
 ### Buttons
 - **Shape:** square (0px), 52px tall (40px small), label typography.
-- **Primary:** Signal Magenta on On-Signal text (6.6:1). One per intent: "Explore work", "Hire me", "Send enquiry".
+- **Primary:** Signal Magenta on On-Signal text (6.6:1). One per intent: "Hire me" (nav and hero, the hire intent everywhere) and "Send enquiry" (the form). "See the work" is the hero's ghost companion.
 - **Ghost:** Starlight text, Hairline Strong border, rgba(7, 6, 15, 0.42) fill so it reads over the sky.
 - **States:** hover (fine pointers only) shifts background or border over 200ms `ease`; press scales to 0.97 over 160ms `cubic-bezier(0.23, 1, 0.32, 1)`; disabled 60% opacity; the busy submit shows a linear bar sweeping along its bottom edge.
 
 ### Project still (signature)
-- A widescreen frame (screenshots are about 2.14:1) on Night Panel with a hairline, the image cropped from the top, and a body row: title and magenta subtitle, description, tech list, then the Live site and Source ghost buttons. On desktop the frames are `position: sticky` and stack.
+- A widescreen frame (screenshots about 2.14:1, served with an 800w source for phones) on Night Panel with a hairline, the image cropped from the top. The body runs heading | story | meta: the compressed title and a Starlight Dim subtitle; the brief and a "What I built" list; then a factual kind label ("Client project" in Aurora Violet, "Concept build" in Starlight Faint, never above the title), the stack and the Live site / Source ghost buttons. On screens at least 900px wide and 620px tall the frames run near full-bleed (16px margins), each filling the height under the nav: the screenshot covers the card and the body is a solid Night Panel band along its bottom; frames stick and the previous one recedes (scale 0.93, dimmed) as the next slides over it. Below that the frames are a plain sequence with the image above the body.
+
+### Hairline list marker
+- Lists of facts (what I built, typical work) use a 10px x 1px Starlight Faint rule as the marker, never a dot or a glyph.
 
 ### Inputs / Fields
 - **Style:** Night fill, Hairline Strong stroke, 0px radius, 48px minimum height, label above in label typography.
 - **Focus:** Magenta border plus a 2px Magenta outline. **Error:** Error Rose border with the message below. The select uses a Phosphor CaretDown; the range is a 2px track filled in Magenta with a square thumb.
 
 ### Navigation
-- Fixed, 68px (60px under 640px). Transparent over the hero, then Night at 0.86 with a hairline once the hero is behind. Links are label typography in Starlight Dim; the current chapter is Starlight with a 2px magenta underline that scales in from the left (200ms). Under 860px a Phosphor List/X toggle opens a full-screen Night menu of compressed titles that stagger in at 40ms.
+- Fixed, 68px (60px under 640px). Transparent over the hero, then Night at 0.96 with a hairline once the hero is behind. Links are label typography in Starlight Dim; the current chapter is Starlight with a 2px magenta underline that scales in from the left (200ms). Under 860px a Phosphor List/X toggle opens a full-screen Night menu of compressed titles that stagger in at 40ms.
 
-### Accordion (services)
-- Full-width rows of headline-size titles; the open row's title is Signal Magenta Hi and its Plus icon rotates 45°. The panel opens through `grid-template-rows` 0fr→1fr over 240ms with an opacity fade, and closed panels are `inert`.
+### Service blocks
+- Four always-visible blocks in a 2x2 grid (one column under 860px), each opened by a Hairline Strong top rule: compressed title, the value sentence in Starlight, a "Typical work" label in Starlight Faint, a hairline-marker list, and the tools in small Starlight Faint text. No accordion: a visitor should see every offer without clicking.
+
+### Next steps (contact)
+- A numbered list (the order is the information) of what happens after an enquiry, including the confirmed 24-hour reply. Numbers are compressed Starlight figures. Beside the email address, a small square Copy control (label typography, Hairline Strong border) copies it to the clipboard and announces "Email address copied".
 
 ## Do's and Don'ts
 

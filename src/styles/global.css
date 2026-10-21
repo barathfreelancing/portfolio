@@ -70,6 +70,11 @@ p {
   margin: 0;
 }
 
+p,
+li {
+  text-wrap: pretty;
+}
+
 ul,
 ol {
   margin: 0;
@@ -233,6 +238,11 @@ section {
   outline-offset: 3px;
 }
 
+/* Sections receive focus after an in-page jump; the ring belongs to controls, not whole chapters */
+section[tabindex='-1']:focus {
+  outline: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -269,7 +279,9 @@ section {
   }
 
   .btn,
-  .btn:active {
-    transform: none;
+  .btn:active,
+  .contact__copy:active,
+  .pywork .pywork__arrow {
+    transform: none !important;
   }
 }

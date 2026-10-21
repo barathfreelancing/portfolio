@@ -59,11 +59,18 @@ export default function World() {
     const reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const small = window.matchMedia('(max-width: 768px)').matches;
-    let reduce = reduceQuery.matches;
+    // Save-Data visitors get the same still sky as reduced motion: one frame per scroll change, no loop.
+    const saveData = Boolean(navigator.connection?.saveData);
+    let reduce = reduceQuery.matches || saveData;
+    // Low-memory or low-core devices start at a lower resolution and fewer noise octaves.
+    const lowEnd = (navigator.deviceMemory || 8) < 4 || (navigator.hardwareConcurrency || 8) <= 2;
+    // Phones draw at 30fps: the sky drifts slowly, so half the frames buy back battery for little visible loss.
+    const frameBudget = small ? 31 : 0;
+    const slowDt = ((frameBudget || 16.7) * 1.6) / 1000;
 
     // Render below CSS resolution and let the browser upscale: the sky is soft by nature.
-    let scale = small ? 0.5 : 0.7;
-    const octaves = small ? 4 : 5;
+    let scale = (small ? 0.5 : 0.7) * (lowEnd ? 0.8 : 1);
+    const octaves = (small ? 4 : 5) - (lowEnd ? 1 : 0);
 
     let width = 0;
     let height = 0;
@@ -141,6 +148,7 @@ export default function World() {
 
     const frame = (now) => {
       raf = requestAnimationFrame(frame);
+      if (frameBudget && now - last < frameBudget) return;
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
 
@@ -229,7 +237,7 @@ export default function World() {
       gl.drawArrays(gl.TRIANGLES, 0, 3);
 
       // Adaptive resolution: step down when frames run long on slower devices.
-      if (!reduce && dt > 0.026) slowFrames += 1;
+      if (!reduce && dt > slowDt) slowFrames += 1;
       else slowFrames = Math.max(0, slowFrames - 1);
       if (slowFrames > 40 && scale > 0.36) {
         scale -= 0.1;
@@ -240,7 +248,7 @@ export default function World() {
     raf = requestAnimationFrame(frame);
 
     const onReduceChange = (e) => {
-      reduce = e.matches;
+      reduce = e.matches || saveData;
       lastDrawKey = '';
     };
     reduceQuery.addEventListener('change', onReduceChange);
