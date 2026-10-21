@@ -1,0 +1,16 @@
+.world {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-world);
+  display: block;
+  width: 100%;
+  /* lvh: the largest viewport, so mobile toolbars never uncover an unpainted strip */
+  height: 100lvh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.world.is-live {
+  opacity: 1;
+}

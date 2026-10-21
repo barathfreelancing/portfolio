@@ -1,6 +1,6 @@
 # Barathkumar — Freelance Portfolio
 
-Full-stack Python & AI developer portfolio built with React + Vite, GSAP/ScrollTrigger, and Lenis smooth scroll.
+Full-stack Python & AI developer portfolio built with React + Vite, GSAP/ScrollTrigger and Lenis. The page is one continuous anime sky rendered live in WebGL: the reader travels from dusk over a floating city (hero) through night (stack, work) and an aurora (services) to first light above a cloud sea (contact).
 
 ## Run locally
 
@@ -11,16 +11,11 @@ npm run dev
 
 Open the printed local URL (typically http://localhost:5173).
 
-## Build for production
+## Build, lint, preview
 
 ```bash
-npm install
-npm run build
-```
-
-Output goes to `dist/`. Preview the production build with:
-
-```bash
+npm run build     # output in dist/
+npm run lint      # oxlint
 npm run preview
 ```
 
@@ -28,36 +23,33 @@ npm run preview
 
 ```
 src/
+├── world/          # WebGL sky: shader.js (procedural scene), states.js (one sky per chapter), World.jsx (renderer + scroll blending)
+├── motion/         # gsap.js: plugin registration, shared easing curves, reduced-motion helper
 ├── components/     # Nav, Footer
-├── sections/       # Hero, Services, Work, Process, Technology, About, Principles, Contact
+├── sections/       # Hero, About (incl. principles), Technology, Work, Services (incl. process), Contact
 ├── data/           # services.js, projects.js, tech.js — edit content here
-├── styles/         # tokens.css (design system) + one stylesheet per section
-├── App.jsx         # assembles sections, sets up Lenis + ScrollTrigger
+├── styles/         # tokens.css (design tokens) + one stylesheet per section
+├── App.jsx         # assembles the page, sets up Lenis + ScrollTrigger
 └── main.jsx
 ```
 
-## Content notes — what still needs to be added
+Design context lives in `PRODUCT.md` and `.impeccable/surfaces/` (direction contract), with the visual system documented in `DESIGN.md`.
 
-- **STUDDS project**: source link is wired to the given GitHub repo. A live/preview
-  link is not yet included — add one in `src/data/projects.js` (`liveUrl`) and wire it
-  into the "View project" button in `src/sections/Work.jsx` once a live URL exists.
-- **Upcoming projects** (AI/RAG app, automation system, full-stack app) are intentional
-  "Coming soon" placeholders — replace with real case studies in
-  `src/data/projects.js` as they ship.
-- **Contact form** is frontend-only: it validates input and opens the visitor's email
-  client via a `mailto:` link with the details pre-filled. No backend/email service is
-  wired up. To make it submit directly, connect a form backend (e.g. Formspree, a
-  serverless function, or a custom API) inside `src/sections/Contact.jsx`.
-- **WhatsApp number** is formatted with the +91 (India) country code based on the
-  10-digit number provided. Double-check this is correct before publishing.
-- No testimonials, client logos, metrics, or years-of-experience claims are included,
-  per the brief — add only verified information if these are introduced later.
+## The world
+
+- Everything in the sky (clouds, stars, aurora, floating islands and towers, the entity, light motes) is procedural geometry and noise in a single fragment shader, so there are no illustration assets to license.
+- Each section has a chapter state in `src/world/states.js` (sky colours, sun, stars, aurora, clouds, camera height, entity position). Change a chapter there to re-light that part of the page.
+- The canvas renders below CSS resolution and steps resolution down automatically on slow devices. Without WebGL, a CSS gradient sky on `<body>` is shown instead.
+
+## Content notes
+
+- **Projects** live in `src/data/projects.js`. Screenshots are served as WebP (`public/*.webp`); the original PNGs are kept beside them. Add a new project by adding an entry and a screenshot of roughly 2.14:1.
+- **Contact form** validates input and submits through Web3Forms when `VITE_WEB3FORMS_KEY` is configured. Without a key it opens the visitor's email client with the enquiry pre-filled. Set the key in a local `.env` file for development and in the deployment provider's environment settings for production.
+- **WhatsApp number** is formatted with the +91 (India) country code. Double-check it before publishing.
+- No testimonials, client logos, metrics, or years-of-experience claims are included. Add only verified information if these are introduced later.
 
 ## Accessibility & motion
 
-- Keyboard-navigable nav (including the mobile menu, which closes on Escape and
-  returns focus to the toggle button).
-- Visible focus states throughout.
-- Respects `prefers-reduced-motion`: all content is immediately visible without
-  relying on scroll animations, and Lenis smooth scroll / GSAP entrance and
-  scroll-triggered effects are skipped.
+- Keyboard-navigable nav, including the mobile menu (focus trap, Escape to close, focus returned to the toggle); visible focus states; labelled form fields with inline errors.
+- `prefers-reduced-motion`: Lenis and all GSAP movement are skipped, every section is visible without scroll triggers, and the world is frozen: the sky still changes colour per chapter, while the city and entity fade out after the hero instead of travelling.
+- Motion follows Emil Kowalski's curves (`--ease-out: cubic-bezier(0.23, 1, 0.32, 1)`, `--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1)`), animates transform/opacity/clip-path, and gates hover effects to fine pointers.

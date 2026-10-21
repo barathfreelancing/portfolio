@@ -1,7 +1,10 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { CaretDown, CheckCircle, EnvelopeSimple, GithubLogo, PaperPlaneTilt, WhatsappLogo } from '@phosphor-icons/react';
+import { gsap, EASE_OUT, prefersReducedMotion } from '../motion/gsap';
+import { flareWorld } from '../world/signals';
 
 const PROJECT_TYPES = ['Website', 'Full-stack application', 'API / integration', 'AI / automation', 'Other'];
-const BUDGETS = ['Under ₹25k', '₹25k – ₹50k', '₹50k – ₹1L', '₹1L – ₹2L', '₹2L – ₹5L', '₹5L+'];
+const BUDGETS = ['Under ₹25k', '₹25k - ₹50k', '₹50k - ₹1L', '₹1L - ₹2L', '₹2L - ₹5L', '₹5L+'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE = 800;
 
@@ -17,9 +20,25 @@ export default function Contact() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
-  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error' | 'email'
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const formRef = useRef(null);
+  const rootRef = useRef(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return undefined;
+    // Closing title card: the headline wipes in when the reader arrives.
+    const ctx = gsap.context(() => {
+      gsap.from('.contact__line > span', {
+        yPercent: 108,
+        duration: 1,
+        ease: EASE_OUT,
+        stagger: 0.08,
+        scrollTrigger: { trigger: '.contact__headline', start: 'top 85%', once: true },
+      });
+    }, rootRef);
+    return () => ctx.revert();
+  }, []);
 
   const update = (field) => (e) => {
     const value = field === 'budget' ? Number(e.target.value) : e.target.value;
@@ -53,6 +72,18 @@ export default function Contact() {
     e.preventDefault();
     if (status === 'submitting' || !validate()) return;
 
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY;
+    if (!accessKey) {
+      const subject = encodeURIComponent(`Project enquiry: ${form.type}`);
+      const body = encodeURIComponent(
+        `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\nProject type: ${form.type}\nBudget: ${BUDGETS[form.budget]}\n\n${form.message.trim()}`
+      );
+      window.location.href = `mailto:barathfreelancing@gmail.com?subject=${subject}&body=${body}`;
+      setStatus('email');
+      setFeedbackMessage('Your email app should open with the enquiry ready. Send it there to complete your message.');
+      return;
+    }
+
     setStatus('submitting');
     setFeedbackMessage('');
 
@@ -61,7 +92,7 @@ export default function Contact() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_KEY,
+          access_key: accessKey,
           subject: `Project enquiry: ${form.type}`,
           from_name: form.name.trim(),
           name: form.name.trim(),
@@ -75,6 +106,7 @@ export default function Contact() {
       if (!data.success) throw new Error(data.message || 'Request failed');
 
       setStatus('success');
+      flareWorld();
     } catch {
       setStatus('error');
       setFeedbackMessage('Could not send your enquiry. Please email barathfreelancing@gmail.com directly.');
@@ -89,18 +121,14 @@ export default function Contact() {
     setStatus('idle');
   };
 
-  const isValid = (field) => touched[field] && !errors[field] && form[field].trim() !== '';
-
   const renderField = (field, label, Tag, props) => (
-    <div
-      className={`form-field form-field--float${errors[field] ? ' is-invalid' : ''}${
-        isValid(field) ? ' is-valid' : ''
-      }`}
-    >
+    <div className={`field${errors[field] ? ' is-invalid' : ''}`}>
+      <label htmlFor={field} className="field__label chrome">
+        {label}
+      </label>
       <Tag
         id={field}
         value={form[field]}
-        placeholder=" "
         onChange={update(field)}
         onBlur={handleBlur(field)}
         disabled={status === 'submitting'}
@@ -108,12 +136,8 @@ export default function Contact() {
         aria-describedby={errors[field] ? `${field}-error` : undefined}
         {...props}
       />
-      <label htmlFor={field}>{label}</label>
-      <svg className="form-field__tick" viewBox="0 0 20 20" aria-hidden="true">
-        <path d="M4 10.5l4 4 8-9" />
-      </svg>
       {errors[field] && (
-        <span id={`${field}-error`} className="form-field__error">
+        <span id={`${field}-error`} className="field__error">
           {errors[field]}
         </span>
       )}
@@ -121,74 +145,82 @@ export default function Contact() {
   );
 
   return (
-    <section id="contact" className="contact section-pad">
+    <section id="contact" className="contact section-pad" ref={rootRef}>
       <div className="container contact__grid">
         <div className="contact__intro">
-          <p className="eyebrow">Contact</p>
-          <h2 className="display-lg contact__headline">Have a problem worth building around?</h2>
-          <p className="body-lg contact__lead">
-            Tell me what you&rsquo;re trying to build, automate, or improve.
-          </p>
+          <h2 className="title title--lg contact__headline">
+            <span className="mask contact__line">
+              <span>Let’s build</span>
+            </span>
+            <span className="mask contact__line">
+              <span>something</span>
+            </span>
+            <span className="mask contact__line contact__line--accent">
+              <span>extraordinary.</span>
+            </span>
+          </h2>
+          <p className="lead contact__lead">Have an idea worth bringing to life? Tell me what you want to build.</p>
 
-          <div className="contact__direct">
-            <a href="mailto:barathfreelancing@gmail.com" className="contact__direct-link">
-              barathfreelancing@gmail.com
-            </a>
-            <a href="https://wa.me/918148290307" target="_blank" rel="noreferrer" className="contact__direct-link">
-              +91 81482 90307 (WhatsApp)
-            </a>
-            <a
-              href="https://github.com/barath220904"
-              target="_blank"
-              rel="noreferrer"
-              className="contact__direct-link"
-            >
-              github.com/barath220904
-            </a>
-          </div>
+          <ul className="contact__direct">
+            <li>
+              <a href="mailto:barathfreelancing@gmail.com" className="contact__link">
+                <EnvelopeSimple size={20} aria-hidden="true" />
+                barathfreelancing@gmail.com
+              </a>
+            </li>
+            <li>
+              <a href="https://wa.me/918148290307" target="_blank" rel="noreferrer" className="contact__link">
+                <WhatsappLogo size={20} aria-hidden="true" />
+                +91 81482 90307 (WhatsApp)
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/barath220904" target="_blank" rel="noreferrer" className="contact__link">
+                <GithubLogo size={20} aria-hidden="true" />
+                github.com/barath220904
+              </a>
+            </li>
+          </ul>
         </div>
 
         {status === 'success' ? (
-          <div className="contact-success" role="status">
-            <svg className="contact-success__check" viewBox="0 0 52 52" aria-hidden="true">
-              <circle cx="26" cy="26" r="24" />
-              <path d="M15 27l8 8 14-16" />
-            </svg>
-            <h3 className="display-sm">Enquiry sent</h3>
-            <p className="body-md">
-              Thanks, {form.name.trim().split(' ')[0] || 'there'}. I&rsquo;ll get back to you at{' '}
-              {form.email.trim()} soon.
+          <div className="contact-panel contact-success" role="status">
+            <CheckCircle size={44} weight="light" className="contact-success__icon" aria-hidden="true" />
+            <h3 className="title title--sm">Enquiry sent</h3>
+            <p className="body">
+              Thanks, {form.name.trim().split(' ')[0] || 'there'}. I&rsquo;ll get back to you at {form.email.trim()}{' '}
+              soon.
             </p>
-            <button type="button" className="btn btn-secondary btn-sm" onClick={reset}>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={reset}>
               Send another
             </button>
           </div>
         ) : (
-          <form className="contact-form" onSubmit={handleSubmit} noValidate ref={formRef}>
-            {renderField('name', 'Name', 'input', { type: 'text', autoComplete: 'name' })}
-            {renderField('email', 'Email', 'input', { type: 'email', autoComplete: 'email' })}
-
-            <div className="form-field">
-              <label htmlFor="type" className="form-field__label-static">
-                Project type
-              </label>
-              <select
-                id="type"
-                value={form.type}
-                onChange={update('type')}
-                disabled={status === 'submitting'}
-              >
-                {PROJECT_TYPES.map((t) => (
-                  <option key={t} value={t}>
-                    {t}
-                  </option>
-                ))}
-              </select>
+          <form className="contact-panel contact-form" onSubmit={handleSubmit} noValidate ref={formRef}>
+            <div className="contact-form__row">
+              {renderField('name', 'Name', 'input', { type: 'text', autoComplete: 'name' })}
+              {renderField('email', 'Email', 'input', { type: 'email', autoComplete: 'email' })}
             </div>
 
-            <div className="form-field budget">
+            <div className="field">
+              <label htmlFor="type" className="field__label chrome">
+                Project type
+              </label>
+              <div className="field__select">
+                <select id="type" value={form.type} onChange={update('type')} disabled={status === 'submitting'}>
+                  {PROJECT_TYPES.map((t) => (
+                    <option key={t} value={t}>
+                      {t}
+                    </option>
+                  ))}
+                </select>
+                <CaretDown size={16} weight="bold" aria-hidden="true" />
+              </div>
+            </div>
+
+            <div className="field budget">
               <div className="budget__head">
-                <label htmlFor="budget" className="form-field__label-static">
+                <label htmlFor="budget" className="field__label chrome">
                   Budget
                 </label>
                 <output htmlFor="budget" className="budget__value">
@@ -213,31 +245,33 @@ export default function Contact() {
               </div>
             </div>
 
-            {renderField('message', 'Message', 'textarea', { rows: 4, maxLength: MAX_MESSAGE })}
-            <span
-              className={`form-field__count${form.message.length > MAX_MESSAGE - 100 ? ' is-near' : ''}`}
-            >
+            {renderField('message', 'Message', 'textarea', {
+              rows: 5,
+              maxLength: MAX_MESSAGE,
+              placeholder: 'What are you building, and by when?',
+            })}
+            <span className={`field__count${form.message.length > MAX_MESSAGE - 100 ? ' is-near' : ''}`}>
               {form.message.length}/{MAX_MESSAGE}
             </span>
 
             {feedbackMessage && (
-              <div className={`contact-form__feedback contact-form__feedback--${status}`} role="alert">
+              <div
+                className={`contact-form__feedback contact-form__feedback--${status}`}
+                role={status === 'email' ? 'status' : 'alert'}
+              >
                 {feedbackMessage}
               </div>
             )}
 
             <button
               type="submit"
-              className="btn btn-primary contact-form__submit"
+              data-attract
+              className={`btn btn-primary contact-form__submit${status === 'submitting' ? ' is-busy' : ''}`}
               disabled={status === 'submitting'}
+              aria-busy={status === 'submitting'}
             >
-              {status === 'submitting' ? (
-                <>
-                  <span className="spinner" aria-hidden="true" /> Sending...
-                </>
-              ) : (
-                'Send enquiry'
-              )}
+              {status === 'submitting' ? 'Sending...' : 'Send enquiry'}
+              <PaperPlaneTilt size={18} weight="bold" aria-hidden="true" />
             </button>
           </form>
         )}

@@ -4,7 +4,7 @@ export const services = [
     key: 'BUILD',
     title: 'Build',
     value:
-      'Websites and full-stack applications that give your business a working product on the internet — not just a design file.',
+      'Websites and full-stack applications that give your business a working product on the internet, not just a design file.',
     tech: ['React', 'Vite', 'JavaScript', 'HTML', 'CSS'],
   },
   {
@@ -26,7 +26,7 @@ export const services = [
   {
     code: '04',
     key: 'PROCESS',
-    title: 'Process',
+    title: 'Data',
     value:
       'Data pipelines and backend workflows that turn spreadsheets and CSVs into structured, reliable systems.',
     tech: ['Pandas', 'CSV Automation', 'PostgreSQL', 'MySQL', 'MongoDB', 'SQL'],

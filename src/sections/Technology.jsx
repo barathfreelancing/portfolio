@@ -1,25 +1,21 @@
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger, EASE_IN_OUT, prefersReducedMotion } from '../motion/gsap';
 import { techGroups } from '../data/tech';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Technology() {
   const rootRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce) return;
+    if (prefersReducedMotion()) return undefined;
 
-      gsap.from('.tech-group', {
-        opacity: 0,
-        y: 20,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: rootRef.current, start: 'top 75%' },
+    // Each row is uncovered from the top as it arrives, once; rows arriving together cascade.
+    const ctx = gsap.context(() => {
+      gsap.set('.stack-row', { clipPath: 'inset(0% 0% 100% 0%)' });
+      ScrollTrigger.batch('.stack-row', {
+        start: 'top 88%',
+        once: true,
+        onEnter: (rows) =>
+          gsap.to(rows, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.6, ease: EASE_IN_OUT, stagger: 0.06 }),
       });
     }, rootRef);
 
@@ -29,20 +25,15 @@ export default function Technology() {
   return (
     <section id="technology" className="technology section-pad" ref={rootRef}>
       <div className="container">
-        <div className="section-head">
-          <p className="eyebrow">Technology</p>
-          <h2 className="display-lg">The stack</h2>
-        </div>
+        <h2 className="title title--lg technology__title">The stack</h2>
 
-        <div className="tech-grid">
+        <div className="stack">
           {techGroups.map((group) => (
-            <div className="tech-group" key={group.category}>
-              <h3 className="caption-mono tech-group__title">{group.category}</h3>
-              <ul className="tech-group__list">
+            <div className="stack-row" key={group.category}>
+              <h3 className="title title--sm stack-row__name">{group.category}</h3>
+              <ul className="stack-row__items">
                 {group.items.map((item) => (
-                  <li key={item} className="tech-group__item">
-                    {item}
-                  </li>
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
             </div>

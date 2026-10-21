@@ -4,3 +4,6 @@ dist/
 .env.*
 !.env.example
     
+# Local review artifacts
+.playwright-mcp/
+.impeccable/review/

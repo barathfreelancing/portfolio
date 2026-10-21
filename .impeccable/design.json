@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T08:00:00Z",
+  "title": "Design System: Barathkumar Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "night": { "role": "neutral", "displayName": "Night", "canonical": "#07060f", "tonalRamp": ["#07060f", "#0d0b1c", "#15122a", "#221d3f", "#352e5c", "#5a5185", "#8d84b6", "#cdc6e8"] },
+      "starlight": { "role": "neutral", "displayName": "Starlight", "canonical": "#f4f0ff", "tonalRamp": ["#2e2a3d", "#4b4562", "#6d6589", "#938ab0", "#a59dc9", "#cdc6e8", "#e4dff7", "#f4f0ff"] },
+      "signal-magenta": { "role": "primary", "displayName": "Signal Magenta", "canonical": "#ff4fb8", "tonalRamp": ["#3d0a2a", "#6a1249", "#9a1c6b", "#cc2c8f", "#ff4fb8", "#ff7ccc", "#ffb0e0", "#ffe0f2"] },
+      "aurora-violet": { "role": "secondary", "displayName": "Aurora Violet", "canonical": "#8b6cff", "tonalRamp": ["#1d1340", "#2f2169", "#45339a", "#6449d4", "#8b6cff", "#a993ff", "#c9bbff", "#e8e1ff"] },
+      "aurora-blue": { "role": "secondary", "displayName": "Aurora Blue", "canonical": "#4f7bff", "tonalRamp": ["#0d1a40", "#162b6a", "#213f9a", "#3358d4", "#4f7bff", "#7d9dff", "#b0c3ff", "#e0e8ff"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Title card", "purpose": "Hero title only; Archivo at 62% width, 800, uppercase." },
+      "headline": { "displayName": "Chapter title", "purpose": "One per section; compressed heavy capitals." },
+      "statement": { "displayName": "Statement", "purpose": "The About manifesto line, scroll-lit word by word." },
+      "body": { "displayName": "Reading", "purpose": "Body copy at normal width, max 62ch." },
+      "label": { "displayName": "Chrome", "purpose": "Nav, buttons, form labels: Archivo at 125% width, uppercase." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Entrances, presses, underline and icon state changes." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "On-screen movement such as the stack rows' clip-path reveal." },
+      { "name": "press", "value": "160ms", "purpose": "Button press scale(0.97)." },
+      { "name": "swift", "value": "200ms", "purpose": "Hover colour, nav underline, icon rotation." }
+    ],
+    "breakpoints": [
+      { "name": "frame-regrid", "value": "1100px" },
+      { "name": "single-column", "value": "900px" },
+      { "name": "nav-menu", "value": "860px" },
+      { "name": "phone", "value": "640px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one interactive colour: Explore work, Hire me, Send enquiry.",
+      "html": "<button class=\"ds-btn-primary\">Hire me</button>",
+      "css": ".ds-btn-primary { min-height: 52px; padding: 0 24px; border: 0; border-radius: 0; background: #ff4fb8; color: #14051a; font-family: 'Archivo Variable', system-ui, sans-serif; font-stretch: 125%; font-size: 13px; font-weight: 650; letter-spacing: 0.05em; text-transform: uppercase; transition: transform 160ms cubic-bezier(0.23,1,0.32,1), background-color 200ms ease; } .ds-btn-primary:hover { background: #ff7ccc; } .ds-btn-primary:active { transform: scale(0.97); } .ds-btn-primary:focus-visible { outline: 2px solid #ff4fb8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary actions over the sky: Hire me in the hero, Live site and Source on projects.",
+      "html": "<button class=\"ds-btn-ghost\">Live site</button>",
+      "css": ".ds-btn-ghost { min-height: 52px; padding: 0 24px; border: 1px solid rgba(206,196,255,0.36); border-radius: 0; background: rgba(7,6,15,0.42); color: #f4f0ff; font-family: 'Archivo Variable', system-ui, sans-serif; font-stretch: 125%; font-size: 13px; font-weight: 650; letter-spacing: 0.05em; text-transform: uppercase; transition: transform 160ms cubic-bezier(0.23,1,0.32,1), border-color 200ms ease, background-color 200ms ease; } .ds-btn-ghost:hover { border-color: #f4f0ff; background: rgba(7,6,15,0.7); } .ds-btn-ghost:active { transform: scale(0.97); } .ds-btn-ghost:focus-visible { outline: 2px solid #ff4fb8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Label above, square stroke, magenta focus.",
+      "html": "<label class=\"ds-field\"><span>Name</span><input placeholder=\"Asha Raman\" /></label>",
+      "css": ".ds-field { display: grid; gap: 8px; font-family: 'Archivo Variable', system-ui, sans-serif; } .ds-field span { color: #cdc6e8; font-stretch: 125%; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; } .ds-field input { min-height: 48px; padding: 12px 14px; border: 1px solid rgba(206,196,255,0.36); border-radius: 0; background: #07060f; color: #f4f0ff; font-size: 16px; } .ds-field input::placeholder { color: #a59dc9; } .ds-field input:focus-visible { border-color: #ff4fb8; outline: 2px solid #ff4fb8; outline-offset: 0; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Expanded capitals; the current chapter gets a magenta underline that scales in from the left.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Work</a><a href=\"#\" class=\"is-active\">Services</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 32px; background: #07060f; padding: 20px; font-family: 'Archivo Variable', system-ui, sans-serif; } .ds-nav a { position: relative; padding: 10px 0; color: #cdc6e8; text-decoration: none; font-stretch: 125%; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; transition: color 200ms ease; } .ds-nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 4px; height: 2px; background: #ff4fb8; transform: scaleX(0); transform-origin: left; transition: transform 200ms cubic-bezier(0.23,1,0.32,1); } .ds-nav a:hover, .ds-nav a.is-active { color: #f4f0ff; } .ds-nav a.is-active::after { transform: scaleX(1); }"
+    },
+    {
+      "name": "Chapter Title",
+      "kind": "custom",
+      "refersTo": "headline",
+      "description": "Compressed heavy capitals, the page's title-card voice.",
+      "html": "<h2 class=\"ds-title\">Builder by instinct.</h2>",
+      "css": ".ds-title { margin: 0; color: #f4f0ff; background: #07060f; padding: 16px; font-family: 'Archivo Variable', system-ui, sans-serif; font-stretch: 62%; font-weight: 800; font-size: 64px; line-height: 0.88; text-transform: uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sky Between Chapters",
+    "overview": "The page is not a dark website with a hero image; it is one live sky (WebGL, src/world/) that the reader travels through. Each section is a chapter with its own time of day. The interface itself is quiet so the world can be loud: off-white type, hairline rules, square controls, and a single magenta signal for anything the visitor can act on.",
+    "keyCharacteristics": [
+      "One procedural sky behind everything; colour lives at page scale in the world, not in UI accents.",
+      "One family (Archivo variable) at three widths: 62% titles, 100% reading, 125% labels.",
+      "Magenta is the only interactive colour; violet and blue belong to the sky and secondary titles.",
+      "All-sharp shapes (0px radius); the entity is the only round thing on the page.",
+      "Motion is authored per chapter: title-card wipes, a scroll-lit statement, uncovering rows, a sticky stack of stills, a route that draws itself."
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Magenta means \"you can act here\". It never decorates a non-interactive surface except the accent line of a title card.", "section": "colors" },
+      { "name": "The Sky Owns the Colour Rule", "body": "Gradients, glows and saturated fields belong to the shader. UI elements stay flat: no gradient text, no glow borders, no coloured shadows.", "section": "colors" },
+      { "name": "The Width Not Family Rule", "body": "Hierarchy changes width and weight within Archivo. Never add a second display face or a serif for emphasis.", "section": "typography" },
+      { "name": "The No Kicker Rule", "body": "No small label above a heading; the title card carries its own weight.", "section": "typography" },
+      { "name": "The Border Or Nothing Rule", "body": "A surface gets a hairline or nothing. Never a border plus a soft shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do add new chapters to src/world/states.js when adding a section, so the sky changes with the reader.",
+      "Do use --ease-out (cubic-bezier(0.23, 1, 0.32, 1)) for entrances and --ease-in-out (cubic-bezier(0.77, 0, 0.175, 1)) for on-screen movement; keep UI transitions at or under 300ms.",
+      "Do gate hover effects behind (hover: hover) and (pointer: fine) and give every movement a reduced-motion variant that keeps opacity changes and drops transforms.",
+      "Do keep the entity's resting positions out of text columns."
+    ],
+    "donts": [
+      "Don't put coloured glows, glass blur or gradient text on UI; the sky already carries the colour.",
+      "Don't round corners on controls or panels.",
+      "Don't add eyebrows or kickers above headings, or number the sections.",
+      "Don't use em dashes in visible copy."
+    ]
+  }
+}

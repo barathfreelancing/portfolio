@@ -1,78 +1,22 @@
 import { useEffect } from 'react';
 import Lenis from 'lenis';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap, ScrollTrigger, prefersReducedMotion } from './motion/gsap';
 
+import World from './world/World';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Hero from './sections/Hero';
-import Services from './sections/Services';
-import Work from './sections/Work';
-import Process from './sections/Process';
-import Technology from './sections/Technology';
 import About from './sections/About';
-import Principles from './sections/Principles';
+import Technology from './sections/Technology';
+import Work from './sections/Work';
+import Services from './sections/Services';
 import Contact from './sections/Contact';
-
-gsap.registerPlugin(ScrollTrigger);
-
-const REVEAL_TARGETS = [
-  '.section-head:not(.about__head)',
-  '.contact__intro > *',
-  '.principle-card',
-].join(', ');
 
 export default function App() {
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
+    if (prefersReducedMotion()) return undefined;
 
-    // Text rises from below and darkens as it travels up the viewport, tied to scroll.
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray(REVEAL_TARGETS).forEach((el) => {
-        gsap.fromTo(
-          el,
-          { y: 70, opacity: 0.12 },
-          {
-            y: 0,
-            opacity: 1,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: el,
-              start: 'top 98%',
-              end: 'top 62%',
-              scrub: 0.6,
-            },
-          }
-        );
-      });
-
-      // About slides in from the right, scrubbed to scroll.
-      gsap.utils.toArray('.about__head, .about__body').forEach((el) => {
-        gsap.fromTo(
-          el,
-          { x: 180, opacity: 0.1 },
-          {
-            x: 0,
-            opacity: 1,
-            ease: 'none',
-            scrollTrigger: { trigger: el, start: 'top 95%', end: 'top 55%', scrub: 0.8 },
-          }
-        );
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return undefined;
-
-    const lenis = new Lenis({
-      duration: 1.1,
-      smoothWheel: true,
-    });
-
+    const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
 
     const raf = (time) => {
@@ -87,20 +31,27 @@ export default function App() {
     };
   }, []);
 
+  // Late-loading fonts and images change section heights; re-measure once everything has settled.
+  useEffect(() => {
+    const refresh = () => ScrollTrigger.refresh();
+    document.fonts?.ready.then(refresh);
+    window.addEventListener('load', refresh);
+    return () => window.removeEventListener('load', refresh);
+  }, []);
+
   return (
     <>
       <a href="#main" className="skip-link">
         Skip to content
       </a>
+      <World />
       <Nav />
       <main id="main">
         <Hero />
-        <Services />
-        <Work />
-        <Process />
-        <Technology />
         <About />
-        <Principles />
+        <Technology />
+        <Work />
+        <Services />
         <Contact />
       </main>
       <Footer />

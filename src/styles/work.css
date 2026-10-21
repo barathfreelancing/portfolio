@@ -1,98 +1,138 @@
-.work {
-  background: var(--canvas-soft);
+.work__title {
+  max-width: 11ch;
+  margin-bottom: var(--sp-5);
 }
 
-.featured-project {
+.work__lead {
+  margin-bottom: var(--sp-8);
+}
+
+.frames {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: var(--sp-3xl);
-  align-items: center;
-  background: var(--canvas);
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-lg);
-  padding: var(--sp-2xl);
-  box-shadow: var(--shadow-sm);
-  margin-bottom: var(--sp-3xl);
+  gap: var(--sp-8);
 }
 
-.featured-project--reverse {
-  grid-template-columns: 0.95fr 1.05fr;
+.frame {
+  position: sticky;
+  top: calc(var(--header-height) + 16px);
 }
 
-.featured-project--reverse .featured-project__visual {
-  order: 2;
-}
-
-.featured-project__visual {
-  border-radius: var(--r-md);
-  overflow: hidden;
-  background: var(--ink);
-  aspect-ratio: 16 / 9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.frame__card {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--night-2);
+  transform-origin: 50% 0%;
 }
 
-.featured-project__frame {
-  color: rgba(255, 255, 255, 0.4);
+.frame__visual {
+  position: relative;
+  /* The screenshots are close to 2.14:1, so the frame reads as a widescreen still */
+  aspect-ratio: 2.14;
+  max-height: calc(100dvh - var(--header-height) - 260px);
+  min-height: 220px;
+  overflow: hidden;
+  background: var(--night-3);
 }
 
-.featured-project__frame::before {
-  content: '';
+.frame__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.frame__body {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) auto;
+  grid-template-areas:
+    'heading description actions'
+    'heading tech actions';
+  align-items: start;
+  gap: var(--sp-3) var(--sp-6);
+  padding: var(--sp-5) var(--sp-6) var(--sp-5);
+}
+
+.frame__heading {
+  grid-area: heading;
+}
+
+.frame__title {
+  margin-bottom: var(--sp-2);
+}
+
+.frame__subtitle {
+  color: var(--magenta-hi);
+  font-weight: 500;
+}
+
+.frame__description {
+  grid-area: description;
+  font-size: 0.9375rem;
+}
+
+.frame__tech {
+  grid-area: tech;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+}
+
+.frame__actions {
+  grid-area: actions;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.frame__shade {
   position: absolute;
-  inset: var(--sp-lg);
-  border: 1px dashed rgba(255, 255, 255, 0.14);
-  border-radius: var(--r-sm);
+  inset: 0;
+  opacity: 0;
+  background: var(--night);
+  pointer-events: none;
 }
 
-.featured-project__title {
-  margin: var(--sp-xs) 0 4px;
-}
-
-.featured-project__subtitle {
-  color: var(--body);
-  margin-bottom: var(--sp-md);
-}
-
-.featured-project__body p.body-md {
-  margin-bottom: var(--sp-md);
-}
-
-.featured-project__tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-xs);
-  list-style: none;
-  padding: 0;
-  margin: 0 0 var(--sp-lg);
-}
-
-.featured-project__tech li {
-  padding: 4px 10px;
-  border: 1px solid var(--hairline);
-  border-radius: var(--r-full);
-  color: var(--body);
-}
-
-.featured-project__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-md);
-  flex-wrap: wrap;
-}
-
-.featured-project__note {
-  color: var(--mute);
-}
-
-@media (max-width: 900px) {
-  .featured-project,
-  .featured-project--reverse {
-    grid-template-columns: 1fr;
+@media (max-width: 1100px) {
+  .frame__body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    grid-template-areas:
+      'heading description'
+      'actions tech';
   }
 
-  .featured-project--reverse .featured-project__visual {
-    order: 0;
+  .frame__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* Below the stacking breakpoint the stills are a plain sequence */
+@media (max-width: 899px) {
+  .frame {
+    position: static;
+  }
+
+  .frame__visual {
+    max-height: none;
+    min-height: 0;
+  }
+
+  .frame__body {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'heading'
+      'description'
+      'tech'
+      'actions';
+    padding: var(--sp-5) var(--sp-4);
+  }
+
+  .frames {
+    gap: var(--sp-6);
   }
 }

@@ -6,10 +6,10 @@ export default function Footer() {
       <div className="container footer__inner">
         <div className="footer__brand">
           <p className="footer__name">BARATHKUMAR</p>
-          <p className="caption-mono">Full-stack Python &amp; AI developer</p>
+          <p className="footer__role">Full-stack Python &amp; AI developer</p>
         </div>
 
-        <nav className="footer__links" aria-label="Footer">
+        <nav className="footer__links chrome" aria-label="Footer">
           <a href="#work">Work</a>
           <a href="#services">Services</a>
           <a href="#about">About</a>
@@ -29,7 +29,7 @@ export default function Footer() {
           </a>
         </nav>
 
-        <p className="footer__meta caption-mono">&copy; {YEAR}</p>
+        <p className="footer__meta">&copy; {YEAR}</p>
       </div>
     </footer>
   );
