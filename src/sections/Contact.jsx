@@ -1,32 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-<<<<<<< HEAD
-import {
-  CaretDown,
-  Check,
-  CheckCircle,
-  Copy,
-  EnvelopeSimple,
-  GithubLogo,
-  PaperPlaneTilt,
-  WhatsappLogo,
-} from '@phosphor-icons/react';
-import { gsap, EASE_OUT, prefersReducedMotion } from '../motion/gsap';
-import { flareWorld } from '../world/signals';
-
-const EMAIL = 'barathfreelancing@gmail.com';
-const WHATSAPP_URL = `https://wa.me/918148290307?text=${encodeURIComponent(
-  'Hi Barathkumar, I saw your portfolio and would like to talk about a project.'
-)}`;
-
-const PROJECT_TYPES = ['Website', 'Full-stack application', 'API / integration', 'AI / automation', 'Other'];
-=======
 import { CaretDown, CheckCircle, EnvelopeSimple, GithubLogo, PaperPlaneTilt, WhatsappLogo } from '@phosphor-icons/react';
 import { site } from '../data/site';
 import { onInquiryPreselect } from '../lib/inquiry';
 import LocalTime from '../components/LocalTime';
 
 const PROJECT_TYPES = ['Website', 'Landing page', 'Full-stack application', 'API / integration', 'AI / automation', 'Other'];
->>>>>>> 27c7e9f (ui change)
 const BUDGETS = ['Under ₹25k', '₹25k - ₹50k', '₹50k - ₹1L', '₹1L - ₹2L', '₹2L - ₹5L', '₹5L+'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE = 800;
@@ -47,35 +25,8 @@ export default function Contact() {
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [copied, setCopied] = useState(false);
   const formRef = useRef(null);
-<<<<<<< HEAD
-  const rootRef = useRef(null);
-  const copyTimer = useRef(0);
-
-  useEffect(() => () => clearTimeout(copyTimer.current), []);
-
-  // Many visitors have no desktop mail client, so the address is one click from their clipboard.
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL);
-    } catch {
-      const field = document.createElement('textarea');
-      field.value = EMAIL;
-      field.setAttribute('readonly', '');
-      field.style.position = 'fixed';
-      field.style.opacity = '0';
-      document.body.appendChild(field);
-      field.select();
-      document.execCommand('copy');
-      field.remove();
-    }
-    setCopied(true);
-    clearTimeout(copyTimer.current);
-    copyTimer.current = setTimeout(() => setCopied(false), 2000);
-  };
-=======
   const successRef = useRef(null);
   const refocusName = useRef(false);
->>>>>>> 27c7e9f (ui change)
 
   // The form unmounts on success; move focus to the confirmation, and back to Name after "Send another".
   useEffect(() => {
@@ -133,11 +84,7 @@ export default function Contact() {
       const body = encodeURIComponent(
         `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\nProject type: ${form.type}\nBudget: ${BUDGETS[form.budget]}\n\n${form.message.trim()}`
       );
-<<<<<<< HEAD
-      window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
-=======
       window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
->>>>>>> 27c7e9f (ui change)
       setStatus('email');
       setFeedbackMessage('Your email app should open with the enquiry ready. Send it there to complete your message.');
       return;
@@ -167,11 +114,7 @@ export default function Contact() {
       setStatus('success');
     } catch {
       setStatus('error');
-<<<<<<< HEAD
-      setFeedbackMessage(`Could not send your enquiry. Please email ${EMAIL} directly.`);
-=======
       setFeedbackMessage(`Could not send your enquiry. Please email ${site.email} directly.`);
->>>>>>> 27c7e9f (ui change)
     }
   };
 
@@ -214,55 +157,6 @@ export default function Contact() {
           Have a project in mind? Let&rsquo;s build something valuable.
         </h2>
 
-<<<<<<< HEAD
-          <ul className="contact__direct">
-            <li className="contact__email">
-              <a href={`mailto:${EMAIL}`} className="contact__link">
-                <EnvelopeSimple size={20} aria-hidden="true" />
-                {EMAIL}
-              </a>
-              <button type="button" className="contact__copy" onClick={copyEmail}>
-                {copied ? <Check size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
-                <span>{copied ? 'Copied' : 'Copy'}</span>
-                <span className="visually-hidden"> email address</span>
-              </button>
-              <span className="visually-hidden" role="status">
-                {copied ? 'Email address copied' : ''}
-              </span>
-            </li>
-            <li>
-              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="contact__link">
-                <WhatsappLogo size={20} aria-hidden="true" />
-                +91 81482 90307 (WhatsApp)
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/barathfreelancing" target="_blank" rel="noreferrer" className="contact__link">
-                <GithubLogo size={20} aria-hidden="true" />
-                github.com/barathfreelancing
-              </a>
-            </li>
-          </ul>
-
-          <div className="next">
-            <h3 className="next__title chrome">What happens next</h3>
-            <ol className="next__steps">
-              <li>Send the form, an email or a WhatsApp message with a short brief.</li>
-              <li>I reply within 24 hours.</li>
-              <li>We talk through the goals, scope and timeline on a short call.</li>
-              <li>You get a written scope and a quote.</li>
-            </ol>
-          </div>
-        </div>
-
-        {status === 'success' ? (
-          <div className="contact-panel contact-success" role="status">
-            <CheckCircle size={44} weight="light" className="contact-success__icon" aria-hidden="true" />
-            <h3 className="title title--sm">Enquiry sent</h3>
-            <p className="body">
-              Thanks, {form.name.trim().split(' ')[0] || 'there'}. I&rsquo;ll reply to {form.email.trim()} within 24
-              hours.
-=======
         {/* The enquiry as a coupon: details on the stub, the form on the slip, a perforation between */}
         <div className="coupon" data-reveal style={{ '--d': 1 }}>
           <div className="coupon__stub">
@@ -303,7 +197,6 @@ export default function Contact() {
                 </>
               )}
               <LocalTime />
->>>>>>> 27c7e9f (ui change)
             </p>
           </div>
 

@@ -19,11 +19,7 @@ OWN-WORLD: Warm-neutral paper #f3f3f0, charcoal ink #141414, cobalt #2649e8 used
 
 STORY: Read who this is and what he builds in one line, see the four services with their deliverables, believe it through five live projects (index paragraph, then large screenshots with problem, role, stack and an expandable case study), understand the four-step process, then send the coupon-style enquiry form or use the email shown at display size in the footer.
 
-<<<<<<< HEAD
-FIRST VIEWPORT: The sky fills the screen; the floating city sits right of centre with the entity (a light core inside two tilted rings) hovering above it. Bottom-left: the condensed two-line headline "Building / digital worlds." at up to 6rem, a lead naming Barathkumar and the offer (websites, web apps, APIs and automation for businesses), and the "Hire me" (magenta, primary) and "See the work" buttons, all visible without scrolling.
-=======
 FIRST VIEWPORT: Paper above, cobalt below, meeting at a hard seam at half height. "Ideas into / products." at up to 8.5rem is centred across the seam: line one in charcoal on paper, line two cut by the seam and white on cobalt. On the cobalt: one sentence naming Barathkumar and what he builds, a white "Discuss a project" button and a "View my work" link, then the availability note with his live local time in India.
->>>>>>> 27c7e9f (ui change)
 
 FORM: Taste direction `type-only-statement` (Taste draw seed 1986015355, recorded in .taste-skill/direction.json), palette and type kept from the owner's brief. Sections: statement cell + dark rows (services), names as one paragraph + project rows (work), itinerary slip (process), two-column highlighted prose + toolkit table (about), clip-out coupon form (contact, redrawn: the dealt single-field blueprint could not hold the five-field form), contact as the headline (footer). seed: none (unavailable)
 

@@ -1,11 +1,15 @@
-<<<<<<< HEAD
 node_modules/
 dist/
 .env
 .env.*
 !.env.example
-    
+
 # Local review artifacts
 .playwright-mcp/
 .impeccable/review/
 
+# Per-project skill installs (local tooling, includes local settings)
+skills/
+
+# Taste skill working files
+.taste-skill/

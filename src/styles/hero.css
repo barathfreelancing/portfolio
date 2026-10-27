@@ -88,12 +88,7 @@
 
 .hero__lead {
   max-width: 40ch;
-<<<<<<< HEAD
-  margin-bottom: var(--sp-6);
-  color: var(--ink);
-=======
   color: var(--on-accent);
->>>>>>> 27c7e9f (ui change)
 }
 
 .hero__lead strong {

@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-// What a client can hire for. `examples` describe typical scope, not past results.
-export const services = [
-  {
-    key: 'BUILD',
-    title: 'Build',
-    value:
-      'Websites and full-stack applications that give your business a working product on the internet, not just a design file.',
-    examples: ['Marketing and product websites', 'Booking and enquiry flows', 'Web apps with accounts and dashboards'],
-=======
 // `inquiryType` must match one of PROJECT_TYPES in sections/Contact.jsx; it preselects the form.
 // `related` lists project slugs from projects.js that demonstrate the service.
 export const services = [
@@ -19,37 +9,12 @@ export const services = [
     deliver:
       'A fast, custom-designed website built around your content and the one action you want visitors to take.',
     deliverables: ['Custom design and build', 'Enquiry, booking or contact forms', 'Deployment to your domain', 'Source code handover'],
->>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'JavaScript', 'HTML', 'CSS'],
     related: ['mano-residences', 'hong-zao', 'drishti-opticians'],
     inquiryType: 'Website',
     cta: 'Discuss a website',
   },
   {
-<<<<<<< HEAD
-    key: 'CONNECT',
-    title: 'Connect',
-    value:
-      'APIs, authentication, and databases that let your application talk to the tools you already use, and the ones you need next.',
-    examples: ['REST APIs for web and mobile apps', 'Login and access control', 'Integrations with third-party services'],
-    tech: ['FastAPI', 'Flask', 'REST APIs', 'JWT', 'SQLAlchemy', 'Pydantic'],
-  },
-  {
-    key: 'AUTOMATE',
-    title: 'Automate',
-    value:
-      'AI chatbots, retrieval-augmented systems, and workflow automation that take repetitive work off your team’s plate.',
-    examples: ['Chatbots that answer from your own documents', 'Automated hand-offs between your tools', 'AI features inside an existing app'],
-    tech: ['AI Chatbots', 'RAG', 'LangGraph', 'AI APIs', 'n8n', 'Python'],
-  },
-  {
-    key: 'DATA',
-    title: 'Data',
-    value:
-      'Data pipelines and backend workflows that turn spreadsheets and CSVs into structured, reliable systems.',
-    examples: ['Spreadsheet and CSV imports into a database', 'Cleaning and reshaping messy data', 'Scheduled reports with Pandas'],
-    tech: ['Pandas', 'CSV Automation', 'PostgreSQL', 'MySQL', 'MongoDB', 'SQL'],
-=======
     key: 'landing',
     title: 'Landing pages & showcases',
     problem:
@@ -87,6 +52,5 @@ export const services = [
     related: [],
     inquiryType: 'AI / automation',
     cta: 'Discuss an AI project',
->>>>>>> 27c7e9f (ui change)
   },
 ];

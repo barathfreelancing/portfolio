@@ -7,152 +7,6 @@
   background: var(--surface-2);
 }
 
-<<<<<<< HEAD
-.services__title {
-  margin-bottom: var(--sp-5);
-}
-
-.services__lead {
-  margin-bottom: var(--sp-8);
-}
-
-/* Four offers, always visible: a 2x2 of hairline-topped blocks, no boxes */
-.services__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--sp-8) var(--sp-7);
-}
-
-.service {
-  display: grid;
-  align-content: start;
-  gap: var(--sp-4);
-  padding-top: var(--sp-5);
-  border-top: 1px solid var(--line-strong);
-}
-
-.service__title {
-  font-size: clamp(2.6rem, 5.6vw, 4.5rem);
-}
-
-.service__value {
-  max-width: 44ch;
-  color: var(--ink);
-  font-size: clamp(1.0625rem, 1.3vw, 1.1875rem);
-  line-height: 1.55;
-}
-
-.service__label {
-  margin-top: var(--sp-2);
-  color: var(--ink-3);
-}
-
-.service__examples {
-  display: grid;
-  gap: var(--sp-2);
-  color: var(--ink-2);
-}
-
-.service__examples li {
-  position: relative;
-  padding-left: 20px;
-}
-
-/* A short rule, not a dot: reads as a list marker in the hairline language */
-.service__examples li::before {
-  position: absolute;
-  top: 0.8em;
-  left: 0;
-  width: 10px;
-  height: 1px;
-  background: var(--ink-3);
-  content: '';
-}
-
-.service__tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px 16px;
-  margin-top: var(--sp-2);
-  color: var(--ink-2);
-  font-size: 0.9375rem;
-}
-
-/* Process: a route drawn across the page */
-.process {
-  margin-top: var(--section);
-}
-
-.process__title {
-  margin-bottom: var(--sp-7);
-  color: var(--violet);
-}
-
-.route {
-  position: relative;
-}
-
-.route__line {
-  position: absolute;
-  top: 5px;
-  right: 0;
-  left: 0;
-  height: 1px;
-  background: var(--line-strong);
-}
-
-.route__fill {
-  position: absolute;
-  inset: 0;
-  background: var(--magenta);
-  transform-origin: left center;
-  transform: scaleX(1);
-}
-
-.route__steps {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: var(--sp-5);
-  counter-reset: none;
-}
-
-.route__step {
-  position: relative;
-  padding-top: var(--sp-6);
-}
-
-.route__stop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 11px;
-  height: 11px;
-  border: 1px solid var(--line-strong);
-  background: var(--night);
-  transition:
-    background-color 300ms ease,
-    border-color 300ms ease;
-}
-
-.route__step.is-reached .route__stop {
-  border-color: var(--magenta);
-  background: var(--magenta);
-}
-
-.route__name {
-  margin-bottom: var(--sp-3);
-  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
-}
-
-.route__body {
-  font-size: 0.9375rem;
-}
-
-@media (max-width: 860px) {
-  .services__grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--sp-7);
-=======
 .services__cell {
   display: flex;
   flex-direction: column;
@@ -266,7 +120,6 @@
   .services {
     grid-template-columns: minmax(0, 1fr);
     min-height: 0;
->>>>>>> 27c7e9f (ui change)
   }
 
   .services__cell {
@@ -285,8 +138,6 @@
     display: block;
   }
 
-<<<<<<< HEAD
-=======
   .service__deliverables li {
     display: inline;
   }
@@ -295,4 +146,3 @@
     content: ', ';
   }
 }
->>>>>>> 27c7e9f (ui change)

@@ -24,33 +24,11 @@ export default function Footer() {
           </a>
         </div>
 
-<<<<<<< HEAD
-        <nav className="footer__links chrome" aria-label="Footer">
-          <a href="#work">Work</a>
-          <a href="#services">Services</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="https://github.com/barathfreelancing" target="_blank" rel="noreferrer">
-            GitHub
-          </a>
-          <a
-            href="https://mail.google.com/mail/?view=cm&to=barathfreelancing@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Email
-          </a>
-          <a href="https://wa.me/918148290307" target="_blank" rel="noreferrer">
-            WhatsApp
-          </a>
-        </nav>
-=======
         {/* The way to get in touch is the display line; it breaks before the @ */}
         <a href={`mailto:${site.email}`} className="footer__email">
           <span className="footer__email-line">{EMAIL_USER}</span>
           <span className="footer__email-line">@{EMAIL_DOMAIN}</span>
         </a>
->>>>>>> 27c7e9f (ui change)
 
         <div className="footer__meta small">
           <nav className="footer__links" aria-label="Footer">

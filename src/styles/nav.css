@@ -17,11 +17,6 @@
     color 300ms ease;
 }
 
-<<<<<<< HEAD
-.nav--solid {
-  border-bottom-color: var(--line);
-  background: rgba(7, 6, 15, 0.96);
-=======
 .nav[data-nav-tone='pale'] {
   --nav-bg: var(--surface-2);
 }
@@ -43,7 +38,6 @@
   --nav-cta-bg: var(--surface);
   --nav-cta-ink: var(--accent);
   --nav-cta-hover: var(--accent-soft);
->>>>>>> 27c7e9f (ui change)
 }
 
 .nav__inner {

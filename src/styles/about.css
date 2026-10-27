@@ -73,20 +73,6 @@
   margin-top: clamp(80px, 9vw, 128px);
 }
 
-<<<<<<< HEAD
-/* Full ink: this column sits over the brightest band of the twilight sky */
-.about__body .body {
-  color: var(--ink);
-}
-
-.about__principles {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: var(--sp-5);
-  margin-top: var(--sp-9);
-  padding-top: var(--sp-6);
-=======
 .toolkit__table {
   width: 100%;
   border-collapse: collapse;
@@ -95,7 +81,6 @@
 .toolkit__table th,
 .toolkit__table td {
   padding: var(--sp-4) 0;
->>>>>>> 27c7e9f (ui change)
   border-top: 1px solid var(--line);
   text-align: left;
   vertical-align: top;

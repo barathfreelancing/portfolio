@@ -1,23 +1,8 @@
-<<<<<<< HEAD
-// Every project below was designed and developed by Barathkumar alone.
-// `kind` is factual: only Drishti Opticians was commissioned by a client; the others are self-initiated builds.
-=======
 // Order is intentional. Case-study copy describes what was built; it makes no claims about clients or results.
->>>>>>> 27c7e9f (ui change)
 export const featuredProjects = [
   {
     slug: 'studds',
     title: 'STUDDS',
-<<<<<<< HEAD
-    subtitle: 'Cinematic helmet product experience',
-    kind: 'Concept build',
-    brief: 'A product showcase that puts a performance helmet first, told through cinematic, motion-driven presentation.',
-    built: [
-      'Scroll-driven product storytelling with GSAP ScrollTrigger',
-      'Smooth-scroll pacing with Lenis',
-      'Chaptered navigation through the helmet’s features',
-    ],
-=======
     subtitle: 'Cinematic Helmet Product Experience',
     category: 'Product showcase',
     description:
@@ -31,7 +16,6 @@ export const featuredProjects = [
       'Built with React and Vite. GSAP ScrollTrigger times each reveal to the reader’s scroll position, Lenis handles smooth scrolling, and a numbered rail shows progress through the chapters.',
     outcome:
       'A deployed product page with chaptered storytelling, scroll-linked animation and a public repository.',
->>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'JavaScript', 'GSAP', 'ScrollTrigger', 'Lenis'],
     image: '/studds-website.webp',
     imageSmall: '/studds-website-800.webp',
@@ -42,16 +26,6 @@ export const featuredProjects = [
   {
     slug: 'mano-residences',
     title: 'MANO Residences',
-<<<<<<< HEAD
-    subtitle: 'Real-estate showcase website',
-    kind: 'Concept build',
-    brief: 'A landing page for a luxury residential project in Chennai that guides visitors from first impression to enquiry.',
-    built: [
-      'Architectural imagery paced with GSAP',
-      'Residences, amenities and location sections',
-      'An enquiry journey with an Enquire action always in reach',
-    ],
-=======
     subtitle: 'Real Estate Showcase Website',
     category: 'Real estate landing page',
     description:
@@ -65,7 +39,6 @@ export const featuredProjects = [
       'A single-page React and Vite build with GSAP-driven entrances, an Enquire button in the navigation, and sections structured around the buyer’s questions.',
     outcome:
       'A deployed landing page with a clear path from first impression to enquiry, and a public repository.',
->>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'JavaScript', 'GSAP'],
     image: '/mano-residences.webp',
     imageSmall: '/mano-residences-800.webp',
@@ -76,16 +49,6 @@ export const featuredProjects = [
   {
     slug: 'bmw-e30-m3',
     title: 'BMW E30 M3',
-<<<<<<< HEAD
-    subtitle: 'Scroll-driven 3D car story',
-    kind: 'Concept build',
-    brief: 'An interactive 3D story of the BMW E30 M3 that moves the car through six chapters of its racing heritage as you scroll.',
-    built: [
-      'A real-time 3D car scene in Three.js',
-      'Six scroll-driven chapters choreographed with ScrollTrigger',
-      'Smooth scrolling with Lenis to pace the chapters',
-    ],
-=======
     subtitle: 'Scroll-driven 3D Car Story',
     category: 'Interactive 3D experience',
     description:
@@ -99,7 +62,6 @@ export const featuredProjects = [
       'React and Vite with a Three.js scene. GSAP ScrollTrigger maps scroll progress to the car and camera, and Lenis smooths the scroll input.',
     outcome:
       'A deployed, scroll-driven 3D experience with six chapters and a public repository.',
->>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'Three.js', 'GSAP', 'ScrollTrigger', 'Lenis'],
     image: '/bmw-e30-m3.webp',
     imageSmall: '/bmw-e30-m3-800.webp',
@@ -110,16 +72,6 @@ export const featuredProjects = [
   {
     slug: 'hong-zao',
     title: 'Hong Zao',
-<<<<<<< HEAD
-    subtitle: 'Modern Chinese restaurant website',
-    kind: 'Concept build',
-    brief: 'A restaurant website for a modern Chinese kitchen in Soho, London, pairing warm editorial design with food photography.',
-    built: [
-      'Signature-dishes menu and dining-space sections',
-      'Guest reviews presented in the editorial layout',
-      'A table reservation form with built-in validation',
-    ],
-=======
     subtitle: 'Modern Chinese Restaurant Website',
     category: 'Restaurant website',
     description:
@@ -133,7 +85,6 @@ export const featuredProjects = [
       'React and Vite with hand-written CSS. Sections for the story, signature dishes, menu, dining spaces and reviews, plus a reservation form with client-side validation.',
     outcome:
       'A deployed restaurant site with a working, validated reservation form and a public repository.',
->>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'JavaScript', 'CSS'],
     image: '/hong-zao.webp',
     imageSmall: '/hong-zao-800.webp',
@@ -144,16 +95,6 @@ export const featuredProjects = [
   {
     slug: 'drishti-opticians',
     title: 'Drishti Opticians',
-<<<<<<< HEAD
-    subtitle: 'Eyewear store website',
-    kind: 'Client project',
-    brief: 'An eyewear storefront for a Kannur optician serving customers since 1977, joining its heritage story to a browsable frame collection.',
-    built: [
-      'A filterable frame collection with quick view',
-      'A saved-frames bag for shortlisting',
-      'An in-store appointment form',
-    ],
-=======
     subtitle: 'Eyewear Store Website',
     category: 'Retail storefront',
     description:
@@ -167,7 +108,6 @@ export const featuredProjects = [
       'React, Vite and TypeScript with Motion for transitions. A filterable collection, quick-view panels, a saved-frames bag and an appointment form.',
     outcome:
       'A deployed storefront with filtering, quick view, saved frames and appointment booking, and a public repository.',
->>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'TypeScript', 'Motion'],
     image: '/drishti-optics.webp',
     imageSmall: '/drishti-optics-800.webp',
