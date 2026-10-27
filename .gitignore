@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 node_modules/
 dist/
 .env
@@ -8,10 +9,3 @@ dist/
 .playwright-mcp/
 .impeccable/review/
 
-<<<<<<< HEAD
-# Per-project skill installs (local tooling, includes local settings)
-skills/
-=======
-# Taste skill working files
-.taste-skill/
->>>>>>> 27c7e9f (ui change)
