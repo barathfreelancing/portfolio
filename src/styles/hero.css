@@ -1,47 +1,99 @@
+/*
+ * Headline across two fields.
+ * --seam: where paper meets cobalt, measured from the top of the hero.
+ * The h1 is two lines at line-height 0.88, so it is 1.76em tall; it is placed so the seam cuts the second
+ * line through its upper third (67% down the block). Each copy is clipped at that same 67%.
+ */
 .hero {
-  display: flex;
-  min-height: 100dvh;
-  align-items: flex-end;
-  padding: calc(var(--header-height) + var(--sp-7)) 0 clamp(48px, 9vh, 104px);
-}
+  --seam: calc((100svh - var(--header-height)) * 0.5);
+  --cut: 67%;
+  /* How far the seam travels during the entrance: the part of the headline that ends up below it */
+  --rise: calc(var(--fs-display) * 1.76 * 0.33);
 
-/* Starts black and fades out on load (Hero.jsx); also darkens the lower left so the copy reads over sunset cloud */
-.hero__veil {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  opacity: 0;
-  background: var(--night);
-  pointer-events: none;
-}
-
-.hero::before {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 70% 60% at 0% 100%, rgba(7, 6, 15, 0.82), rgba(7, 6, 15, 0.4) 55%, transparent 80%),
-    linear-gradient(0deg, rgba(7, 6, 15, 0.55), transparent 40%);
-  content: '';
-  pointer-events: none;
-}
-
-.hero__content {
   position: relative;
-  z-index: 1;
+  display: grid;
+  min-height: calc(100svh - var(--header-height) + 22svh);
+  overflow: hidden;
+  color: var(--on-accent);
+  background: var(--accent);
 }
 
-.hero__headline {
-  margin-bottom: var(--sp-5);
+.hero__field {
+  position: absolute;
+  inset-inline: 0;
 }
 
-.hero__line--accent {
-  color: var(--magenta-hi);
+/* Paper overhangs the top by --rise so it can retreat upward during the entrance */
+.hero__field--paper {
+  top: calc(var(--rise) * -1);
+  height: calc(var(--seam) + var(--rise));
+  background: var(--bg);
+}
+
+/* Cobalt is the hero's own ground; this element only marks the chapter for the header */
+.hero__field--cobalt {
+  top: var(--seam);
+  bottom: 0;
+}
+
+.hero__title-wrap {
+  position: absolute;
+  top: var(--seam);
+  inset-inline: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--gutter);
+  transform: translateY(calc(var(--cut) * -1));
+  pointer-events: none;
+}
+
+.hero__title {
+  position: relative;
+  margin: 0;
+  text-align: center;
+}
+
+.hero__line {
+  display: block;
+  white-space: nowrap;
+}
+
+.hero__copy {
+  display: block;
+}
+
+.hero__copy--paper {
+  color: var(--ink);
+  clip-path: inset(0 0 calc(100% - var(--cut)) 0);
+}
+
+.hero__copy--cobalt {
+  position: absolute;
+  inset: 0;
+  color: var(--on-accent);
+  clip-path: inset(var(--cut) 0 0 0);
+}
+
+/* The body sits on the cobalt field, below the headline's second line */
+.hero__body {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: var(--sp-5);
+  padding-top: calc(var(--seam) + var(--fs-display) * 0.72 + clamp(32px, 5vh, 56px));
+  padding-bottom: clamp(56px, 9vh, 96px);
+  text-align: center;
 }
 
 .hero__lead {
   max-width: 40ch;
+<<<<<<< HEAD
   margin-bottom: var(--sp-6);
   color: var(--ink);
+=======
+  color: var(--on-accent);
+>>>>>>> 27c7e9f (ui change)
 }
 
 .hero__lead strong {
@@ -51,20 +103,118 @@
 .hero__ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-3);
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3) var(--sp-6);
+  margin-top: var(--sp-2);
 }
 
-@media (max-width: 640px) {
-  .hero {
-    padding-bottom: 40px;
+.hero__work-link {
+  color: var(--on-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.hero__status {
+  justify-content: center;
+  color: var(--on-accent-2);
+}
+
+.hero :focus-visible {
+  outline-color: var(--on-accent);
+}
+
+/*
+ * The signature move: the cobalt rises into place (the paper retreats) while the clip on both copies travels
+ * with the seam, so "products." is submerged as the field arrives. Same curve and duration keep them in step.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__field--paper {
+    animation: field-rise 1100ms var(--ease-in-out) 150ms both;
   }
 
-  .hero::before {
-    background:
-      linear-gradient(0deg, rgba(7, 6, 15, 0.9) 0%, rgba(7, 6, 15, 0.6) 45%, transparent 75%);
+  .hero__copy--paper {
+    animation: cut-paper 1100ms var(--ease-in-out) 150ms both;
+  }
+
+  .hero__copy--cobalt {
+    animation: cut-cobalt 1100ms var(--ease-in-out) 150ms both;
+  }
+
+  .hero__title {
+    animation: title-in 900ms var(--ease-out) both;
+  }
+
+  .hero__body > * {
+    animation: body-in 500ms var(--ease-out) both;
+    animation-delay: calc(450ms + var(--d, 0) * 60ms);
+  }
+}
+
+@keyframes field-rise {
+  from {
+    transform: translateY(var(--rise));
+  }
+}
+
+@keyframes cut-paper {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes cut-cobalt {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
+@keyframes title-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes body-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title,
+  .hero__body > * {
+    animation: fade-in 400ms ease both;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Phone: seam at 46%, headline stays on two lines */
+@media (max-width: 640px) {
+  .hero {
+    --seam: calc((100svh - var(--header-height)) * 0.46);
+    min-height: calc(100svh - var(--header-height) + 12svh);
+  }
+
+  .hero__lead {
+    max-width: 30ch;
+    font-size: var(--fs-body);
+  }
+
+  .hero__ctas {
+    flex-direction: column;
+    width: 100%;
   }
 
   .hero__ctas .btn {
-    flex: 1 1 auto;
+    width: 100%;
   }
 }

@@ -1,8 +1,14 @@
+<<<<<<< HEAD
 // Every project below was designed and developed by Barathkumar alone.
 // `kind` is factual: only Drishti Opticians was commissioned by a client; the others are self-initiated builds.
+=======
+// Order is intentional. Case-study copy describes what was built; it makes no claims about clients or results.
+>>>>>>> 27c7e9f (ui change)
 export const featuredProjects = [
   {
+    slug: 'studds',
     title: 'STUDDS',
+<<<<<<< HEAD
     subtitle: 'Cinematic helmet product experience',
     kind: 'Concept build',
     brief: 'A product showcase that puts a performance helmet first, told through cinematic, motion-driven presentation.',
@@ -11,6 +17,21 @@ export const featuredProjects = [
       'Smooth-scroll pacing with Lenis',
       'Chaptered navigation through the helmet’s features',
     ],
+=======
+    subtitle: 'Cinematic Helmet Product Experience',
+    category: 'Product showcase',
+    description:
+      'A premium helmet showcase that puts the product first, pairing cinematic presentation with immersive, motion-driven interactions.',
+    problem:
+      'A technical product like a performance helmet is hard to sell through a catalogue grid. The page has to explain construction and safety detail while still feeling premium.',
+    role: 'Design and front-end development',
+    approach:
+      'Let the product lead. A dark, restrained interface keeps attention on the helmet, and the page is split into numbered chapters so each technical detail gets its own moment.',
+    implementation:
+      'Built with React and Vite. GSAP ScrollTrigger times each reveal to the reader’s scroll position, Lenis handles smooth scrolling, and a numbered rail shows progress through the chapters.',
+    outcome:
+      'A deployed product page with chaptered storytelling, scroll-linked animation and a public repository.',
+>>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'JavaScript', 'GSAP', 'ScrollTrigger', 'Lenis'],
     image: '/studds-website.webp',
     imageSmall: '/studds-website-800.webp',
@@ -19,7 +40,9 @@ export const featuredProjects = [
     liveUrl: 'https://studds-website.vercel.app/',
   },
   {
+    slug: 'mano-residences',
     title: 'MANO Residences',
+<<<<<<< HEAD
     subtitle: 'Real-estate showcase website',
     kind: 'Concept build',
     brief: 'A landing page for a luxury residential project in Chennai that guides visitors from first impression to enquiry.',
@@ -28,6 +51,21 @@ export const featuredProjects = [
       'Residences, amenities and location sections',
       'An enquiry journey with an Enquire action always in reach',
     ],
+=======
+    subtitle: 'Real Estate Showcase Website',
+    category: 'Real estate landing page',
+    description:
+      'A premium landing page for a luxury residential project in Chennai, where refined design and architectural imagery guide visitors from first impression to an enquiry.',
+    problem:
+      'Luxury property is bought on trust and atmosphere. The site needs to convey quality at first glance and move interested visitors toward an enquiry.',
+    role: 'Design and front-end development',
+    approach:
+      'Large architectural imagery and calm, spacious typography set the tone. The page moves from the project to residences, amenities and location, with an enquiry action kept in view.',
+    implementation:
+      'A single-page React and Vite build with GSAP-driven entrances, an Enquire button in the navigation, and sections structured around the buyer’s questions.',
+    outcome:
+      'A deployed landing page with a clear path from first impression to enquiry, and a public repository.',
+>>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'JavaScript', 'GSAP'],
     image: '/mano-residences.webp',
     imageSmall: '/mano-residences-800.webp',
@@ -36,7 +74,9 @@ export const featuredProjects = [
     liveUrl: 'https://real-estate-web-sample.vercel.app/',
   },
   {
+    slug: 'bmw-e30-m3',
     title: 'BMW E30 M3',
+<<<<<<< HEAD
     subtitle: 'Scroll-driven 3D car story',
     kind: 'Concept build',
     brief: 'An interactive 3D story of the BMW E30 M3 that moves the car through six chapters of its racing heritage as you scroll.',
@@ -45,6 +85,21 @@ export const featuredProjects = [
       'Six scroll-driven chapters choreographed with ScrollTrigger',
       'Smooth scrolling with Lenis to pace the chapters',
     ],
+=======
+    subtitle: 'Scroll-driven 3D Car Story',
+    category: 'Interactive 3D experience',
+    description:
+      'An interactive 3D experience of the BMW E30 M3, where scroll-driven storytelling moves the car through six chapters of its racing heritage.',
+    problem:
+      'Heritage stories are usually told with static photos and long text. The goal was to make the car itself the narrator and keep visitors scrolling through its history.',
+    role: 'Design and front-end development',
+    approach:
+      'Split the story into six chapters and tie the 3D car’s position and camera to scroll, so moving down the page moves the car through its racing history.',
+    implementation:
+      'React and Vite with a Three.js scene. GSAP ScrollTrigger maps scroll progress to the car and camera, and Lenis smooths the scroll input.',
+    outcome:
+      'A deployed, scroll-driven 3D experience with six chapters and a public repository.',
+>>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'Three.js', 'GSAP', 'ScrollTrigger', 'Lenis'],
     image: '/bmw-e30-m3.webp',
     imageSmall: '/bmw-e30-m3-800.webp',
@@ -53,7 +108,9 @@ export const featuredProjects = [
     liveUrl: 'https://bmwm30.vercel.app/',
   },
   {
+    slug: 'hong-zao',
     title: 'Hong Zao',
+<<<<<<< HEAD
     subtitle: 'Modern Chinese restaurant website',
     kind: 'Concept build',
     brief: 'A restaurant website for a modern Chinese kitchen in Soho, London, pairing warm editorial design with food photography.',
@@ -62,6 +119,21 @@ export const featuredProjects = [
       'Guest reviews presented in the editorial layout',
       'A table reservation form with built-in validation',
     ],
+=======
+    subtitle: 'Modern Chinese Restaurant Website',
+    category: 'Restaurant website',
+    description:
+      'A restaurant website for a modern Chinese kitchen in Soho, London, pairing warm editorial design and food photography with a signature-dishes menu, dining spaces, guest reviews and a table reservation form with built-in validation.',
+    problem:
+      'A restaurant site has two jobs: make the food tempting and make booking a table quick. Many do the first and bury the second.',
+    role: 'Design and front-end development',
+    approach:
+      'Warm, editorial pages built around food photography and the kitchen’s story, with “Reserve a table” always one click away in the header.',
+    implementation:
+      'React and Vite with hand-written CSS. Sections for the story, signature dishes, menu, dining spaces and reviews, plus a reservation form with client-side validation.',
+    outcome:
+      'A deployed restaurant site with a working, validated reservation form and a public repository.',
+>>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'JavaScript', 'CSS'],
     image: '/hong-zao.webp',
     imageSmall: '/hong-zao-800.webp',
@@ -70,7 +142,9 @@ export const featuredProjects = [
     liveUrl: 'https://hong-zao.vercel.app/',
   },
   {
+    slug: 'drishti-opticians',
     title: 'Drishti Opticians',
+<<<<<<< HEAD
     subtitle: 'Eyewear store website',
     kind: 'Client project',
     brief: 'An eyewear storefront for a Kannur optician serving customers since 1977, joining its heritage story to a browsable frame collection.',
@@ -79,6 +153,21 @@ export const featuredProjects = [
       'A saved-frames bag for shortlisting',
       'An in-store appointment form',
     ],
+=======
+    subtitle: 'Eyewear Store Website',
+    category: 'Retail storefront',
+    description:
+      'An eyewear storefront for a Kannur optician serving customers since 1977, combining editorial heritage storytelling with a filterable frame collection, quick view, a saved-frames bag and an in-store appointment form.',
+    problem:
+      'An established local shop wants customers to browse frames online without losing the personal, in-store service it is known for.',
+    role: 'Design and front-end development',
+    approach:
+      'Pair the shop’s heritage story with practical shopping tools: browse and shortlist frames online, then book an appointment to try them in the store.',
+    implementation:
+      'React, Vite and TypeScript with Motion for transitions. A filterable collection, quick-view panels, a saved-frames bag and an appointment form.',
+    outcome:
+      'A deployed storefront with filtering, quick view, saved frames and appointment booking, and a public repository.',
+>>>>>>> 27c7e9f (ui change)
     tech: ['React', 'Vite', 'TypeScript', 'Motion'],
     image: '/drishti-optics.webp',
     imageSmall: '/drishti-optics-800.webp',

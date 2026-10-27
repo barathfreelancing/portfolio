@@ -1,16 +1,17 @@
+<<<<<<< HEAD
 import { useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger, prefersReducedMotion } from '../motion/gsap';
+=======
+import { ArrowRight } from '@phosphor-icons/react';
+>>>>>>> 27c7e9f (ui change)
 import { services } from '../data/services';
+import { featuredProjects } from '../data/projects';
+import { preselectInquiry } from '../lib/inquiry';
 
-const STEPS = [
-  { title: 'Discover', body: 'Understand the business problem, goals, users, and requirements.' },
-  { title: 'Plan', body: 'Define architecture, UX, integrations, and technical approach.' },
-  { title: 'Build', body: 'Design and develop the website, application, API, or automation.' },
-  { title: 'Integrate', body: 'Connect APIs, AI services, databases, authentication, and workflows.' },
-  { title: 'Launch', body: 'Test, deploy, document, and hand over.' },
-];
+const projectBySlug = Object.fromEntries(featuredProjects.map((p) => [p.slug, p]));
 
 export default function Services() {
+<<<<<<< HEAD
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -50,11 +51,17 @@ export default function Services() {
     };
   }, []);
 
+=======
+>>>>>>> 27c7e9f (ui change)
   return (
-    <section id="services" className="services section-pad" ref={rootRef}>
-      <div className="container">
-        <h2 className="title title--lg services__title">What I build</h2>
+    <section id="services" className="services" aria-labelledby="services-title">
+      <div className="services__cell" data-tone="pale">
+        <h2 id="services-title" className="heading services__title" data-reveal>
+          <span className="services__title-line">What I can</span>
+          <span className="services__title-line services__title-line--right">build for you</span>
+        </h2>
 
+<<<<<<< HEAD
         <p className="lead services__lead">
           Four kinds of work, often combined in one project. You work with me directly, from the first call to launch.
         </p>
@@ -97,8 +104,60 @@ export default function Services() {
               ))}
             </ol>
           </div>
+=======
+        <div className="services__foot" data-reveal style={{ '--d': 1 }}>
+          <p className="body services__intro">
+            Four ways I usually help. If your project sits between them, that is normal: tell me what you need
+            and we will scope it together.
+          </p>
+          <a href="#contact" className="btn btn-primary">
+            Discuss a project
+            <ArrowRight size={18} weight="bold" aria-hidden="true" />
+          </a>
+>>>>>>> 27c7e9f (ui change)
         </div>
       </div>
+
+      <ul className="services__rows" data-tone="dark">
+        {services.map((service, i) => {
+          const related = service.related.map((slug) => projectBySlug[slug]).filter(Boolean);
+          return (
+            <li className="service" key={service.key} data-reveal style={{ '--d': i }}>
+              <div className="service__name">
+                <h3 className="subheading service__title">{service.title}</h3>
+                {related.length > 0 && (
+                  <p className="small service__related">
+                    See{' '}
+                    {related.map((p, j) => (
+                      <span key={p.slug}>
+                        <a href={`#project-${p.slug}`} className="text-link">
+                          {p.title}
+                        </a>
+                        {j < related.length - 2 ? ', ' : j === related.length - 2 ? ' and ' : ''}
+                      </span>
+                    ))}
+                  </p>
+                )}
+                <a
+                  href="#contact"
+                  className="text-link service__cta"
+                  onClick={() => preselectInquiry(service.inquiryType)}
+                >
+                  {service.cta}
+                </a>
+              </div>
+
+              <p className="service__problem">{service.problem}</p>
+
+              <ul className="service__deliverables" aria-label={`${service.title}: what you get`}>
+                {service.deliverables.map((d) => (
+                  <li key={d}>{d}</li>
+                ))}
+              </ul>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }

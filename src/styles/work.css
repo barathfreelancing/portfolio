@@ -1,8 +1,16 @@
-.work__title {
-  max-width: 11ch;
-  margin-bottom: var(--sp-5);
+/* Index: every project name in one paragraph, each followed by a small frame of its screenshot */
+.work-index {
+  max-width: 34em;
+  color: var(--ink-3);
+  font-size: var(--fs-sub);
+  font-stretch: var(--w-display);
+  font-weight: 680;
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  text-wrap: pretty;
 }
 
+<<<<<<< HEAD
 .work__lead {
   max-width: 44ch;
   margin-bottom: var(--sp-8);
@@ -15,18 +23,35 @@
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 var(--gutter);
+=======
+.work-index__title {
+  display: inline;
+  color: var(--ink);
+  font: inherit;
 }
 
-.frame__card {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
+.work-index__name {
+  color: var(--ink-3);
+  transition: color var(--swift) ease;
+}
+
+.work-index > span {
+  white-space: nowrap;
+>>>>>>> 27c7e9f (ui change)
+}
+
+.work-index__frame {
+  display: inline-block;
+  width: 1.5em;
+  height: 0.8em;
+  margin: 0 0.12em 0 0.22em;
   overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--night-2);
-  transform-origin: 50% 0%;
+  vertical-align: baseline;
+  transform-origin: left center;
+  transition: transform 300ms var(--ease-out);
 }
 
+<<<<<<< HEAD
 .frame__visual {
   position: relative;
   /* The screenshots are close to 2.14:1, so the frame reads as a widescreen still */
@@ -36,12 +61,16 @@
 }
 
 .frame__image {
+=======
+.work-index__frame img {
+>>>>>>> 27c7e9f (ui change)
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center bottom;
 }
 
+<<<<<<< HEAD
 /* Heading | story | stack and links */
 .frame__body {
   display: grid;
@@ -57,12 +86,47 @@
 
 .frame__kind.is-client {
   color: var(--violet);
+=======
+@media (hover: hover) and (pointer: fine) {
+  .work-index__name:hover {
+    color: var(--ink);
+  }
+
+  .work-index > span:has(.work-index__name:hover) .work-index__frame,
+  .work-index__frame:hover {
+    transform: scale(1.6);
+  }
 }
 
-.frame__title {
-  margin-bottom: var(--sp-2);
+.work__note {
+  margin-top: var(--sp-5);
+  color: var(--ink-3);
 }
 
+/* Projects */
+.projects {
+  display: grid;
+  gap: clamp(96px, 11vw, 168px);
+  margin-top: clamp(80px, 10vw, 144px);
+}
+
+.project__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(32px, 4.5vw, 72px);
+}
+
+.project--flip .project__row {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+>>>>>>> 27c7e9f (ui change)
+}
+
+.project--flip .project__figure {
+  order: 2;
+}
+
+<<<<<<< HEAD
 .frame__subtitle {
   color: var(--ink-2);
   font-weight: 500;
@@ -124,17 +188,162 @@
 .frame__actions {
   display: flex;
   flex-wrap: wrap;
+=======
+.project__figure {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+/* The screenshot sits on a mat one tone down from the page, never in a frame */
+.project__visual {
+  display: block;
+  padding: clamp(14px, 2.4vw, 36px);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
+.project__image {
+  width: 100%;
+  aspect-ratio: 1366 / 625;
+  object-fit: cover;
+  /* Crops the few pixels of captured browser chrome at the top */
+  object-position: center bottom;
+  transition: transform 700ms var(--ease-out);
+}
+
+.project__host {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-3);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project__visual:hover .project__image {
+    transform: scale(1.03);
+  }
+}
+
+.project__info {
+  display: grid;
+  gap: var(--sp-4);
+  align-content: start;
+  padding-top: var(--sp-2);
+}
+
+.project__subtitle {
+  margin-top: calc(var(--sp-2) * -1);
+  color: var(--ink-3);
+}
+
+.project__meta {
+  display: grid;
+  gap: var(--sp-4);
+  margin-top: var(--sp-2);
+  padding: var(--sp-5);
+  background: var(--surface);
+}
+
+.project__meta dt {
+  font-size: var(--fs-small);
+  font-weight: 680;
+}
+
+.project__meta dd {
+  margin-top: 2px;
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.project__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-5);
+  margin-top: var(--sp-2);
+}
+
+.project__source {
+  color: var(--ink);
+}
+
+.case-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 640;
+}
+
+.case-toggle svg {
+  transition: transform var(--swift) var(--ease-out);
+}
+
+.case-toggle.is-open svg {
+  transform: rotate(45deg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .case-toggle:hover {
+    color: var(--accent-hover);
+  }
+}
+
+/* Case study: opens at 300ms, closes faster at 200ms (the system responding, not the user deciding) */
+.case {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 200ms var(--ease-out),
+    opacity 150ms ease;
+}
+
+.case.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition:
+    grid-template-rows 300ms var(--ease-out),
+    opacity 250ms ease 50ms;
+}
+
+.case__inner {
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0s linear 200ms;
+}
+
+.case.is-open .case__inner {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.case__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-6) var(--sp-7);
+  margin-top: var(--sp-7);
+  padding: clamp(24px, 4vw, 56px);
+  background: var(--surface);
+}
+
+.case__item {
+  display: grid;
+  align-content: start;
+>>>>>>> 27c7e9f (ui change)
   gap: var(--sp-2);
 }
 
-.frame__shade {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  background: var(--night);
-  pointer-events: none;
+.case__item dt {
+  font-weight: 680;
 }
 
+<<<<<<< HEAD
 /* Stacked stills on desktop and laptops. The still's height gives way first (cropping from the
    bottom) so a whole frame, buttons included, always fits under the nav while it is stuck. */
 @media (min-width: 900px) and (min-height: 620px) {
@@ -213,10 +422,66 @@
 
   .frame__actions {
     order: 5;
+=======
+.case__item dd {
+  color: var(--ink-2);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.case__item--wide {
+  grid-column: 1 / -1;
+}
+
+.case__item--wide dd {
+  max-width: 60ch;
+  color: var(--ink);
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+}
+
+.case__links {
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+}
+
+@media (max-width: 1020px) {
+  .case__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .project__row,
+  .project--flip .project__row {
+    grid-template-columns: minmax(0, 1fr);
+>>>>>>> 27c7e9f (ui change)
   }
 
-  .frames {
-    gap: var(--sp-6);
+  .project--flip .project__figure {
+    order: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .work-index > span:nth-of-type(n + 4) .work-index__frame {
+    display: none;
+  }
+
+  .case__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case,
+  .case.is-open,
+  .project__image,
+  .work-index__frame {
+    transition: opacity 200ms ease;
   }
 
   .frame__body {

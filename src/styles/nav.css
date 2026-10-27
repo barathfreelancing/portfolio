@@ -1,135 +1,203 @@
+/* Each chapter sets the bar's colours; the bar eases between them as section edges pass under it */
 .nav {
-  position: fixed;
-  inset: 0 0 auto;
+  --nav-bg: var(--bg);
+  --nav-ink: var(--ink);
+  --nav-ink-2: var(--ink-2);
+  --nav-cta-bg: var(--accent);
+  --nav-cta-ink: var(--on-accent);
+  --nav-cta-hover: var(--accent-hover);
+
+  position: sticky;
+  top: 0;
   z-index: var(--z-nav);
-  height: var(--header-height);
-  border-bottom: 1px solid transparent;
+  color: var(--nav-ink);
+  background: var(--nav-bg);
   transition:
-    background-color 240ms ease,
-    border-color 240ms ease;
+    background-color 300ms ease,
+    color 300ms ease;
 }
 
+<<<<<<< HEAD
 .nav--solid {
   border-bottom-color: var(--line);
   background: rgba(7, 6, 15, 0.96);
+=======
+.nav[data-nav-tone='pale'] {
+  --nav-bg: var(--surface-2);
+}
+
+.nav[data-nav-tone='white'] {
+  --nav-bg: var(--surface);
+}
+
+.nav[data-nav-tone='dark'] {
+  --nav-bg: var(--dark);
+  --nav-ink: var(--on-dark);
+  --nav-ink-2: var(--on-dark-2);
+}
+
+.nav[data-nav-tone='cobalt'] {
+  --nav-bg: var(--accent);
+  --nav-ink: var(--on-accent);
+  --nav-ink-2: var(--on-accent-2);
+  --nav-cta-bg: var(--surface);
+  --nav-cta-ink: var(--accent);
+  --nav-cta-hover: var(--accent-soft);
+>>>>>>> 27c7e9f (ui change)
 }
 
 .nav__inner {
   display: flex;
   align-items: center;
-  gap: var(--sp-5);
-  height: 100%;
+  gap: var(--sp-6);
+  height: var(--header-height);
 }
 
 .nav__logo {
-  font-stretch: var(--w-expanded);
-  font-size: 0.875rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  font-size: 1.0625rem;
+  font-stretch: var(--w-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.nav__mark {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  color: var(--nav-bg);
+  background: var(--nav-ink);
+  font-size: 0.9375rem;
+  font-weight: 760;
+  letter-spacing: 0;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
 }
 
 .nav__links {
   display: flex;
-  gap: clamp(20px, 3vw, 40px);
-  margin-left: auto;
+  align-items: center;
+  gap: var(--sp-5);
 }
 
 .nav__link {
-  position: relative;
-  padding: 10px 0;
-  color: var(--ink-2);
-  transition: color var(--swift) ease;
-}
-
-.nav__link::after {
-  position: absolute;
-  right: 0;
-  bottom: 4px;
-  left: 0;
-  height: 2px;
-  background: var(--magenta);
-  content: '';
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--swift) var(--ease-out);
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--nav-ink-2);
+  font-size: 0.9375rem;
+  font-weight: 520;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.45em;
+  text-decoration-color: transparent;
+  transition:
+    color var(--swift) ease,
+    text-decoration-color var(--swift) ease;
 }
 
 .nav__link.is-active {
-  color: var(--ink);
-}
-
-.nav__link.is-active::after {
-  transform: scaleX(1);
+  color: var(--nav-ink);
+  text-decoration-color: currentColor;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .nav__link:hover {
-    color: var(--ink);
+    color: var(--nav-ink);
   }
+}
+
+.nav__cta {
+  color: var(--nav-cta-ink);
+  background: var(--nav-cta-bg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav__cta:hover {
+    background: var(--nav-cta-hover);
+  }
+}
+
+.nav :focus-visible {
+  outline-color: currentColor;
+}
+
+.nav .nav__cta:focus-visible {
+  outline-color: var(--nav-ink);
 }
 
 .nav__toggle {
   display: none;
   align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin-right: -10px;
-  padding: 0;
+  gap: 8px;
+  min-height: 44px;
+  margin-right: -6px;
+  padding: 0 6px;
   border: 0;
-  color: var(--ink);
+  color: inherit;
   background: transparent;
+  font-size: 0.9375rem;
+  font-weight: 620;
 }
 
 .nav__mobile {
   position: fixed;
   inset: var(--header-height) 0 0;
   overflow-y: auto;
-  background: var(--night);
+  color: var(--ink);
+  background: var(--bg);
 }
 
-.nav__mobile:not([hidden]) {
-  animation: menu-in 220ms var(--ease-out);
+.nav__mobile[hidden] {
+  display: none;
 }
 
 .nav__mobile-links {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
   gap: 4px;
-  padding-top: var(--sp-7);
+  padding-top: var(--sp-5);
   padding-bottom: var(--sp-7);
 }
 
 .nav__mobile-link {
-  padding: 6px 0;
-  font-size: clamp(3rem, 15vw, 4.5rem);
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  font-size: var(--fs-head);
+  font-stretch: var(--w-display);
+  font-weight: 720;
+  letter-spacing: -0.035em;
 }
 
-.nav__mobile-link,
-.nav__mobile-cta {
-  animation: menu-item-in 280ms var(--ease-out) backwards;
-  animation-delay: calc(var(--i) * 40ms + 40ms);
+.nav__mobile-link.is-active {
+  color: var(--accent);
 }
 
 .nav__mobile-cta {
+  justify-self: start;
   margin-top: var(--sp-6);
 }
 
-@keyframes menu-in {
-  from {
-    opacity: 0;
+@media (prefers-reduced-motion: no-preference) {
+  .nav__mobile:not([hidden]) .nav__mobile-links > * {
+    animation: menu-in 400ms var(--ease-out) both;
+    animation-delay: calc(var(--i) * 40ms);
   }
 }
 
-@keyframes menu-item-in {
+@keyframes menu-in {
   from {
     opacity: 0;
     transform: translateY(12px);
   }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 960px) {
   .nav__links,
   .nav__cta {
     display: none;
@@ -137,13 +205,5 @@
 
   .nav__toggle {
     display: inline-flex;
-    margin-left: auto;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav__mobile-link,
-  .nav__mobile-cta {
-    animation-name: menu-in;
   }
 }

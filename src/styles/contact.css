@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .contact {
   padding-bottom: clamp(96px, 12vw, 160px);
 }
@@ -22,52 +23,76 @@
   gap: clamp(40px, 7vw, 112px);
 }
 
+=======
+>>>>>>> 27c7e9f (ui change)
 .contact__headline {
-  margin-bottom: var(--sp-5);
-  font-size: clamp(2.9rem, 5.4vw, 4.75rem);
+  max-width: 22ch;
 }
 
-.contact__line--accent {
-  color: var(--magenta-hi);
-}
+/*
+ * The coupon: one dark card with semicircular notches and a dotted perforation at 42% of its width.
+ * Notches are circles in the page colour sitting over the card's edges.
+ */
+.coupon {
+  --notch: 28px;
 
-.contact__lead {
-  margin-bottom: var(--sp-6);
-  color: var(--ink);
-}
-
-.contact__direct {
+  position: relative;
   display: grid;
-  gap: var(--sp-2);
+  grid-template-columns: minmax(0, 42fr) auto minmax(0, 58fr);
+  max-width: 1120px;
+  margin: clamp(48px, 6vw, 88px) 0 0;
+  color: var(--on-dark);
+  background: var(--dark);
 }
 
-.contact__link {
+.coupon__stub {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-7);
+  padding: clamp(28px, 4vw, 48px);
+}
+
+.coupon__stub-top {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.coupon__title {
+  color: var(--on-dark);
+}
+
+.coupon__sentence {
+  max-width: 34ch;
+  color: var(--on-dark-2);
+}
+
+.coupon__direct {
+  display: grid;
+  gap: 2px;
+}
+
+.coupon__link {
   display: inline-flex;
   align-items: center;
   gap: var(--sp-3);
   min-height: 44px;
-  color: var(--ink);
   overflow-wrap: anywhere;
-  text-decoration: underline;
-  text-decoration-color: var(--line-strong);
-  text-decoration-thickness: 1px;
-  text-underline-offset: 6px;
-  transition:
-    color var(--swift) ease,
-    text-decoration-color var(--swift) ease;
+  transition: color var(--swift) ease;
 }
 
-.contact__link svg {
+.coupon__link svg {
   flex: none;
-  color: var(--magenta-hi);
+  color: #9fb2ff;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .contact__link:hover {
-    text-decoration-color: var(--magenta);
+  .coupon__link:hover {
+    color: #9fb2ff;
   }
 }
 
+<<<<<<< HEAD
 .contact__email {
   display: flex;
   flex-wrap: wrap;
@@ -146,40 +171,84 @@
   border: 1px solid var(--line-strong);
   background: rgba(10, 8, 22, 0.75);
   padding: clamp(20px, 3vw, 36px);
+=======
+.coupon__status {
+  color: var(--on-dark-2);
+>>>>>>> 27c7e9f (ui change)
 }
 
+.coupon__perf {
+  position: relative;
+  width: 5px;
+  margin: calc(var(--notch) / 2 + 8px) 0;
+  border-left: 5px dotted var(--bg);
+}
+
+.coupon__perf::before,
+.coupon__perf::after {
+  position: absolute;
+  left: 50%;
+  width: var(--notch);
+  height: var(--notch);
+  border-radius: 50%;
+  background: var(--bg);
+  content: '';
+  transform: translateX(calc(-50% - 2.5px));
+}
+
+.coupon__perf::before {
+  top: calc((var(--notch) + 8px) * -1);
+}
+
+.coupon__perf::after {
+  bottom: calc((var(--notch) + 8px) * -1);
+}
+
+.coupon__slip {
+  padding: clamp(28px, 4vw, 48px);
+}
+
+.coupon :focus-visible {
+  outline-color: #9fb2ff;
+}
+
+/* Form fields: filled blocks one tone lighter than the card, no outline at rest */
 .contact-form {
   display: grid;
-  gap: var(--sp-5);
+  gap: var(--sp-4);
 }
 
 .contact-form__row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--sp-5);
+  gap: var(--sp-4);
 }
 
 .field {
   display: grid;
-  gap: var(--sp-2);
+  gap: 6px;
 }
 
 .field__label {
-  color: var(--ink-2);
+  color: var(--on-dark-2);
+  font-size: var(--fs-small);
+  font-weight: 560;
 }
 
 .field input:not([type='range']),
 .field select,
 .field textarea {
   width: 100%;
-  min-height: 48px;
-  padding: 12px 14px;
-  border: 1px solid var(--line-strong);
+  min-height: 52px;
+  padding: 13px 14px;
+  border: 0;
   border-radius: var(--radius);
-  color: var(--ink);
-  background: var(--night);
+  color: var(--on-dark);
+  background: var(--dark-3);
   font-size: 1rem;
-  transition: border-color var(--swift) ease;
+  transition:
+    background-color var(--swift) ease,
+    box-shadow var(--swift) ease;
 }
 
 .field__select {
@@ -190,7 +259,7 @@
   position: absolute;
   top: 50%;
   right: 16px;
-  color: var(--ink-2);
+  color: var(--on-dark-2);
   pointer-events: none;
   transform: translateY(-50%);
 }
@@ -202,56 +271,55 @@
 
 .field select option {
   color: var(--ink);
-  background: var(--night-2);
+  background: var(--surface);
 }
 
 .field textarea {
-  min-height: 140px;
+  min-height: 120px;
   resize: vertical;
 }
 
 .field input::placeholder,
 .field textarea::placeholder {
-  color: var(--ink-3);
+  color: #9a9993;
   opacity: 1;
 }
 
+/* Focus: a 2px inner ring in the accent */
 .field input:not([type='range']):focus-visible,
 .field select:focus-visible,
 .field textarea:focus-visible {
-  border-color: var(--magenta);
-  outline: 2px solid var(--magenta);
-  outline-offset: 0;
+  outline: 0;
+  box-shadow: inset 0 0 0 2px #9fb2ff; /* taste-skill-ignore: focus ring, not elevation */
 }
 
 @media (hover: hover) and (pointer: fine) {
   .field input:not([type='range']):hover,
   .field select:hover,
   .field textarea:hover {
-    border-color: var(--ink-3);
+    background: #33343a;
   }
 }
 
 .field.is-invalid input,
 .field.is-invalid textarea {
-  border-color: var(--danger);
+  box-shadow: inset 0 0 0 2px var(--danger-on-dark); /* taste-skill-ignore: error ring */
 }
 
 .field__error {
-  color: var(--danger);
-  font-size: 0.875rem;
+  color: var(--danger-on-dark);
+  font-size: var(--fs-small);
 }
 
 .field__count {
-  margin-top: calc(var(--sp-3) * -1);
-  color: var(--ink-3);
-  font-size: 0.8125rem;
-  font-variant-numeric: tabular-nums;
+  margin-top: calc(var(--sp-2) * -1);
+  color: var(--on-dark-2);
+  font-size: var(--fs-small);
   text-align: right;
 }
 
 .field__count.is-near {
-  color: #ffd38a;
+  color: #ffc76b;
 }
 
 .budget__head {
@@ -261,9 +329,8 @@
 }
 
 .budget__value {
-  color: var(--magenta-hi);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
+  color: var(--on-dark);
+  font-weight: 640;
 }
 
 .budget input[type='range'] {
@@ -275,74 +342,79 @@
   cursor: pointer;
 }
 
+/* The track fill is a hard two-colour split driven by --fill, not a blend */
 .budget input[type='range']::-webkit-slider-runnable-track {
-  height: 2px;
-  background: linear-gradient(to right, var(--magenta) var(--fill), var(--line-strong) var(--fill));
+  height: 4px;
+  background: linear-gradient(to right, #9fb2ff var(--fill), var(--dark-3) var(--fill)); /* taste-skill-ignore */
 }
 
 .budget input[type='range']::-moz-range-track {
-  height: 2px;
-  background: linear-gradient(to right, var(--magenta) var(--fill), var(--line-strong) var(--fill));
+  height: 4px;
+  background: linear-gradient(to right, #9fb2ff var(--fill), var(--dark-3) var(--fill)); /* taste-skill-ignore */
 }
 
 .budget input[type='range']::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
-  margin-top: -8px;
-  border: 2px solid var(--night);
-  background: var(--magenta);
+  margin-top: -7px;
+  border: 0;
+  border-radius: 0;
+  background: var(--on-dark);
   appearance: none;
+  transition: transform var(--press) var(--ease-out);
+}
+
+.budget input[type='range']:active::-webkit-slider-thumb {
+  transform: scale(1.15);
 }
 
 .budget input[type='range']::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--night);
+  width: 18px;
+  height: 18px;
+  border: 0;
   border-radius: 0;
-  background: var(--magenta);
+  background: var(--on-dark);
 }
 
 .budget input[type='range']:focus-visible {
-  outline: 2px solid var(--magenta);
+  outline: 2px solid #9fb2ff;
   outline-offset: 4px;
 }
 
 .budget__ticks {
   display: flex;
   justify-content: space-between;
-  color: var(--ink-3);
-  font-size: 0.8125rem;
+  color: var(--on-dark-2);
+  font-size: var(--fs-small);
 }
 
 .contact-form__feedback {
   padding: 12px 14px;
-  border: 1px solid var(--line-strong);
-  font-size: 0.9375rem;
-}
-
-.contact-form__feedback--email {
-  border-color: rgba(139, 108, 255, 0.6);
-  color: var(--ink);
+  color: var(--on-dark);
+  background: var(--dark-3);
+  font-size: 1rem;
 }
 
 .contact-form__feedback--error {
-  border-color: var(--danger);
-  color: var(--danger);
+  color: var(--danger-on-dark);
 }
 
+/* The submit is a full-width bar: the one action on the card */
 .contact-form__submit {
-  justify-self: start;
+  width: 100%;
+  min-height: 56px;
+  margin-top: var(--sp-2);
   overflow: hidden;
 }
 
-/* Sending: a bar sweeps along the bottom edge of the button */
+/* Sending: a bar sweeps along the bottom edge */
 .contact-form__submit.is-busy::after {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 40%;
   height: 3px;
-  background: var(--on-accent);
+  background: rgba(255, 255, 255, 0.85);
   content: '';
   animation: sending 900ms linear infinite;
 }
@@ -359,16 +431,51 @@
 .contact-success {
   display: grid;
   justify-items: start;
+  align-content: center;
   gap: var(--sp-4);
+  min-height: 100%;
+}
+
+.contact-success__title:focus {
+  outline: none;
 }
 
 .contact-success__icon {
-  color: var(--success);
+  color: #3ccf7d;
 }
 
+/* Phone and tablet: the coupon turns upright and the perforation runs across */
 @media (max-width: 900px) {
-  .contact__grid {
+  .coupon {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .coupon__stub {
+    gap: var(--sp-5);
+  }
+
+  .coupon__perf {
+    width: auto;
+    height: 5px;
+    margin: 0 calc(var(--notch) / 2 + 8px);
+    border-left: 0;
+    border-top: 5px dotted var(--bg);
+  }
+
+  .coupon__perf::before,
+  .coupon__perf::after {
+    top: 50%;
+    left: auto;
+    bottom: auto;
+    transform: translateY(calc(-50% - 2.5px));
+  }
+
+  .coupon__perf::before {
+    left: calc((var(--notch) + 8px) * -1);
+  }
+
+  .coupon__perf::after {
+    right: calc((var(--notch) + 8px) * -1);
   }
 }
 
@@ -376,20 +483,10 @@
   .contact-form__row {
     grid-template-columns: minmax(0, 1fr);
   }
-
-  .contact-form__submit {
-    justify-self: stretch;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .contact-form__submit.is-busy::after {
     animation-duration: 2.4s;
-  }
-}
-
-@media (prefers-reduced-transparency: reduce) {
-  .contact-panel {
-    background: var(--night-2);
   }
 }

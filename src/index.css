@@ -1,11 +1,10 @@
 @import '@fontsource-variable/archivo/wdth.css';
 @import './styles/global.css';
-@import './styles/world.css';
 @import './styles/nav.css';
 @import './styles/hero.css';
-@import './styles/about.css';
-@import './styles/technology.css';
-@import './styles/work.css';
 @import './styles/services.css';
+@import './styles/work.css';
+@import './styles/process.css';
+@import './styles/about.css';
 @import './styles/contact.css';
 @import './styles/footer.css';

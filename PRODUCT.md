@@ -21,7 +21,7 @@ The personal freelance portfolio of Barathkumar, a full-stack Python and AI deve
 
 ## Positioning
 
-One person who builds both the cinematic, motion-heavy frontend and the Python/AI backend behind it: the live projects demonstrate GSAP/Three.js storytelling, while the services cover FastAPI/Flask APIs, RAG, LangGraph, n8n automation, and data pipelines.
+One person who designs and builds the whole product: business websites and landing pages (proven by five live projects, including GSAP/Three.js storytelling), plus React apps with Python APIs and AI/automation (FastAPI/Flask, RAG, LangGraph, n8n, data pipelines).
 
 ## Operating Context
 
@@ -29,15 +29,15 @@ Visitors reach the site from a shared link (WhatsApp, GitHub, a proposal) on pho
 
 ## Capabilities and Constraints
 
-- Stack: React 19 + Vite 8, GSAP + ScrollTrigger, Lenis, plain CSS per section, oxlint. Deployed on Vercel (SPA rewrite).
-- Sections and anchors that must keep working: `#top`, `#about`, `#technology`, `#work`, `#services`, `#contact`. Primary nav labels: Work, Services, About, Contact.
-- Process and Principles are folded into Services and About respectively (confirmed); their copy is kept.
+- Stack: React 19 + Vite 8, plain CSS per section, Phosphor icons, oxlint. No animation library; motion is CSS plus one IntersectionObserver. Deployed on Vercel (SPA rewrite).
+- Sections and anchors that must keep working: `#top`, `#services`, `#work`, `#process`, `#about`, `#technology` (toolkit inside About), `#contact`, and `#project-<slug>` for each project. Primary nav: Services, Work, Process, About, plus the "Discuss a project" CTA.
+- Principles and the toolkit are folded into About; their copy is kept.
 - Project order stays as in `src/data/projects.js` (confirmed).
 
 ## Brand Commitments
 
-- Name and wordmark: BARATHKUMAR.
-- Visual direction pinned by the owner's brief: an anime-inspired fantasy universe (cinematic landscapes, floating architecture, atmospheric depth, an abstract digital entity, luminous particles), editorial typography, and violet, blue, magenta, and midnight-black tones, told through cinematic scroll storytelling.
+- Name and wordmark: Barathkumar, with a "B" monogram.
+- Visual direction (owner's brief, October 2026, replacing the earlier anime sky): a premium, light, editorial freelancer portfolio. Warm-neutral paper, charcoal type, one cobalt accent used as the action and as whole colour fields, square corners, tone steps instead of lines, restrained motion. No anime or decorative illustration. Built with the Taste direction `type-only-statement` (see DESIGN.md).
 
 ## Evidence on Hand
 
@@ -49,10 +49,10 @@ Visitors reach the site from a shared link (WhatsApp, GitHub, a proposal) on pho
 
 ## Product Principles
 
-1. Real work is the proof; spectacle frames it and never replaces it.
+1. Real work is the proof; the design frames it and never competes with it.
 2. Every route to contact works on the first try, on any device.
 3. Plain, specific language about what gets built; no invented claims.
-4. The experience degrades gracefully: reduced motion, no WebGL, slow phones.
+4. The experience degrades gracefully: reduced motion, no JavaScript animation, slow phones.
 
 ## Accessibility & Inclusion
 

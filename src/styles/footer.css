@@ -1,9 +1,7 @@
+/* A full cobalt field; the email address is the display line */
 .footer {
-  position: relative;
-  z-index: var(--z-content);
-  padding: var(--sp-7) 0;
-  border-top: 1px solid var(--line);
-  background: var(--night);
+  color: var(--on-accent);
+  background: var(--accent);
 }
 
 /* A short fade so the sky dissolves into the footer instead of being cut */
@@ -19,42 +17,111 @@
 }
 
 .footer__inner {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--sp-7);
+  min-height: 90svh;
+  padding-top: 40px;
+  padding-bottom: var(--sp-6);
+}
+
+.footer__top {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
+  align-items: flex-start;
   gap: var(--sp-5);
 }
 
-.footer__name {
-  font-stretch: var(--w-expanded);
-  font-size: 0.875rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+.footer__notes {
+  display: grid;
+  gap: 4px;
+  max-width: 52ch;
+  color: var(--on-accent-2);
 }
 
-.footer__role,
+.footer__notes strong {
+  color: var(--on-accent);
+  font-weight: 650;
+}
+
+.footer__top-link {
+  flex: none;
+  min-height: 44px;
+  font-size: var(--fs-small);
+}
+
+.footer__email {
+  align-self: end;
+  display: grid;
+  font-size: clamp(2.25rem, 9.6vw, 9rem);
+  font-stretch: 80%;
+  font-weight: 760;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+  transition: color var(--swift) ease;
+}
+
+.footer__email-line {
+  display: block;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer__email:hover {
+    color: var(--on-accent-2);
+  }
+}
+
 .footer__meta {
-  color: var(--ink-3);
-  font-size: 0.875rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--sp-3) var(--sp-5);
+  align-items: end;
+  color: var(--on-accent-2);
+}
+
+.footer__meta p:last-child {
+  text-align: right;
 }
 
 .footer__links {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 24px;
+  gap: 0 var(--sp-4);
 }
 
 .footer__links a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--ink-2);
+  color: var(--on-accent);
   transition: color var(--swift) ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .footer__links a:hover {
-    color: var(--ink);
+    color: var(--on-accent-2);
+  }
+}
+
+.footer :focus-visible {
+  outline-color: var(--on-accent);
+}
+
+@media (max-width: 720px) {
+  .footer__inner {
+    min-height: 80svh;
+  }
+
+  .footer__top {
+    flex-direction: column;
+  }
+
+  .footer__meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer__meta p:last-child {
+    text-align: left;
   }
 }

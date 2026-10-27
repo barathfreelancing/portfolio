@@ -1,8 +1,13 @@
-/* The process route closes the chapter; contact's own top padding supplies the gap */
+/* Statement cell on the left, dark rows on the right; two halves butted together, no gap */
 .services {
-  padding-bottom: calc(var(--section) * 0.4);
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 90svh;
+  background: var(--surface-2);
 }
 
+<<<<<<< HEAD
 .services__title {
   margin-bottom: var(--sp-5);
 }
@@ -147,28 +152,147 @@
   .services__grid {
     grid-template-columns: minmax(0, 1fr);
     gap: var(--sp-7);
-  }
+=======
+.services__cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  padding: clamp(56px, 7vw, 112px) var(--gutter) clamp(40px, 5vw, 72px) var(--page-margin);
+}
 
-  .route__line {
-    top: 0;
-    bottom: 0;
-    left: 5px;
-    width: 1px;
-    height: auto;
-  }
-
-  .route__fill {
-    transform-origin: center top;
-  }
-
-  .route__steps {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--sp-6);
-  }
-
-  .route__step {
-    padding-top: 0;
-    padding-left: var(--sp-6);
+/* The rows run taller than one screen; the statement cell stays in view beside them */
+@media (min-width: 961px) {
+  .services__cell {
+    position: sticky;
+    top: var(--header-height);
+    align-self: start;
+    height: calc(100svh - var(--header-height));
   }
 }
 
+.services__title-line {
+  display: block;
+}
+
+/* The second line steps to the right edge, so the heading zigzags inside the cell */
+.services__title-line--right {
+  text-align: right;
+}
+
+.services__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-5);
+}
+
+.services__intro {
+  max-width: 34ch;
+  color: var(--ink);
+}
+
+.services__rows {
+  display: grid;
+  grid-auto-rows: 1fr;
+  color: var(--on-dark);
+  background: var(--dark);
+}
+
+/* Rows are told apart by two near-black tones, not by lines */
+.service {
+  display: grid;
+  grid-template-columns: 5fr 4fr 3fr;
+  gap: var(--sp-5);
+  align-items: start;
+  padding: clamp(28px, 3vw, 40px) var(--page-margin) clamp(28px, 3vw, 40px) var(--gutter);
+  background: var(--dark);
+}
+
+.service:nth-child(even) {
+  background: var(--dark-2);
+}
+
+.service__name {
+  display: grid;
+  justify-items: start;
+  gap: var(--sp-3);
+}
+
+.service__title {
+  color: var(--on-dark);
+}
+
+.service__related {
+  color: var(--on-dark-2);
+}
+
+.service__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #9fb2ff;
+  font-weight: 620;
+}
+
+.service__problem {
+  color: var(--on-dark);
+  text-wrap: pretty;
+}
+
+.service__deliverables {
+  display: grid;
+  gap: 6px;
+  color: var(--on-dark-2);
+  font-size: var(--fs-small);
+}
+
+.services__rows :focus-visible {
+  outline-color: currentColor;
+}
+
+@media (max-width: 1500px) {
+  .service {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service__name {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 960px) {
+  .services {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+>>>>>>> 27c7e9f (ui change)
+  }
+
+  .services__cell {
+    min-height: 60svh;
+    padding-right: var(--page-margin);
+  }
+
+  .service {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-3);
+    padding-left: var(--page-margin);
+  }
+
+  /* Terms run inline as one sentence on a phone */
+  .service__deliverables {
+    display: block;
+  }
+
+<<<<<<< HEAD
+=======
+  .service__deliverables li {
+    display: inline;
+  }
+
+  .service__deliverables li:not(:last-child)::after {
+    content: ', ';
+  }
+}
+>>>>>>> 27c7e9f (ui change)

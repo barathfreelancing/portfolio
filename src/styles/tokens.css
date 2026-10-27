@@ -1,28 +1,39 @@
 :root {
-  /* Color: the page is a night sky; magenta is the only interactive accent */
-  --night: #07060f;
-  --night-2: #0d0b1c;
-  --night-3: #15122a;
-  --ink: #f4f0ff;
-  --ink-2: #cdc6e8;
-  --ink-3: #a59dc9;
-  --line: rgba(206, 196, 255, 0.16);
-  --line-strong: rgba(206, 196, 255, 0.36);
-  --violet: #8b6cff;
-  --blue: #4f7bff;
-  --magenta: #ff4fb8;
-  --magenta-hi: #ff7ccc;
-  --on-accent: #14051a;
-  --danger: #ff9db0;
-  --success: #9ff0c4;
+  /* Colour: paper and ink, one cobalt accent used as the action and as whole fields */
+  --bg: #f3f3f0;
+  --surface: #ffffff;
+  --surface-2: #e7e6e1;
+  --ink: #141414;
+  --ink-2: #3f3e3a;
+  --ink-3: #64635d;
+  --line: #d9d8d2;
+  --accent: #2649e8;
+  --accent-hover: #1c38c2;
+  --accent-soft: #dce3fc;
+  --accent-mid: #bccbfa;
+  --on-accent: #ffffff;
+  --on-accent-2: #d9e0fd;
+  --dark: #141518;
+  --dark-2: #1c1d21;
+  --dark-3: #2a2b30;
+  --on-dark: #f3f3f0;
+  --on-dark-2: #b9b8b2;
+  --success: #1f8a4c;
+  --danger: #c0303d;
+  --danger-on-dark: #ff9ca6;
+  --warning: #9a5b00;
 
-  /* Type: one variable family, three widths (compressed titles, normal reading, expanded chrome) */
-  --font: 'Archivo Variable', 'Archivo', system-ui, -apple-system, sans-serif;
-  --w-compressed: 62%;
-  --w-normal: 100%;
-  --w-expanded: 125%;
+  /* Type: Archivo variable; display narrowed and heavy, reading at normal width */
+  --font: 'Archivo Variable', 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --w-display: 88%;
+  --fs-small: 0.875rem;
+  --fs-body: 1.0625rem;
+  --fs-lead: clamp(1.25rem, 1.8vw, 1.625rem);
+  --fs-sub: clamp(1.625rem, 2.5vw, 2.25rem);
+  --fs-head: clamp(2.25rem, 4.4vw, 4rem);
+  --fs-display: clamp(3.5rem, 9.5vw, 8.5rem);
 
-  /* Motion tokens (Emil Kowalski's curves) */
+  /* Motion (Emil Kowalski's curves) */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --press: 160ms;
@@ -38,20 +49,20 @@
   --sp-7: 48px;
   --sp-8: 64px;
   --sp-9: 96px;
-  --section: clamp(96px, 14vw, 192px);
+  --section: clamp(96px, 12vw, 176px);
 
-  /* Shape: all-sharp; the entity is the only round thing on the page */
+  /* Shape: square corners everywhere; one decision for the whole page */
   --radius: 0px;
 
-  /* Layers */
-  --z-world: 0;
   --z-content: 1;
   --z-nav: 100;
   --z-skip: 300;
 
   --header-height: 68px;
-  --max-width: 1320px;
-  --gutter: clamp(16px, 4vw, 48px);
+  --max-width: 1360px;
+  --gutter: clamp(16px, 3vw, 40px);
+  /* The outer margin of .container content, for full-bleed sections that must align with it */
+  --page-margin: max(var(--gutter), calc((100cqw - var(--max-width)) / 2 + var(--gutter)));
 }
 
 @media (max-width: 640px) {

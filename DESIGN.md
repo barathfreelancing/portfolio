@@ -1,120 +1,59 @@
 ---
 name: Barathkumar Portfolio
-description: One continuous anime sky, dusk to first light, carrying a full-stack Python & AI developer's work.
+description: A type-led freelancer portfolio in paper, charcoal and one cobalt, where colour fields do the work pictures would and the real project screenshots carry the proof.
 colors:
-  night: "#07060f"
-  night-panel: "#0d0b1c"
-  night-raised: "#15122a"
-  starlight: "#f4f0ff"
-  starlight-dim: "#cdc6e8"
-  starlight-faint: "#a59dc9"
-  aurora-violet: "#8b6cff"
-  aurora-blue: "#4f7bff"
-  signal-magenta: "#ff4fb8"
-  signal-magenta-hi: "#ff7ccc"
-  on-signal: "#14051a"
-  error-rose: "#ff9db0"
-  success-mint: "#9ff0c4"
+  bg: "#f3f3f0"
+  surface: "#ffffff"
+  surface-2: "#e7e6e1"
+  ink: "#141414"
+  ink-2: "#3f3e3a"
+  ink-3: "#64635d"
+  line: "#d9d8d2"
+  accent: "#2649e8"
+  accent-hover: "#1c38c2"
+  accent-soft: "#dce3fc"
+  accent-mid: "#bccbfa"
+  on-accent: "#ffffff"
+  on-accent-2: "#d9e0fd"
+  dark: "#141518"
+  dark-2: "#1c1d21"
+  dark-3: "#2a2b30"
+  on-dark: "#f3f3f0"
+  on-dark-2: "#b9b8b2"
+  link-on-dark: "#9fb2ff"
 typography:
-  display:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "clamp(3.4rem, 10.5vw, 6rem)"
-    fontWeight: 800
-    lineHeight: 0.88
-    letterSpacing: "-0.005em"
-    fontVariation: "'wdth' 62"
-  headline:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "clamp(2.9rem, 7.4vw, 6rem)"
-    fontWeight: 800
-    lineHeight: 0.88
-    fontVariation: "'wdth' 62"
-  title:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "clamp(2.1rem, 4.4vw, 3.5rem)"
-    fontWeight: 800
-    lineHeight: 0.88
-    fontVariation: "'wdth' 62"
-  statement:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "clamp(1.6rem, 3.3vw, 2.75rem)"
-    fontWeight: 500
-    lineHeight: 1.18
-    letterSpacing: "-0.015em"
-  body:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "1.0625rem"
-    fontWeight: 400
-    lineHeight: 1.65
-  label:
-    fontFamily: "Archivo Variable, Archivo, system-ui, sans-serif"
-    fontSize: "0.75rem"
-    fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "0.06em"
-    fontVariation: "'wdth' 125"
+  family: "Archivo Variable (self-hosted, wdth 62-125)"
+  display: "780, clamp(3.5rem, 9.5vw, 8.5rem), 0.88, -0.04em, wdth 88%"
+  heading: "720, clamp(2.25rem, 4.4vw, 4rem), 0.98, -0.035em, wdth 88%"
+  subheading: "680, clamp(1.625rem, 2.5vw, 2.25rem), 1.08, -0.025em, wdth 88%"
+  lead: "400, clamp(1.25rem, 1.8vw, 1.625rem), 1.35"
+  body: "400, 1.0625rem, 1.55"
+  small: "0.875rem, 1.5"
 rounded:
-  none: "0px"
-spacing:
-  "1": "4px"
-  "2": "8px"
-  "3": "12px"
-  "4": "16px"
-  "5": "24px"
-  "6": "32px"
-  "7": "48px"
-  "8": "64px"
-  "9": "96px"
-  section: "clamp(96px, 14vw, 192px)"
-components:
-  button-primary:
-    backgroundColor: "{colors.signal-magenta}"
-    textColor: "{colors.on-signal}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "0 24px"
-    height: "52px"
-  button-primary-hover:
-    backgroundColor: "{colors.signal-magenta-hi}"
-  button-ghost:
-    backgroundColor: "rgba(7, 6, 15, 0.42)"
-    textColor: "{colors.starlight}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "0 24px"
-    height: "52px"
-  button-small:
-    padding: "0 16px"
-    height: "40px"
-  input:
-    backgroundColor: "{colors.night}"
-    textColor: "{colors.starlight}"
-    rounded: "{rounded.none}"
-    padding: "12px 14px"
-    height: "48px"
-  panel:
-    backgroundColor: "rgba(10, 8, 22, 0.75)"
-    rounded: "{rounded.none}"
-    padding: "clamp(20px, 3vw, 36px)"
+  all: "0px (square everywhere; only the status dot and coupon notches are round)"
 ---
 
 # Design System: Barathkumar Portfolio
 
-## Overview
+## Direction
 
-**Creative North Star: "The Sky Between Chapters"**
+Taste direction **type-only-statement** (seed 1986015355), with the owner's palette and typeface kept. The first screen is words, colour and space only; the five real project screenshots arrive later, large. Colour does the work imagery would: cobalt is both the action colour and a whole field in three places (hero lower half, process, footer).
 
-The page is not a dark website with a hero image; it is one live sky (WebGL, `src/world/`) that the reader travels through. Each section is a chapter with its own time of day: dusk over a floating city, twilight, night among distant islands, deep night for the work, aurora for services, first light above a cloud sea for contact. Content sits on the sky in set type and sharp-cornered panels, never in glowing cards.
+Each section is its own composition; no two neighbours share a layout:
 
-The interface itself is quiet so the world can be loud: off-white type, hairline rules, square controls, and a single magenta signal for anything the visitor can act on. Typography does the editorial work through width, not through a second family: compressed heavy capitals for chapter titles, normal width for reading, expanded capitals for chrome.
+| Section | Blueprint | Ground |
+| --- | --- | --- |
+| Hero | Headline across two fields | paper above a seam, cobalt below |
+| Services | Statement cell (sticky) + dark rows | pale / charcoal |
+| Work | Names as one paragraph, then project rows | paper |
+| Process | Itinerary on a slip | white slip on cobalt |
+| About | Two columns, highlighted words + toolkit table | white |
+| Contact | Clip-out coupon form | dark coupon on paper |
+| Footer | Contact as the headline | cobalt |
 
-**Key Characteristics:**
-- One procedural sky behind everything; colour lives at page scale in the world, not in UI accents.
-- One family (Archivo variable) at three widths: 62% titles, 100% reading, 125% labels.
-- Magenta is the only interactive colour; violet and blue belong to the sky and secondary titles.
-- All-sharp shapes (0px radius); the entity is the only round thing on the page.
-- Motion is authored per chapter: title-card wipes, a scroll-lit statement, uncovering rows, a sticky stack of stills, a route that draws itself.
+## Rules
 
+<<<<<<< HEAD
 ## Colors
 
 A midnight ground lit by a violet-blue sky, with magenta reserved for action.
@@ -189,11 +128,36 @@ All-sharp: 0px radius on buttons, inputs, frames, panels, the range thumb and th
 
 ### Hairline list marker
 - Lists of facts (what I built, typical work) use a 10px x 1px Starlight Faint rule as the marker, never a dot or a glyph.
+=======
+- **One accent.** Cobalt marks the action (buttons, case-study toggle) or fills a whole field. On cobalt, the action inverts to a white button with cobalt text. On dark grounds, links use `#9fb2ff`.
+- **Tone steps, not lines.** Surfaces are separated by a change of ground. Lines exist only in the toolkit table and form controls. No resting shadows.
+- **Square corners.** Buttons, inputs, media and panels are all square.
+- **No eyebrows, no tiny tracked capitals, no decorative numbering.** The 01–04 in the process slip stays because order is the information there (and the owner asked for it).
+- **Headlines on two lines or fewer.** The one exception is the owner's exact contact headline, which takes three lines on phones.
+- **Screenshots sit on a pale mat** (`surface-2`) with no frame or shadow, cropped from the top (`object-position: center bottom`) to hide captured browser chrome.
 
-### Inputs / Fields
-- **Style:** Night fill, Hairline Strong stroke, 0px radius, 48px minimum height, label above in label typography.
-- **Focus:** Magenta border plus a 2px Magenta outline. **Error:** Error Rose border with the message below. The select uses a Phosphor CaretDown; the range is a 2px track filled in Magenta with a square thumb.
+## Components
 
+- **Header:** sticky; takes the ground of the chapter beneath its middle line (`data-tone` on sections: paper, pale, white, dark, cobalt), easing over 300ms. Under 960px, a "Menu" text toggle opens a full-screen paper menu with a focus trap.
+- **Hero headline:** set twice, each copy clipped at 67% of its height so the seam cuts line two; above the seam in charcoal, below in white.
+- **Service row:** title, related projects, "Discuss …" link (preselects the form's project type), the client problem, a plain list of deliverables. Rows alternate `dark` / `dark-2`.
+- **Work index:** "Selected work:" followed by every project name, each trailed by a small screenshot frame; hovering a name scales its frame to 1.6.
+- **Project row:** large screenshot on a mat (links to the live site) beside title, category, description, a white panel with Problem / My role / Built with, then Live demo (charcoal button), Source code, Read case study. Rows alternate sides and mirror their column widths.
+- **Case study:** expands under the row (`grid-template-rows` 0fr→1fr, 300ms open, 200ms close) into Overview, Problem, Approach, Implementation, Technology stack, Outcome, Links. Closed panels are `inert` and hidden.
+- **Slip:** white receipt with a zigzag bottom edge (`clip-path`), dotted leaders between what happens and what you hold, and an inverted closing row.
+- **Coupon:** dark card with notches and a dotted perforation; stub holds contact methods, availability and live time; the slip holds the form with filled fields, a 2px inner focus ring, and a full-width cobalt submit bar.
+- **Live time:** the owner's current time in India, updated every 30s, beside the availability note (hero, coupon, footer).
+
+## Motion (Emil Kowalski's rules)
+>>>>>>> 27c7e9f (ui change)
+
+- **Signature:** on load the paper retreats upward (cobalt rises) while both headline clips travel with the seam; 1100ms `--ease-in-out` (cubic-bezier(0.77, 0, 0.175, 1)), all three in step. The hero body then rises 16px, staggered 80ms.
+- **Colour by chapter:** header background and ink transition 300ms `ease`.
+- **Section entrances:** heading, then text, then picture, staggered 70ms, rising 24px over 800ms `--ease-out` (cubic-bezier(0.23, 1, 0.32, 1)). Screenshots uncover top-down with `clip-path` over 1000ms.
+- **Feedback:** buttons scale to 0.97 on press (160ms); arrows nudge 2–3px; screenshots zoom to 1.03 on hover. All hover effects gated to `(hover: hover) and (pointer: fine)`.
+- **Reduced motion:** no travel, clips or smooth scrolling; content still fades in over 300ms.
+
+<<<<<<< HEAD
 ### Navigation
 - Fixed, 68px (60px under 640px). Transparent over the hero, then Night at 0.96 with a hairline once the hero is behind. Links are label typography in Starlight Dim; the current chapter is Starlight with a 2px magenta underline that scales in from the left (200ms). Under 860px a Phosphor List/X toggle opens a full-screen Night menu of compressed titles that stagger in at 40ms.
 
@@ -216,3 +180,11 @@ All-sharp: 0px radius on buttons, inputs, frames, panels, the range thumb and th
 - **Don't** round corners on controls or panels.
 - **Don't** add eyebrows or kickers above headings, or number the sections.
 - **Don't** use em dashes in visible copy.
+=======
+## Don'ts
+
+- No anime, mascots, illustrations, neon, glow, gradients or glass.
+- No rounded corners, no pill buttons, no resting shadows.
+- No invented testimonials, logos, metrics or client claims.
+- No scroll hijacking or cursor effects.
+>>>>>>> 27c7e9f (ui change)

@@ -1,0 +1,133 @@
+/* A paper slip standing on the cobalt field */
+.process {
+  color: var(--on-accent);
+  background: var(--accent);
+}
+
+.process__grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--sp-5);
+  align-items: start;
+}
+
+.process__intro {
+  grid-column: 1 / 6;
+  display: grid;
+  gap: var(--sp-5);
+}
+
+.process__lead {
+  max-width: 30ch;
+  color: var(--on-accent-2);
+}
+
+.slip {
+  grid-column: 7 / 12;
+  width: 100%;
+  max-width: 480px;
+  padding: var(--sp-6) var(--sp-6) calc(var(--sp-6) + 10px);
+  color: var(--ink);
+  background: var(--surface);
+}
+
+.slip__stages {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+.slip__title {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: var(--sp-3);
+  font-size: var(--fs-body);
+  font-weight: 720;
+}
+
+.slip__number {
+  color: var(--accent);
+}
+
+.slip__rows {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.slip__row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-size: 1rem;
+}
+
+.slip__row dt {
+  color: var(--ink-2);
+}
+
+/* Round dots between the description and its value, as on a printed receipt */
+.slip__leader {
+  flex: 1 1 24px;
+  min-width: 24px;
+  height: 4px;
+  border-bottom: 4px dotted var(--line);
+  transform: translateY(-3px);
+}
+
+.slip__row dd {
+  flex: none;
+  font-weight: 620;
+  white-space: nowrap;
+}
+
+.slip__total {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px var(--sp-4);
+  margin: var(--sp-6) calc(var(--sp-6) * -1) 0;
+  padding: 12px var(--sp-6);
+  color: var(--surface);
+  background: var(--ink);
+  font-size: 1rem;
+  font-weight: 620;
+}
+
+.process :focus-visible {
+  outline-color: var(--on-accent);
+}
+
+@media (max-width: 960px) {
+  .process__intro,
+  .slip {
+    grid-column: 1 / -1;
+  }
+
+  .slip {
+    margin-top: var(--sp-7);
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 520px) {
+  .slip {
+    padding-inline: var(--sp-5);
+  }
+
+  .slip__total {
+    margin-inline: calc(var(--sp-5) * -1);
+    padding-inline: var(--sp-5);
+  }
+
+  .slip__row {
+    flex-wrap: wrap;
+  }
+
+  .slip__row dt {
+    flex: 1 1 100%;
+  }
+
+  .slip__leader {
+    flex: 1 1 auto;
+  }
+}

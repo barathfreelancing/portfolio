@@ -7,10 +7,16 @@
 }
 
 html {
-  scroll-padding-top: calc(var(--header-height) + 16px);
-  color-scheme: dark;
-  scrollbar-color: var(--violet) var(--night);
+  scroll-padding-top: var(--header-height);
+  color-scheme: light;
+  scrollbar-color: var(--ink-3) var(--bg);
   -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -18,31 +24,27 @@ body {
   min-height: 100dvh;
   overflow-x: clip;
   color: var(--ink);
-  /* Shown when WebGL is unavailable; the world canvas paints over it otherwise */
-  background:
-    radial-gradient(ellipse 80% 60% at 70% 100%, rgba(255, 79, 184, 0.28), transparent 70%),
-    radial-gradient(ellipse 90% 70% at 20% 0%, rgba(79, 123, 255, 0.18), transparent 70%),
-    linear-gradient(180deg, #0b0a24 0%, #160f3d 55%, #2a1650 100%) fixed,
-    var(--night);
+  background: var(--bg);
   font-family: var(--font);
-  font-size: 1.0625rem;
-  font-stretch: var(--w-normal);
+  font-size: var(--fs-body);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  caret-color: var(--magenta);
-  accent-color: var(--magenta);
+  caret-color: var(--accent);
+  accent-color: var(--accent);
 }
 
 ::selection {
   color: var(--on-accent);
-  background: var(--magenta);
+  background: var(--accent);
 }
 
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 a {
@@ -66,7 +68,10 @@ h1,
 h2,
 h3,
 h4,
-p {
+p,
+dl,
+dd,
+figure {
   margin: 0;
 }
 
@@ -102,70 +107,84 @@ section {
   padding: var(--section) 0;
 }
 
-/* Type voices */
-.title {
-  font-stretch: var(--w-compressed);
-  font-weight: 800;
-  line-height: 0.88;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
+/* Type: five steps plus the display size */
+.display,
+.heading,
+.subheading {
+  font-stretch: var(--w-display);
   text-wrap: balance;
 }
 
-.title--xl {
-  font-size: clamp(3.4rem, 10.5vw, 6rem);
+.display {
+  font-size: var(--fs-display);
+  font-weight: 780;
+  line-height: 0.88;
+  letter-spacing: -0.04em;
 }
 
-.title--lg {
-  font-size: clamp(2.9rem, 7.4vw, 6rem);
+.heading {
+  font-size: var(--fs-head);
+  font-weight: 720;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
 }
 
-.title--md {
-  font-size: clamp(2.1rem, 4.4vw, 3.5rem);
-}
-
-.title--sm {
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-  line-height: 0.95;
+.subheading {
+  font-size: var(--fs-sub);
+  font-weight: 680;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
 }
 
 .lead {
-  max-width: 34ch;
-  color: var(--ink-2);
-  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
-  line-height: 1.5;
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
   text-wrap: pretty;
 }
 
 .body {
-  max-width: 62ch;
-  color: var(--ink-2);
+  max-width: 64ch;
   text-wrap: pretty;
 }
 
-.chrome {
-  font-stretch: var(--w-expanded);
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.small {
+  font-size: var(--fs-small);
+  line-height: 1.5;
 }
 
-/* Title-card mask: lines rise into a clipped box */
-.mask {
-  display: block;
-  overflow: hidden;
-  /* Room for descenders and the compressed caps' overshoot */
-  padding-bottom: 0.04em;
-  margin-bottom: -0.04em;
+/* Links */
+.text-link {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color var(--swift) ease, color var(--swift) ease;
 }
 
-.mask > span {
-  display: block;
+.arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-weight: 620;
 }
 
-/* Buttons */
+.arrow-link svg {
+  transition: transform var(--swift) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .text-link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  .arrow-link:hover svg {
+    transform: translateX(3px);
+  }
+}
+
+/* Buttons: flat, square, one fill */
 .btn {
   position: relative;
   display: inline-flex;
@@ -174,19 +193,16 @@ section {
   gap: 10px;
   min-height: 52px;
   padding: 0 24px;
-  border: 1px solid transparent;
+  border: 0;
   border-radius: var(--radius);
-  font-stretch: var(--w-expanded);
-  font-size: 0.8125rem;
-  font-weight: 650;
-  letter-spacing: 0.05em;
+  font-size: 1rem;
+  font-weight: 640;
+  letter-spacing: -0.005em;
   line-height: 1;
-  text-transform: uppercase;
   white-space: nowrap;
   transition:
     transform var(--press) var(--ease-out),
     background-color var(--swift) ease,
-    border-color var(--swift) ease,
     color var(--swift) ease;
   -webkit-tap-highlight-color: transparent;
 }
@@ -197,33 +213,46 @@ section {
 
 .btn svg {
   flex: none;
+  transition: transform var(--swift) var(--ease-out);
 }
 
 .btn-primary {
   color: var(--on-accent);
-  background: var(--magenta);
+  background: var(--accent);
 }
 
-.btn-ghost {
-  color: var(--ink);
-  border-color: var(--line-strong);
-  background: rgba(7, 6, 15, 0.42);
+.btn-light {
+  color: var(--accent);
+  background: var(--surface);
+}
+
+.btn-dark {
+  color: var(--on-dark);
+  background: var(--ink);
 }
 
 .btn-sm {
-  min-height: 40px;
-  padding: 0 16px;
-  font-size: 0.75rem;
+  min-height: 44px;
+  padding: 0 18px;
+  font-size: 0.9375rem;
+  gap: 8px;
 }
 
 @media (hover: hover) and (pointer: fine) {
   .btn-primary:hover {
-    background: var(--magenta-hi);
+    background: var(--accent-hover);
   }
 
-  .btn-ghost:hover {
-    border-color: var(--ink);
-    background: rgba(7, 6, 15, 0.7);
+  .btn-light:hover {
+    background: var(--accent-soft);
+  }
+
+  .btn-dark:hover {
+    background: #2e2e2e;
+  }
+
+  .btn:hover svg {
+    transform: translateX(2px);
   }
 }
 
@@ -233,8 +262,26 @@ section {
   transform: none;
 }
 
+/* Availability */
+.status {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: var(--fs-small);
+}
+
+.status__dot {
+  position: relative;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3ccf7d;
+}
+
 :focus-visible {
-  outline: 2px solid var(--magenta);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -262,7 +309,7 @@ section[tabindex='-1']:focus {
   z-index: var(--z-skip);
   padding: 12px 16px;
   color: var(--on-accent);
-  background: var(--magenta);
+  background: var(--accent);
   transform: translateY(-160%);
   transition: transform var(--swift) var(--ease-out);
 }
@@ -271,11 +318,56 @@ section[tabindex='-1']:focus {
   transform: translateY(0);
 }
 
+/*
+ * Section entrances: heading, then text, then picture, staggered by --d (70ms steps).
+ * Only active once lib/motion.js confirms IntersectionObserver, so content never stays hidden without it.
+ */
+.reveal-ready [data-reveal] {
+  transition:
+    opacity 800ms var(--ease-out) calc(var(--d, 0) * 70ms),
+    transform 800ms var(--ease-out) calc(var(--d, 0) * 70ms);
+}
+
+.reveal-ready [data-reveal]:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/*
+ * Pictures uncover from the top as they arrive. The observer watches the wrapper and the clip sits on its
+ * .reveal-media child: Chrome never reports a fully clip-path-hidden target as intersecting.
+ */
+.reveal-ready [data-reveal='picture'] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.reveal-ready [data-reveal='picture'] .reveal-media {
+  transition: clip-path 1000ms var(--ease-in-out) calc(var(--d, 0) * 70ms);
+}
+
+.reveal-ready [data-reveal='picture']:not(.is-visible) .reveal-media {
+  clip-path: inset(0 0 100% 0);
+}
+
+/* Reduced motion keeps the fades and drops the travel */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
+  .reveal-ready [data-reveal] {
+    transition: opacity 300ms ease;
+  }
+
+  .reveal-ready [data-reveal]:not(.is-visible) {
+    transform: none;
+  }
+
+  .reveal-ready [data-reveal='picture'] .reveal-media {
+    transition: opacity 300ms ease;
+  }
+
+  .reveal-ready [data-reveal='picture']:not(.is-visible) .reveal-media {
+    clip-path: none;
+    opacity: 0;
   }
 
   .btn,

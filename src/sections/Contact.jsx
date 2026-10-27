@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+<<<<<<< HEAD
 import {
   CaretDown,
   Check,
@@ -18,6 +19,14 @@ const WHATSAPP_URL = `https://wa.me/918148290307?text=${encodeURIComponent(
 )}`;
 
 const PROJECT_TYPES = ['Website', 'Full-stack application', 'API / integration', 'AI / automation', 'Other'];
+=======
+import { CaretDown, CheckCircle, EnvelopeSimple, GithubLogo, PaperPlaneTilt, WhatsappLogo } from '@phosphor-icons/react';
+import { site } from '../data/site';
+import { onInquiryPreselect } from '../lib/inquiry';
+import LocalTime from '../components/LocalTime';
+
+const PROJECT_TYPES = ['Website', 'Landing page', 'Full-stack application', 'API / integration', 'AI / automation', 'Other'];
+>>>>>>> 27c7e9f (ui change)
 const BUDGETS = ['Under ₹25k', '₹25k - ₹50k', '₹50k - ₹1L', '₹1L - ₹2L', '₹2L - ₹5L', '₹5L+'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE = 800;
@@ -38,6 +47,7 @@ export default function Contact() {
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [copied, setCopied] = useState(false);
   const formRef = useRef(null);
+<<<<<<< HEAD
   const rootRef = useRef(null);
   const copyTimer = useRef(0);
 
@@ -62,21 +72,28 @@ export default function Contact() {
     clearTimeout(copyTimer.current);
     copyTimer.current = setTimeout(() => setCopied(false), 2000);
   };
+=======
+  const successRef = useRef(null);
+  const refocusName = useRef(false);
+>>>>>>> 27c7e9f (ui change)
 
+  // The form unmounts on success; move focus to the confirmation, and back to Name after "Send another".
   useEffect(() => {
-    if (prefersReducedMotion()) return undefined;
-    // Closing title card: the headline wipes in when the reader arrives.
-    const ctx = gsap.context(() => {
-      gsap.from('.contact__line > span', {
-        yPercent: 108,
-        duration: 1,
-        ease: EASE_OUT,
-        stagger: 0.08,
-        scrollTrigger: { trigger: '.contact__headline', start: 'top 85%', once: true },
-      });
-    }, rootRef);
-    return () => ctx.revert();
-  }, []);
+    if (status === 'success') successRef.current?.focus();
+    if (status === 'idle' && refocusName.current) {
+      refocusName.current = false;
+      formRef.current?.querySelector('#name')?.focus();
+    }
+  }, [status]);
+
+  // A service's "Discuss ..." link preselects the matching project type.
+  useEffect(
+    () =>
+      onInquiryPreselect((type) => {
+        if (PROJECT_TYPES.includes(type)) setForm((f) => ({ ...f, type }));
+      }),
+    []
+  );
 
   const update = (field) => (e) => {
     const value = field === 'budget' ? Number(e.target.value) : e.target.value;
@@ -116,7 +133,11 @@ export default function Contact() {
       const body = encodeURIComponent(
         `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\nProject type: ${form.type}\nBudget: ${BUDGETS[form.budget]}\n\n${form.message.trim()}`
       );
+<<<<<<< HEAD
       window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+=======
+      window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+>>>>>>> 27c7e9f (ui change)
       setStatus('email');
       setFeedbackMessage('Your email app should open with the enquiry ready. Send it there to complete your message.');
       return;
@@ -144,10 +165,13 @@ export default function Contact() {
       if (!data.success) throw new Error(data.message || 'Request failed');
 
       setStatus('success');
-      flareWorld();
     } catch {
       setStatus('error');
+<<<<<<< HEAD
       setFeedbackMessage(`Could not send your enquiry. Please email ${EMAIL} directly.`);
+=======
+      setFeedbackMessage(`Could not send your enquiry. Please email ${site.email} directly.`);
+>>>>>>> 27c7e9f (ui change)
     }
   };
 
@@ -156,12 +180,13 @@ export default function Contact() {
     setErrors({});
     setTouched({});
     setFeedbackMessage('');
+    refocusName.current = true;
     setStatus('idle');
   };
 
   const renderField = (field, label, Tag, props) => (
     <div className={`field${errors[field] ? ' is-invalid' : ''}`}>
-      <label htmlFor={field} className="field__label chrome">
+      <label htmlFor={field} className="field__label">
         {label}
       </label>
       <Tag
@@ -183,22 +208,13 @@ export default function Contact() {
   );
 
   return (
-    <section id="contact" className="contact section-pad" ref={rootRef}>
-      <div className="container contact__grid">
-        <div className="contact__intro">
-          <h2 className="title title--lg contact__headline">
-            <span className="mask contact__line">
-              <span>Let’s build</span>
-            </span>
-            <span className="mask contact__line">
-              <span>something</span>
-            </span>
-            <span className="mask contact__line contact__line--accent">
-              <span>extraordinary.</span>
-            </span>
-          </h2>
-          <p className="lead contact__lead">Have an idea worth bringing to life? Tell me what you want to build.</p>
+    <section id="contact" className="contact section-pad" aria-labelledby="contact-title" data-tone="paper">
+      <div className="container">
+        <h2 id="contact-title" className="heading contact__headline" data-reveal>
+          Have a project in mind? Let&rsquo;s build something valuable.
+        </h2>
 
+<<<<<<< HEAD
           <ul className="contact__direct">
             <li className="contact__email">
               <a href={`mailto:${EMAIL}`} className="contact__link">
@@ -246,91 +262,149 @@ export default function Contact() {
             <p className="body">
               Thanks, {form.name.trim().split(' ')[0] || 'there'}. I&rsquo;ll reply to {form.email.trim()} within 24
               hours.
+=======
+        {/* The enquiry as a coupon: details on the stub, the form on the slip, a perforation between */}
+        <div className="coupon" data-reveal style={{ '--d': 1 }}>
+          <div className="coupon__stub">
+            <div className="coupon__stub-top">
+              <p className="subheading coupon__title">Project enquiry</p>
+              <p className="coupon__sentence">
+                Tell me what you want to build and roughly when you need it. The form comes straight to my inbox.
+              </p>
+            </div>
+
+            <ul className="coupon__direct">
+              <li>
+                <a href={`mailto:${site.email}`} className="coupon__link">
+                  <EnvelopeSimple size={20} aria-hidden="true" />
+                  {site.email}
+                </a>
+              </li>
+              <li>
+                <a href={`https://wa.me/${site.whatsappNumber}`} target="_blank" rel="noreferrer" className="coupon__link">
+                  <WhatsappLogo size={20} aria-hidden="true" />
+                  {site.whatsappLabel} on WhatsApp
+                </a>
+              </li>
+              <li>
+                <a href={site.githubUrl} target="_blank" rel="noreferrer" className="coupon__link">
+                  <GithubLogo size={20} aria-hidden="true" />
+                  {site.githubLabel}
+                </a>
+              </li>
+            </ul>
+
+            <p className="status coupon__status">
+              {site.available && (
+                <>
+                  <span className="status__dot" aria-hidden="true" />
+                  <span>{site.availabilityLabel}</span>
+                  <span aria-hidden="true">·</span>
+                </>
+              )}
+              <LocalTime />
+>>>>>>> 27c7e9f (ui change)
             </p>
-            <button type="button" className="btn btn-ghost btn-sm" onClick={reset}>
-              Send another
-            </button>
           </div>
-        ) : (
-          <form className="contact-panel contact-form" onSubmit={handleSubmit} noValidate ref={formRef}>
-            <div className="contact-form__row">
-              {renderField('name', 'Name', 'input', { type: 'text', autoComplete: 'name' })}
-              {renderField('email', 'Email', 'input', { type: 'email', autoComplete: 'email' })}
-            </div>
 
-            <div className="field">
-              <label htmlFor="type" className="field__label chrome">
-                Project type
-              </label>
-              <div className="field__select">
-                <select id="type" value={form.type} onChange={update('type')} disabled={status === 'submitting'}>
-                  {PROJECT_TYPES.map((t) => (
-                    <option key={t} value={t}>
-                      {t}
-                    </option>
-                  ))}
-                </select>
-                <CaretDown size={16} weight="bold" aria-hidden="true" />
-              </div>
-            </div>
+          <span className="coupon__perf" aria-hidden="true" />
 
-            <div className="field budget">
-              <div className="budget__head">
-                <label htmlFor="budget" className="field__label chrome">
-                  Budget
-                </label>
-                <output htmlFor="budget" className="budget__value">
-                  {BUDGETS[form.budget]}
-                </output>
+          <div className="coupon__slip">
+            {status === 'success' ? (
+              <div className="contact-success" role="status">
+                <CheckCircle size={44} weight="light" className="contact-success__icon" aria-hidden="true" />
+                <h3 className="subheading contact-success__title" ref={successRef} tabIndex={-1}>
+                  Enquiry sent
+                </h3>
+                <p>
+                  Thanks, {form.name.trim().split(' ')[0] || 'there'}. I&rsquo;ll get back to you at{' '}
+                  {form.email.trim()} soon.
+                </p>
+                <button type="button" className="btn btn-light btn-sm" onClick={reset}>
+                  Send another
+                </button>
               </div>
-              <input
-                id="budget"
-                type="range"
-                min="0"
-                max={BUDGETS.length - 1}
-                step="1"
-                value={form.budget}
-                onChange={update('budget')}
-                disabled={status === 'submitting'}
-                style={{ '--fill': `${(form.budget / (BUDGETS.length - 1)) * 100}%` }}
-                aria-valuetext={BUDGETS[form.budget]}
-              />
-              <div className="budget__ticks" aria-hidden="true">
-                <span>{BUDGETS[0]}</span>
-                <span>{BUDGETS[BUDGETS.length - 1]}</span>
-              </div>
-            </div>
+            ) : (
+              <form className="contact-form" onSubmit={handleSubmit} noValidate ref={formRef} aria-label="Project enquiry">
+                <div className="contact-form__row">
+                  {renderField('name', 'Name', 'input', { type: 'text', autoComplete: 'name' })}
+                  {renderField('email', 'Email', 'input', { type: 'email', autoComplete: 'email' })}
+                </div>
 
-            {renderField('message', 'Message', 'textarea', {
-              rows: 5,
-              maxLength: MAX_MESSAGE,
-              placeholder: 'What are you building, and by when?',
-            })}
-            <span className={`field__count${form.message.length > MAX_MESSAGE - 100 ? ' is-near' : ''}`}>
-              {form.message.length}/{MAX_MESSAGE}
-            </span>
+                <div className="field">
+                  <label htmlFor="type" className="field__label">
+                    Project type
+                  </label>
+                  <div className="field__select">
+                    <select id="type" value={form.type} onChange={update('type')} disabled={status === 'submitting'}>
+                      {PROJECT_TYPES.map((t) => (
+                        <option key={t} value={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                    <CaretDown size={16} weight="bold" aria-hidden="true" />
+                  </div>
+                </div>
 
-            {feedbackMessage && (
-              <div
-                className={`contact-form__feedback contact-form__feedback--${status}`}
-                role={status === 'email' ? 'status' : 'alert'}
-              >
-                {feedbackMessage}
-              </div>
+                <div className="field budget">
+                  <div className="budget__head">
+                    <label htmlFor="budget" className="field__label">
+                      Budget
+                    </label>
+                    <output htmlFor="budget" className="budget__value">
+                      {BUDGETS[form.budget]}
+                    </output>
+                  </div>
+                  <input
+                    id="budget"
+                    type="range"
+                    min="0"
+                    max={BUDGETS.length - 1}
+                    step="1"
+                    value={form.budget}
+                    onChange={update('budget')}
+                    disabled={status === 'submitting'}
+                    style={{ '--fill': `${(form.budget / (BUDGETS.length - 1)) * 100}%` }}
+                    aria-valuetext={BUDGETS[form.budget]}
+                  />
+                  <div className="budget__ticks" aria-hidden="true">
+                    <span>{BUDGETS[0]}</span>
+                    <span>{BUDGETS[BUDGETS.length - 1]}</span>
+                  </div>
+                </div>
+
+                {renderField('message', 'Message', 'textarea', {
+                  rows: 4,
+                  maxLength: MAX_MESSAGE,
+                  placeholder: 'What are you building, and by when?',
+                })}
+                <span className={`field__count${form.message.length > MAX_MESSAGE - 100 ? ' is-near' : ''}`}>
+                  {form.message.length}/{MAX_MESSAGE}
+                </span>
+
+                {feedbackMessage && (
+                  <div
+                    className={`contact-form__feedback contact-form__feedback--${status}`}
+                    role={status === 'email' ? 'status' : 'alert'}
+                  >
+                    {feedbackMessage}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  className={`btn btn-primary contact-form__submit${status === 'submitting' ? ' is-busy' : ''}`}
+                  disabled={status === 'submitting'}
+                  aria-busy={status === 'submitting'}
+                >
+                  {status === 'submitting' ? 'Sending...' : 'Send enquiry'}
+                  <PaperPlaneTilt size={18} weight="bold" aria-hidden="true" />
+                </button>
+              </form>
             )}
-
-            <button
-              type="submit"
-              data-attract
-              className={`btn btn-primary contact-form__submit${status === 'submitting' ? ' is-busy' : ''}`}
-              disabled={status === 'submitting'}
-              aria-busy={status === 'submitting'}
-            >
-              {status === 'submitting' ? 'Sending...' : 'Send enquiry'}
-              <PaperPlaneTilt size={18} weight="bold" aria-hidden="true" />
-            </button>
-          </form>
-        )}
+          </div>
+        </div>
       </div>
     </section>
   );

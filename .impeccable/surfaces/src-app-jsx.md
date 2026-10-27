@@ -1,5 +1,5 @@
 ---
-version: 1
+version: 2
 slug: "src-app-jsx"
 primary_target: "src/App.jsx"
 related_targets: ["src/index.css"]
@@ -9,26 +9,34 @@ related_targets: ["src/index.css"]
 
 Whole single-page portfolio (`src/App.jsx` and its sections). Mode: Experience (portfolio) with a Persuade close: the work leads, the enquiry form converts.
 
-Audience: business owners and agencies, equally. Action: send the enquiry form. Proof: five live projects with screenshots, live links, and source. Constraints: keep anchors, nav labels, project order, form behaviour; fold Process into Services and Principles into About.
+Audience: small-business owners and agencies, equally. Action: send the enquiry form (Web3Forms, mailto fallback). Proof: five live projects with screenshots, live links, source and case studies. Constraints: keep anchors (`#top`, `#services`, `#work`, `#process`, `#about`, `#technology`, `#contact`, `#project-<slug>`), project order, form behaviour; no invented testimonials, clients, metrics.
 
 ## Direction contract
 
-THESIS: The page is one continuous anime sky that the visitor travels through: dusk over a floating city at the hero, deep night among the islands for the work, aurora for services, first light at contact. It refuses the category default of a dark page with a glowing hero blob and stacked cards on a flat ground.
+THESIS: A type-led page in paper, charcoal and one cobalt, where colour fields do the work pictures would. It replaces the earlier anime WebGL sky entirely (owner brief, October 2026) and refuses the freelancer-template default of a centred headline over a row of icon cards.
 
-OWN-WORLD: A live WebGL sky (fbm cumulus, star field, rising motes, layered floating islands carrying crisp geometric towers and ring-gates) painted in midnight #07060f, violet #8b6cff, blue #4f7bff and magenta #ff4fb8. Magenta is the only interactive accent. Type: Archivo variable, extra-condensed heavy uppercase for chapter titles, normal width for reading. Hairlines, square-shouldered 4px controls, no glow borders, no glass cards.
+OWN-WORLD: Warm-neutral paper #f3f3f0, charcoal ink #141414, cobalt #2649e8 used both as the action colour and as whole fields (hero lower half, process, footer). Archivo variable, narrowed to 88% and heavy for display, normal width for reading. Square corners everywhere. Surfaces separated by tone steps, not lines or shadows; lines only in the toolkit table and form fields.
 
-STORY: Understand that one developer builds both cinematic frontends and Python/AI systems, believe it through five live projects shown as full-frame cinema stills, then send the enquiry form.
+STORY: Read who this is and what he builds in one line, see the four services with their deliverables, believe it through five live projects (index paragraph, then large screenshots with problem, role, stack and an expandable case study), understand the four-step process, then send the coupon-style enquiry form or use the email shown at display size in the footer.
 
+<<<<<<< HEAD
 FIRST VIEWPORT: The sky fills the screen; the floating city sits right of centre with the entity (a light core inside two tilted rings) hovering above it. Bottom-left: the condensed two-line headline "Building / digital worlds." at up to 6rem, a lead naming Barathkumar and the offer (websites, web apps, APIs and automation for businesses), and the "Hire me" (magenta, primary) and "See the work" buttons, all visible without scrolling.
+=======
+FIRST VIEWPORT: Paper above, cobalt below, meeting at a hard seam at half height. "Ideas into / products." at up to 8.5rem is centred across the seam: line one in charcoal on paper, line two cut by the seam and white on cobalt. On the cobalt: one sentence naming Barathkumar and what he builds, a white "Discuss a project" button and a "View my work" link, then the availability note with his live local time in India.
+>>>>>>> 27c7e9f (ui change)
 
-FORM: Brief-pinned world (anime fantasy sky), so no roll was dealt; scroll-driven world state is the signature interaction, with the entity travelling between chapters. The roll was skipped because the owner's brief pins the world ("Build an anime-inspired fantasy universe with cinematic landscapes, floating architecture, atmospheric depth, an abstract digital entity, luminous particles, editorial typography, and violet, blue, magenta, and midnight-black tones"); concept-seed --check-seed none confirms none means skipped. seed: none
+FORM: Taste direction `type-only-statement` (Taste draw seed 1986015355, recorded in .taste-skill/direction.json), palette and type kept from the owner's brief. Sections: statement cell + dark rows (services), names as one paragraph + project rows (work), itinerary slip (process), two-column highlighted prose + toolkit table (about), clip-out coupon form (contact, redrawn: the dealt single-field blueprint could not hold the five-field form), contact as the headline (footer). seed: none (unavailable)
 
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+FINISH: verified with the Taste inspector at 1440/768/390, Emil Kowalski motion rules (ease-out entrances, ease-in-out movement, ≤300ms UI, press 0.97, hover gated to fine pointers, reduced motion keeps fades and drops travel) and this brief.
 
 ## Memorable moment
 
-Scrolling turns the time of day: the sky, light and entity move with the reader from dusk to dawn.
+On load the cobalt field rises to the seam and "products." sinks into it, changing from charcoal to white; while scrolling, the header takes the colour of each chapter beneath it.
+
+## Live element
+
+The visitor sees Barathkumar's current local time in India beside his availability, in the hero, the enquiry coupon and the footer.
 
 ## Unresolved
 
-No generated or commissioned illustration exists; the world is procedural (shader geometry), and the project screenshots are the only rasters.
+No portrait, testimonials, client logos or freelance-marketplace profiles exist. No honest video footage exists for this subject.
