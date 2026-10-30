@@ -127,7 +127,7 @@
   font-weight: 560;
 }
 
-.field input:not([type='range']),
+.field input,
 .field select,
 .field textarea {
   width: 100%;
@@ -178,7 +178,7 @@
 }
 
 /* Focus: a 2px inner ring in the accent */
-.field input:not([type='range']):focus-visible,
+.field input:focus-visible,
 .field select:focus-visible,
 .field textarea:focus-visible {
   outline: 0;
@@ -186,7 +186,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .field input:not([type='range']):hover,
+  .field input:hover,
   .field select:hover,
   .field textarea:hover {
     background: #33343a;
@@ -212,72 +212,6 @@
 
 .field__count.is-near {
   color: #ffc76b;
-}
-
-.budget__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-}
-
-.budget__value {
-  color: var(--on-dark);
-  font-weight: 640;
-}
-
-.budget input[type='range'] {
-  width: 100%;
-  height: 28px;
-  margin: 0;
-  background: transparent;
-  appearance: none;
-  cursor: pointer;
-}
-
-/* The track fill is a hard two-colour split driven by --fill, not a blend */
-.budget input[type='range']::-webkit-slider-runnable-track {
-  height: 4px;
-  background: linear-gradient(to right, #9fb2ff var(--fill), var(--dark-3) var(--fill)); /* taste-skill-ignore */
-}
-
-.budget input[type='range']::-moz-range-track {
-  height: 4px;
-  background: linear-gradient(to right, #9fb2ff var(--fill), var(--dark-3) var(--fill)); /* taste-skill-ignore */
-}
-
-.budget input[type='range']::-webkit-slider-thumb {
-  width: 18px;
-  height: 18px;
-  margin-top: -7px;
-  border: 0;
-  border-radius: 0;
-  background: var(--on-dark);
-  appearance: none;
-  transition: transform var(--press) var(--ease-out);
-}
-
-.budget input[type='range']:active::-webkit-slider-thumb {
-  transform: scale(1.15);
-}
-
-.budget input[type='range']::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border: 0;
-  border-radius: 0;
-  background: var(--on-dark);
-}
-
-.budget input[type='range']:focus-visible {
-  outline: 2px solid #9fb2ff;
-  outline-offset: 4px;
-}
-
-.budget__ticks {
-  display: flex;
-  justify-content: space-between;
-  color: var(--on-dark-2);
-  font-size: var(--fs-small);
 }
 
 .contact-form__feedback {

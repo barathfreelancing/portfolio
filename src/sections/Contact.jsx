@@ -5,11 +5,10 @@ import { onInquiryPreselect } from '../lib/inquiry';
 import LocalTime from '../components/LocalTime';
 
 const PROJECT_TYPES = ['Website', 'Landing page', 'Full-stack application', 'API / integration', 'AI / automation', 'Other'];
-const BUDGETS = ['Under ₹25k', '₹25k - ₹50k', '₹50k - ₹1L', '₹1L - ₹2L', '₹2L - ₹5L', '₹5L+'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE = 800;
 
-const EMPTY_FORM = { name: '', email: '', type: PROJECT_TYPES[0], budget: 2, message: '' };
+const EMPTY_FORM = { name: '', email: '', type: PROJECT_TYPES[0], message: '' };
 
 const validators = {
   name: (v) => (v.trim() ? '' : 'Enter your name.'),
@@ -47,7 +46,7 @@ export default function Contact() {
   );
 
   const update = (field) => (e) => {
-    const value = field === 'budget' ? Number(e.target.value) : e.target.value;
+    const value = e.target.value;
     setForm((f) => ({ ...f, [field]: value }));
     if (touched[field] && validators[field]) {
       setErrors((prev) => ({ ...prev, [field]: validators[field](value) }));
@@ -82,7 +81,7 @@ export default function Contact() {
     if (!accessKey) {
       const subject = encodeURIComponent(`Project enquiry: ${form.type}`);
       const body = encodeURIComponent(
-        `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\nProject type: ${form.type}\nBudget: ${BUDGETS[form.budget]}\n\n${form.message.trim()}`
+        `Name: ${form.name.trim()}\nEmail: ${form.email.trim()}\nProject type: ${form.type}\n\n${form.message.trim()}`
       );
       window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
       setStatus('email');
@@ -104,7 +103,6 @@ export default function Contact() {
           name: form.name.trim(),
           email: form.email.trim(),
           project_type: form.type,
-          budget: BUDGETS[form.budget],
           message: form.message.trim(),
         }),
       });
@@ -237,33 +235,6 @@ export default function Contact() {
                       ))}
                     </select>
                     <CaretDown size={16} weight="bold" aria-hidden="true" />
-                  </div>
-                </div>
-
-                <div className="field budget">
-                  <div className="budget__head">
-                    <label htmlFor="budget" className="field__label">
-                      Budget
-                    </label>
-                    <output htmlFor="budget" className="budget__value">
-                      {BUDGETS[form.budget]}
-                    </output>
-                  </div>
-                  <input
-                    id="budget"
-                    type="range"
-                    min="0"
-                    max={BUDGETS.length - 1}
-                    step="1"
-                    value={form.budget}
-                    onChange={update('budget')}
-                    disabled={status === 'submitting'}
-                    style={{ '--fill': `${(form.budget / (BUDGETS.length - 1)) * 100}%` }}
-                    aria-valuetext={BUDGETS[form.budget]}
-                  />
-                  <div className="budget__ticks" aria-hidden="true">
-                    <span>{BUDGETS[0]}</span>
-                    <span>{BUDGETS[BUDGETS.length - 1]}</span>
                   </div>
                 </div>
 
